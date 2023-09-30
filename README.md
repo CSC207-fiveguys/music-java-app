@@ -1,5 +1,5 @@
 # Problem Domain Description
-We have chose **Music Organization/Streaming Service** as our project domain. Possible use cases include the following.
+We have chosen **Music Organization/Streaming Service** as our project domain. Possible use cases include the following.
 * login
 * search for song
 * favourite a song
@@ -26,4 +26,4 @@ Hoppscotch demo call
 
 # Technical Problems
 * the Spotify API does not provide actual music files, so if we wanted to have a "play song" use case we likely would need to use some sort of [downloader tool](https://github.com/SwapnilSoni1999/spotify-dl) or API
-* in order to support "login, ""add friend", and "share playlist with friend" use cases, we will need to be able to sync persistent data with all users, possibly by using a database API
+* in order to support "login", "add friend", and "share playlist with friend" use cases, we will need to be able to sync persistent data with all users, possibly by using a database API
