@@ -1,5 +1,5 @@
 # Problem Domain Description
-We have chose **Music Organization/Streaming Service** as our project domain. Possible use cases include the following.
+We have chosen **Music Organization/Streaming Service** as our project domain. Possible use cases include the following.
 * login
 * search for song
 * favourite a song
