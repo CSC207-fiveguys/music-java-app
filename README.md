@@ -6,7 +6,7 @@ We have chosen **Music Organization/Streaming Service** as our project domain. P
 * favourite a song
 * create playlist
 * add and remove songs to a playlist
-* add friend
+* add friends
 * share playlist with friend
 
 # Application Description
