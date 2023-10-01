@@ -1,11 +1,13 @@
 # Problem Domain Description
 We have chosen **Music Organization/Streaming Service** as our project domain. Possible use cases include the following.
-* sign-up and login
+* sign-up
+* login
 * search for song
 * favourite a song
 * create playlist
-* add and remove songs to a playlist
-* add friends
+* add song to playlist
+* remove song from playlist
+* add friend
 * share playlist with friend
 
 # Application Description
