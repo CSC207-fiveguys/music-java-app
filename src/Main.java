@@ -17,8 +17,7 @@ public class Main {
         String authB64Encoded = encoder.encodeToString(authByteEncoded);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://accounts.spotify.com/api/token"
-                        + "?" + "grant_type=client_credentials"))
+                .uri(URI.create("https://accounts.spotify.com/api/token" + "?" + "grant_type=client_credentials"))
                 .header("Authorization", "Basic " + authB64Encoded)
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .method("POST", HttpRequest.BodyPublishers.noBody())
