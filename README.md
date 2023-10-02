@@ -26,8 +26,10 @@ Hoppscotch demo call
 Hoppscotch demo call
 ![Hoppscotch demo call screenshot](https://imgur.com/i4WJwcC.png)
 
-# Example Java Output 
-
+# Example Java Output
+```java
+{"access_token":"BQBzBwuKPFHTHu-gwIFQ3AW4ocTRq_bTDPHZGrbBOfDvI3hUXfwR2TRZyaH_gtEgHB-6-Hs4j0ATD5Nh2TW-c03RNNIqiV4AXvx19AS9_7sWBZIdM_Y","token_type":"Bearer","expires_in":3600}
+```
 
 # Technical Problems
 * The Spotify API does not provide actual music files, so if we wanted to have a "play song" use case we likely would need to use some sort of [downloader tool](https://github.com/SwapnilSoni1999/spotify-dl) or API
