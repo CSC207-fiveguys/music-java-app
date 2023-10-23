@@ -1,4 +1,4 @@
-package view;
+package view.components.row_components;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,7 +16,7 @@ class ArtistRowPanel extends JPanel {
             URL url = new URL(imageURL);
             image = ImageIO.read(url);
         } catch (Exception e) {
-            File imgageFile = new File("error-image-generic.png");
+            File imgageFile = new File("./error-image-generic.png");
             try {
                 image = ImageIO.read(imgageFile);
             } catch (IOException ex) {

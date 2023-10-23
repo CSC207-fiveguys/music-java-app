@@ -1,42 +1,50 @@
 package app;
 
-import java.util.Base64;
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpClient;
-import java.io.IOException;
-import org.json.JSONObject;
+import view.logged_out.SignupView;
 
-public class Main {
+import javax.swing.JTabbedPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import java.awt.*;
+
+public class Main extends JPanel {
+
     public static void main(String[] args) {
-        HttpClient client = HttpClient.newHttpClient();
-        Base64.Encoder encoder = Base64.getUrlEncoder();
+        createAndShowGUI();
+    }
 
-        // loads spotify client id and spotify client secret from environment variables
-        String auth = System.getenv("SPOTIFY_CLIENT_ID") + ":" + System.getenv("SPOTIFY_CLIENT_SECRET");
-        byte[] authByteEncoded = auth.getBytes();
-        String authB64Encoded = encoder.encodeToString(authByteEncoded);
+    private static void createAndShowGUI() {
+        JFrame frame = new JFrame("JFRAME TITLE");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://accounts.spotify.com/api/token" + "?" + "grant_type=client_credentials"))
-                .header("Authorization", "Basic " + authB64Encoded)
-                .header("Content-Type", "application/x-www-form-urlencoded")
-                .method("POST", HttpRequest.BodyPublishers.noBody())
-                .build();
+        JPanel panel = createCardJPanel();
+        frame.add(panel);
 
-        HttpResponse<String> response = null;
-        JSONObject jsonResponse = null;
-        try {
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            jsonResponse = new JSONObject(response.body());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        frame.pack();
+        frame.setVisible(true);
+    }
 
-        assert jsonResponse != null;
-        System.out.println(jsonResponse);
+    public static JPanel createCardJPanel() {
+        CardLayout cardLayout = new CardLayout();
+        JPanel views = new JPanel(cardLayout);
+
+        views.add(new SignupView(cardLayout, views));
+//        views.add(loginView);
+        views.add(createLoggedInViewWrapper());
+
+        return views;
+    }
+
+    public static JTabbedPane createLoggedInViewWrapper() {
+
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        tabbedPane.addTab("Tab 1", null, new JLabel("TESTTT MY LIBRARY VIEW"), "tooltip 1");
+        tabbedPane.addTab("Tab 2", null, new JLabel("OK MY FLOOWERED ARTISIST VIEW"), "tooltip 2");
+        tabbedPane.addTab("Tab 3", null, new JLabel("my  friends VIEW"), "tooltip3");
+        tabbedPane.addTab("Tab 4", null, new JLabel("SEARCHHHHHH VIEW"), "tooltip4");
+
+        return tabbedPane;
     }
 }
