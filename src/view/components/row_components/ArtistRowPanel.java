@@ -1,4 +1,4 @@
-package view.components.row_components;
+package view;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,9 +13,11 @@ class ArtistRowPanel extends JPanel {
         Image image;
 
         try {
+            // load image of the selected artist from spotify's CDN
             URL url = new URL(imageURL);
             image = ImageIO.read(url);
         } catch (Exception e) {
+            // if image is not able to be retrieved, use local generic error image
             File imgageFile = new File("./error-image-generic.png");
             try {
                 image = ImageIO.read(imgageFile);
