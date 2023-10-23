@@ -1,4 +1,4 @@
-package view;
+package view.components.row_components;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
