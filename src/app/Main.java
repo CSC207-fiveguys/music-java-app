@@ -1,3 +1,5 @@
+package app;
+
 import java.util.Base64;
 import java.net.URI;
 import java.net.http.HttpRequest;
