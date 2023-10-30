@@ -5,7 +5,9 @@ import view.logged_out.SignupView;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import javax.swing.JFrame;
+
 import java.awt.*;
 
 public class Main extends JPanel {
