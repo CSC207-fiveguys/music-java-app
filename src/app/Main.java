@@ -1,52 +1,50 @@
 package app;
 
-import view.logged_out.SignupView;
+import view.ViewManager;
+import view.ViewManagerModel;
+import view.logged_in.TabView;
+import view.logged_in.TabViewModel;
+import view.logged_out.*;
 
-import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import javax.swing.JFrame;
-
+import javax.swing.*;
 import java.awt.*;
 
 public class Main extends JPanel {
 
     public static void main(String[] args) {
-        createAndShowGUI();
-    }
-
-    private static void createAndShowGUI() {
-        JFrame frame = new JFrame("JFRAME TITLE");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel panel = createCardJPanel();
-        frame.add(panel);
-
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static JPanel createCardJPanel() {
         CardLayout cardLayout = new CardLayout();
         JPanel views = new JPanel(cardLayout);
 
-        views.add(new SignupView(cardLayout, views));
-//        views.add(loginView);
-        views.add(createLoggedInViewWrapper());
 
-        return views;
-    }
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        ViewManager viewManager = new ViewManager(viewManagerModel, views, cardLayout);
 
-    public static JTabbedPane createLoggedInViewWrapper() {
 
-        JTabbedPane tabbedPane = new JTabbedPane();
+        LoginViewState loginViewState = new LoginViewState();
+        LoginViewModel loginViewModel = new LoginViewModel("log in view", loginViewState);
+        LoginView loginView = new LoginView(loginViewModel, null, null); //todo
+        views.add(loginView, loginViewModel.viewName);
 
-        tabbedPane.addTab("Tab 1", null, new JLabel("TESTTT MY LIBRARY VIEW"), "tooltip 1");
-        tabbedPane.addTab("Tab 2", null, new JLabel("OK MY FLOOWERED ARTISIST VIEW"), "tooltip 2");
-        tabbedPane.addTab("Tab 3", null, new JLabel("my  friends VIEW"), "tooltip3");
-        tabbedPane.addTab("Tab 4", null, new JLabel("SEARCHHHHHH VIEW"), "tooltip4");
 
-        return tabbedPane;
+        SignupViewState signupViewState = new SignupViewState();
+        SignupViewModel signupViewModel = new SignupViewModel("sign up view", signupViewState);
+        SignupView signupView = new SignupView(signupViewModel, null, null); //todo
+        views.add(signupView, signupViewModel.viewName);
+
+
+        TabViewModel tabViewModel = new TabViewModel("tab view");
+        TabView temp = new TabView(tabViewModel);
+        temp.add(new JLabel("TESTTT MY LIBRARY VIEW"));
+        temp.add(new JLabel("OK MY FLOOWERED ARTISIST VIEW"));
+        temp.add(new JLabel("my  friends VIEW"));
+        temp.add(new JLabel("SEARCHHHHHH VIEW"));
+        views.add(temp, tabViewModel.viewName);
+
+
+        JFrame frame = new JFrame("JFRAME TITLE");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(views);
+        frame.pack();
+        frame.setVisible(true);
     }
 }

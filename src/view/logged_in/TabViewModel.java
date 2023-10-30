@@ -1,23 +1,21 @@
-package view.logged_out;
+package view.logged_in;
 
 import view.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class SignupViewModel extends ViewModel {
+public class TabViewModel extends ViewModel {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-    public final SignupViewState state;
 
-    public SignupViewModel(String viewName, SignupViewState state) {
+    public TabViewModel(String viewName) {
         super(viewName);
-        this.state = state;
     }
 
     @Override
     public void firePropertyChanged() {
-        support.firePropertyChange("state", null, state);
+        support.firePropertyChange("state", null, "never used lol"); //TODO
     }
 
     @Override

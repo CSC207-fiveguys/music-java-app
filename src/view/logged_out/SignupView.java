@@ -1,39 +1,64 @@
 package view.logged_out;
 
+import services.signup.SignupCompleteController;
+import services.signup_abort.SignupAbortController;
 import view.components.LabelTextPanel;
 
 import javax.swing.*;
-import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class SignupView extends JPanel {
+public class SignupView extends JPanel implements PropertyChangeListener {
+
+    private final SignupViewModel signupViewModel;
+    private final SignupCompleteController signupCompleteController;
+    private final SignupAbortController signupAbortController;
 
     private final JTextField usernameInputField;
-    private final JPasswordField passwordInputField;
+    private final JPasswordField password1InputField;
+    private final JPasswordField password2InputField;
     private final JButton signupButton;
+    private final JButton cancelButton;
 
-    private final CardLayout x; // TODO TEMPPPPP DELETE THIS HSOULD BE HANDELED BY VIEWMANAGER
-    private final JPanel x_parent; //TODO TEMP DELETE ^^^
-
-    public SignupView(CardLayout x, JPanel x_parent) {
-        this.x = x; // TODO DELETE
-        this.x_parent = x_parent; //TODO DELETE
+    public SignupView(SignupViewModel signupViewModel,
+                      SignupCompleteController signupCompleteController,
+                      SignupAbortController signupAbortController) {
+        this.signupViewModel = signupViewModel;
+        signupViewModel.addPropertyChangeListener(this);
+        this.signupCompleteController = signupCompleteController;
+        this.signupAbortController = signupAbortController;
 
         usernameInputField = new JTextField(15);
-        LabelTextPanel usernamePanel = new LabelTextPanel(new JLabel("okok username"), usernameInputField);
+        LabelTextPanel usernamePanel = new LabelTextPanel(new JLabel(signupViewModel.state.usernameInputFieldText), usernameInputField);
         add(usernamePanel);
 
-        passwordInputField = new JPasswordField(15);
-        LabelTextPanel passwordPanel = new LabelTextPanel(new JLabel("PASSword"), passwordInputField);
-        add(passwordPanel);
+        password1InputField = new JPasswordField(15);
+        LabelTextPanel password1Panel = new LabelTextPanel(new JLabel(signupViewModel.state.password1InputFieldText), password1InputField);
+        add(password1Panel);
 
-        signupButton = new JButton("sign me up my g");
+        password2InputField = new JPasswordField(15);
+        LabelTextPanel password2Panel = new LabelTextPanel(new JLabel(signupViewModel.state.password2InputFieldText), password2InputField);
+        add(password2Panel);
+
+        signupButton = new JButton(signupViewModel.state.signupButtonText);
         add(signupButton);
         signupButton.addActionListener(e -> signupButtonPressed());
+
+        cancelButton = new JButton(signupViewModel.state.cancelButtonText);
+        add(cancelButton);
+        signupButton.addActionListener(e -> cancelButtonPressed());
     }
 
     private void signupButtonPressed() {
-        System.out.println(usernameInputField);
-        System.out.println(passwordInputField);
-        x.next(x_parent);
+//        signupCompleteController.execute(); todo
+    }
+
+    private void cancelButtonPressed() {
+//        signupAbortController.execute(); todo
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        // handle property changes fired from signupViewModel
     }
 }
