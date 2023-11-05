@@ -1,5 +1,7 @@
 package app;
 
+import data_access.UserDataAccessObject;
+import entities.UserFactory;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.TabView;
@@ -20,6 +22,8 @@ public class Main extends JPanel {
         ViewManager viewManager = new ViewManager(viewManagerModel, views, cardLayout);
 
 
+        // Create a new DAO in MAIN that should be passed to the Views
+        UserDataAccessObject UserDataAccessObject = new UserDataAccessObject(new UserFactory());
         LoginViewState loginViewState = new LoginViewState();
         LoginViewModel loginViewModel = new LoginViewModel("log in view", loginViewState);
         LoginView loginView = new LoginView(loginViewModel, null, null); //todo

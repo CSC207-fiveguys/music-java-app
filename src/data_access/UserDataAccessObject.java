@@ -6,13 +6,13 @@ import entities.UserFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FakeDAO {
+public class UserDataAccessObject {
 
     private final Map<String, User> users;
 
     private UserFactory userFactory;
 
-    public FakeDAO(UserFactory userFactory) {
+    public UserDataAccessObject(UserFactory userFactory) {
         users = new HashMap<>();
         // Create 2 fake users and store them in users
         User fake_user1 = userFactory.create("_Jason", "pass123");
