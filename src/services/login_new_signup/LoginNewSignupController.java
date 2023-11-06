@@ -7,9 +7,7 @@ public class LoginNewSignupController {
         this.loginNewSignupUseCaseInteractor = loginNewSignupUseCaseInteractor;
     }
 
-    public void execute() {
-
-        loginNewSignupUseCaseInteractor.execute();
-
+    public void goToSignup() {
+        loginNewSignupUseCaseInteractor.initiateSignupProcess();
     }
 }
