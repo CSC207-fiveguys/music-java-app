@@ -3,7 +3,7 @@ package entities;
 import java.util.ArrayList;
 
 public class CommonUser implements User{
-    private final String name;
+    private final String username;
     private final String password;
     private final Playlist likedTracks;
     private final ArrayList<Playlist> personalPlaylists;
@@ -12,11 +12,11 @@ public class CommonUser implements User{
 
     /**
      * Requires: password is valid.
-     * @param name
-     * @param password
+     * @param username This is the User's username that they signed up with
+     * @param password This is their password that the signed up with
      */
-    CommonUser(String name, String password){
-        this.name = name;
+    CommonUser(String username, String password) {
+        this.username = username;
         this.password = password;
         // DESIGN CHOICE: WHEN CREATING USERS, THEY WILL NOT HAVE ANY FILLED IN ATTRIBUTES OTHER THAN USERNAME/PASSWORD
         // THESE ATTRIBUTES WILL GET FILLED IN WHEN THE USER MAKES CERTAIN ACTIONS (LIKING TRACKS, ADDING FRIENDS ETC.)
@@ -27,8 +27,8 @@ public class CommonUser implements User{
 
     }
     @Override
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     @Override

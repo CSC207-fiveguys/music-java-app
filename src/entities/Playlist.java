@@ -6,7 +6,7 @@ public interface Playlist {
 
     String getName();
 
-    User getUser();
+    User getOwner();
 
     ArrayList<Track> getTracks();
 }

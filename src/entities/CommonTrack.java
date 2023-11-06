@@ -1,18 +1,20 @@
 package entities;
 
 public class CommonTrack implements Track{
-    String id;
-    String imageURL;
-    String name;
-    String artists;
+    final String id;
+    final String imageURL;
+    final String name;
+    final String artists;
     int duration;
+    final boolean explicit;
 
-    CommonTrack(String id, String imageURL, String name, String artists, int duration){
+    CommonTrack(String id, String imageURL, String name, String artists, int duration, boolean explicit){
         this.id = id;
         this.imageURL = imageURL;
         this.name = name;
         this.artists = artists;
         this.duration = duration;
+        this.explicit = explicit;
     }
 
     @Override
@@ -38,5 +40,10 @@ public class CommonTrack implements Track{
     @Override
     public int getDuration() {
         return duration;
+    }
+
+    @Override
+    public boolean getExplicit() {
+        return explicit;
     }
 }

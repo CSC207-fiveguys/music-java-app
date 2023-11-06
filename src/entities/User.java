@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface User {
 
-    String getName();
+    String getUsername();
 
     String getPassword();
 
