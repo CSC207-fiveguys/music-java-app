@@ -1,12 +1,12 @@
 package entities;
 
 public class CommonTrack implements Track{
-    final String id;
-    final String imageURL;
-    final String name;
-    final String artists;
-    int duration;
-    final boolean explicit;
+    private final String id;
+    private final String imageURL;
+    private final String name;
+    private final String artists;
+    private final int duration;
+    private final boolean explicit;
 
     CommonTrack(String id, String imageURL, String name, String artists, int duration, boolean explicit){
         this.id = id;
