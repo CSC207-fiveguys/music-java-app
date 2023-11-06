@@ -43,7 +43,7 @@ public class CommonTrack implements Track {
     }
 
     @Override
-    public boolean getExplicit() {
+    public boolean isExplicit() {
         return explicit;
     }
 }
