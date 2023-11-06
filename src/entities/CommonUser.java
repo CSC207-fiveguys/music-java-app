@@ -2,7 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 
-public class CommonUser implements User{
+public class CommonUser implements User {
     private final String username;
     private final String password;
     private final Playlist likedTracks;
