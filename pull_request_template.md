@@ -1,14 +1,13 @@
-<!--
-Replace THIS comment with a description of your PR.
--->
+description:
 
-<!--
-Ensure each step below is complete by adding an "x" to each box below.
+REPLACE THIS COMMENT WITH A DESCRIPTION OF YOUR PR
 
-If only docs were changed, these aren't relevant and can be removed.
--->
+---
+
+- [ ] only docs were changed, the checklist below is left unchecked as it is not relevant
 
 checklist:
+<!-- Ensure each step below is complete by adding an "x" to each box below. -->
 
 - [ ] coding style (conforms to Google Java Style Guide) 
 - [ ] especially follows section 7 (Javadoc is present for every public class, public or protected member)
