@@ -1,4 +1,22 @@
 package services.login_new_signup;
 
-public class LoginNewSignupPresenter {
+import view.ViewManagerModel;
+import view.logged_out.LoginViewModel;
+import view.logged_out.SignupViewModel;
+
+public class LoginNewSignupPresenter implements LoginNewSignupOutputBoundary{
+    private final SignupViewModel signupViewModel;
+    private final ViewManagerModel viewManagerModel;
+
+    public LoginNewSignupPresenter(SignupViewModel signupViewModel,
+                                   ViewManagerModel viewManagerModel) {
+        this.signupViewModel = signupViewModel;
+        this.viewManagerModel = viewManagerModel;
+    }
+
+    @Override
+    public void presentSignupView(LoginNewSignupOutputData outputData) {
+        viewManagerModel.activeView = signupViewModel.viewName;
+        viewManagerModel.firePropertyChanged();
+    }
 }
