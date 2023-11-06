@@ -42,4 +42,9 @@
 
 - [ ] I have performed a self-review of my own code.
 - [ ] I have added tests for my changes. <!-- (delete this checklist item if not applicable) -->
-- [ ] I have updated the CHANGELOG.md file. <!-- (delete this checklist item if not applicable) -->
+- [ ] Coverage tests
+- [ ] Coding style (conforms to Google Java Style Guide)
+- [ ] Especially follows section 7 (Javadoc is present for every public class, public or protected member)
+- [ ] Especially follows section 4.6 (Multiple consecutive blank lines are not encouraged)
+- [ ] Correctness (follows CA and SOLID, is a reasonable and not overly complicated solution, etc.)
+- [ ] Description of pull request is clear, consise, and reasonably detailed
