@@ -8,6 +8,6 @@ public class SignupAbortController {
     }
 
     public void goToLogin() {
-        signupAbortInteractor.initiateLoginProcess();
+        signupAbortInteractor.execute();
     }
 }

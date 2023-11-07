@@ -9,7 +9,7 @@ public class SignupAbortInteractor implements SignupAbortInputBoundary {
   }
 
   @Override
-  public void initiateLoginProcess() {
+  public void execute() {
     userPresenter.presentLoginView();
   }
 }
