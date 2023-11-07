@@ -1,20 +1,15 @@
 package services.signup_abort;
 
-public class SignupAbortInteractor implements SignupAbortInputBoundary{
-    private SignupAbortOutputBoundary userPresenter;
-    private SignupAbortUserDataAccessInterface userDataAccess;
+public class SignupAbortInteractor implements SignupAbortInputBoundary {
 
-    public SignupAbortInteractor(
-            SignupAbortOutputBoundary outputBoundary,
-            SignupAbortUserDataAccessInterface userDataAccess
-    ) {
-        this.userPresenter = outputBoundary;
-        this.userDataAccess = userDataAccess;
-    }
+  private SignupAbortOutputBoundary userPresenter;
 
-    @Override
-    public void initiateLoginProcess() {
-        SignupAbortOutputData signupAbortOutputData = new SignupAbortOutputData();
-        userPresenter.presentLoginView(signupAbortOutputData);
-    }
+  public SignupAbortInteractor(SignupAbortOutputBoundary outputBoundary) {
+    this.userPresenter = outputBoundary;
+  }
+
+  @Override
+  public void initiateLoginProcess() {
+    userPresenter.presentLoginView();
+  }
 }
