@@ -15,7 +15,7 @@ public class LoginNewSignupPresenter implements LoginNewSignupOutputBoundary{
     }
 
     @Override
-    public void presentSignupView(LoginNewSignupOutputData outputData) {
+    public void presentSignupView() {
         viewManagerModel.activeView = signupViewModel.viewName;
         viewManagerModel.firePropertyChanged();
     }
