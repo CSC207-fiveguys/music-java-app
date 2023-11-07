@@ -1,13 +1,15 @@
 package services.login_new_signup;
 
-public class LoginNewSignupInteractor implements LoginNewSignupInputBoundary{
-    final LoginNewSignupOutputBoundary userPresenter;
-    public LoginNewSignupInteractor(LoginNewSignupOutputBoundary loginNewSignupOutputBoundary) {
-        this.userPresenter = loginNewSignupOutputBoundary;
-    }
+public class LoginNewSignupInteractor implements LoginNewSignupInputBoundary {
 
-    @Override
-    public void execute() {
-        userPresenter.presentSignupView();
-    }
+  final LoginNewSignupOutputBoundary userPresenter;
+
+  public LoginNewSignupInteractor(LoginNewSignupOutputBoundary loginNewSignupOutputBoundary) {
+    this.userPresenter = loginNewSignupOutputBoundary;
+  }
+
+  @Override
+  public void execute() {
+    userPresenter.presentSignupView();
+  }
 }
