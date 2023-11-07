@@ -15,7 +15,7 @@ public class SignupAbortPresenter implements SignupAbortOutputBoundary{
     }
 
     @Override
-    public void presentLoginView(SignupAbortOutputData outputData) {
+    public void presentLoginView() {
         viewManagerModel.activeView = loginViewModel.viewName;
         viewManagerModel.firePropertyChanged();
     }
