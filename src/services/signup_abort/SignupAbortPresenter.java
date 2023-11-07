@@ -1,22 +1,22 @@
 package services.signup_abort;
 
-import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_out.LoginViewModel;
 
-public class SignupAbortPresenter implements SignupAbortOutputBoundary{
-    private final LoginViewModel loginViewModel;
-    private final ViewManagerModel viewManagerModel;
+public class SignupAbortPresenter implements SignupAbortOutputBoundary {
 
-    public SignupAbortPresenter(LoginViewModel loginViewModel,
-                                ViewManagerModel viewManagerModel) {
-        this.loginViewModel = loginViewModel;
-        this.viewManagerModel = viewManagerModel;
-    }
+  private final LoginViewModel loginViewModel;
+  private final ViewManagerModel viewManagerModel;
 
-    @Override
-    public void presentLoginView() {
-        viewManagerModel.activeView = loginViewModel.viewName;
-        viewManagerModel.firePropertyChanged();
-    }
+  public SignupAbortPresenter(LoginViewModel loginViewModel,
+      ViewManagerModel viewManagerModel) {
+    this.loginViewModel = loginViewModel;
+    this.viewManagerModel = viewManagerModel;
+  }
+
+  @Override
+  public void presentLoginView() {
+    viewManagerModel.activeView = loginViewModel.viewName;
+    viewManagerModel.firePropertyChanged();
+  }
 }

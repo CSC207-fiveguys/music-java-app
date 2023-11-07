@@ -2,7 +2,7 @@ package services.signup_abort;
 
 public class SignupAbortInteractor implements SignupAbortInputBoundary {
 
-  private SignupAbortOutputBoundary userPresenter;
+  final SignupAbortOutputBoundary userPresenter;
 
   public SignupAbortInteractor(SignupAbortOutputBoundary outputBoundary) {
     this.userPresenter = outputBoundary;
