@@ -8,6 +8,6 @@ public class LoginNewSignupController {
     }
 
     public void goToSignup() {
-        loginNewSignupUseCaseInteractor.initiateSignupProcess();
+        loginNewSignupUseCaseInteractor.execute();
     }
 }
