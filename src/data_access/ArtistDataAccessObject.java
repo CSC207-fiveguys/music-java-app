@@ -22,9 +22,9 @@ public class ArtistDataAccessObject {
     return artists.get(artistID);
   }
 
-  public void saveArtist(String artistID, Artist artist) {
+  public void saveArtist(Artist artist) {
     // Add the artist to the dictionary and then update the json file
-    artists.put(artistID, artist);
+    artists.put(artist.getID(), artist);
     save();
   }
 

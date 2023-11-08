@@ -22,9 +22,9 @@ public class TrackDataAccessObject {
     return tracks.get(trackID);
   }
 
-  public void saveTrack(String trackID, Track track) {
+  public void saveTrack(Track track) {
     // Add the track to the dictionary and then update the json file
-    tracks.put(trackID, track);
+    tracks.put(track.getID(), track);
     save();
   }
 
