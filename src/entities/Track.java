@@ -13,4 +13,5 @@ public interface Track {
     int getDuration();
 
     boolean isExplicit();
+
 }

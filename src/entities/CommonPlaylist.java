@@ -6,14 +6,15 @@ public class CommonPlaylist implements Playlist {
 
     private final String name;
     private final User owner;
-    private final ArrayList<Track> tracks;
+    // Design Choice: Playlists will contain a list of String track ids, which serve as the
+    // keys in our cache dictionary, which actually stores the Track object
+    private final ArrayList<String> tracks;
 
-    CommonPlaylist(String name, User owner, ArrayList<Track> tracks) {
+    CommonPlaylist(String name, User owner, ArrayList<String> tracks) {
         this.name = name;
         this.owner = owner;
         this.tracks = tracks;
     }
-
 
     @Override
     public String getName() {
@@ -26,7 +27,18 @@ public class CommonPlaylist implements Playlist {
     }
 
     @Override
-    public ArrayList<Track> getTracks() {
+    public ArrayList<String> getTracks() {
         return tracks;
     }
+
+    @Override
+    public void addTrack(String trackID) {
+        tracks.add(trackID);
+    }
+
+    @Override
+    public void removeTrack(String trackID) {
+        tracks.remove(trackID);
+    }
+
 }

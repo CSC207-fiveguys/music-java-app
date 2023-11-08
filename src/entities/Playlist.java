@@ -8,5 +8,10 @@ public interface Playlist {
 
     User getOwner();
 
-    ArrayList<Track> getTracks();
+    ArrayList<String> getTracks();
+
+    void addTrack(String trackID);
+
+    void removeTrack(String trackID);
+
 }

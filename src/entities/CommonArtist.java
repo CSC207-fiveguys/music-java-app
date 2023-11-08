@@ -33,4 +33,5 @@ public class CommonArtist implements Artist {
     public int getNumFollowers() {
         return numFollowers;
     }
+
 }

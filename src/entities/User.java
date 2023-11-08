@@ -10,10 +10,28 @@ public interface User {
 
     Playlist getLikedTracks();
 
+     void likeTrack(String trackID);
+
+    void unlikeTrack(String trackID);
+
     ArrayList<Playlist> getPlaylists();
 
-    ArrayList<Artist> getFollowedArtists();
+    void createPlaylist(String playlistName);
+
+    void addTrackToPlaylist(String trackID, String playlistName);
+
+    void removeTrackFromPlaylist(String trackID, String playlistName);
+
+    ArrayList<String> getFollowedArtists();
+
+    void followArtist(String artistID);
+
+    void unfollowArtist(String artistID);
 
     ArrayList<User> getFriends();
+
+     void addFriend(User friend);
+
+     void removeFriend(User friend);
 
 }
