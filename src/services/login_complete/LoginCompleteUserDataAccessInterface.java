@@ -1,10 +1,12 @@
 package services.login_complete;
+
 import entities.User;
 
 public interface LoginCompleteUserDataAccessInterface {
-    boolean existsByName(String identifier);
 
-    void save(User user);
+  boolean existsByName(String identifier);
 
-    User get(String username);
+  void save(User user);
+
+  User get(String username);
 }
