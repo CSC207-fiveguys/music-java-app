@@ -13,20 +13,19 @@ public class LoginCompleteInteractor implements LoginCompleteInputBoundary {
     this.loginCompletePresenter = loginCompletePresenter;
   }
 
-
   @Override
   public void execute(LoginCompleteInputData loginCompleteInputData) {
     String username = loginCompleteInputData.getUsername();
     String password = loginCompleteInputData.getPassword();
-    if (!userDataAccessObject.existsByName(username)) {
+    if (!userDataAccessObject.exists(username)) {
       loginCompletePresenter.prepareFailView(username + ": Account does not exist.");
     } else {
-      String pwd = userDataAccessObject.get(username).getPassword();
+      String pwd = userDataAccessObject.getUser(username).getPassword();
       if (!password.equals(pwd)) {
         loginCompletePresenter.prepareFailView("Incorrect password for " + username + ".");
       } else {
 
-        User user = userDataAccessObject.get(loginCompleteInputData.getUsername());
+        User user = userDataAccessObject.getUser(loginCompleteInputData.getUsername());
 
         LoginCompleteOutputData loginCompleteOutputData = new LoginCompleteOutputData(
             user.getUsername(),
