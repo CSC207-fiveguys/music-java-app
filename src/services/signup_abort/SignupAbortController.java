@@ -8,7 +8,7 @@ public class SignupAbortController {
     this.signupAbortInteractor = signupAbortInteractor;
   }
 
-  public void goToLogin() {
+  public void prepareSuccessView() {
     signupAbortInteractor.execute();
   }
 }
