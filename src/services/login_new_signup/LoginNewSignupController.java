@@ -8,7 +8,7 @@ public class LoginNewSignupController {
     this.loginNewSignupUseCaseInteractor = loginNewSignupUseCaseInteractor;
   }
 
-  public void prepareSuccessView() {
+  public void execute() {
     loginNewSignupUseCaseInteractor.execute();
   }
 }

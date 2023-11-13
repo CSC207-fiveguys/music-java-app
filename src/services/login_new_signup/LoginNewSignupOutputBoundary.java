@@ -2,5 +2,5 @@ package services.login_new_signup;
 
 public interface LoginNewSignupOutputBoundary {
 
-  void presentSignupView();
+  void prepareSuccessView();
 }

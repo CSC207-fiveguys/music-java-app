@@ -10,6 +10,6 @@ public class LoginNewSignupInteractor implements LoginNewSignupInputBoundary {
 
   @Override
   public void execute() {
-    userPresenter.presentSignupView();
+    userPresenter.prepareSuccessView();
   }
 }
