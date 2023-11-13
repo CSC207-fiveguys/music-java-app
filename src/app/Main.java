@@ -1,5 +1,10 @@
 package app;
 
+import services.login_new_signup.LoginNewSignupController;
+import services.login_new_signup.LoginNewSignupInputBoundary;
+import services.login_new_signup.LoginNewSignupInteractor;
+import services.login_new_signup.LoginNewSignupOutputBoundary;
+import services.login_new_signup.LoginNewSignupPresenter;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.TabView;
@@ -22,12 +27,18 @@ public class Main extends JPanel {
 
         LoginViewState loginViewState = new LoginViewState();
         LoginViewModel loginViewModel = new LoginViewModel("log in view", loginViewState);
-        LoginView loginView = new LoginView(loginViewModel, null, null); //todo
+        SignupViewState signupViewState = new SignupViewState();
+        SignupViewModel signupViewModel = new SignupViewModel("sign up view", signupViewState);
+
+        LoginNewSignupOutputBoundary loginNewSignupPresenter = new LoginNewSignupPresenter(signupViewModel, viewManagerModel);
+        LoginNewSignupInputBoundary loginNewSignupInteractor = new LoginNewSignupInteractor(loginNewSignupPresenter);
+        LoginNewSignupController loginNewSignupController = new LoginNewSignupController(loginNewSignupInteractor);
+
+        LoginView loginView = new LoginView(loginViewModel, null, loginNewSignupController); //todo
         views.add(loginView, loginViewModel.viewName);
 
 
-        SignupViewState signupViewState = new SignupViewState();
-        SignupViewModel signupViewModel = new SignupViewModel("sign up view", signupViewState);
+
         SignupView signupView = new SignupView(signupViewModel, null, null); //todo
         views.add(signupView, signupViewModel.viewName);
 
