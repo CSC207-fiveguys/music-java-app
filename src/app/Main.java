@@ -5,6 +5,8 @@ import services.login_new_signup.LoginNewSignupInputBoundary;
 import services.login_new_signup.LoginNewSignupInteractor;
 import services.login_new_signup.LoginNewSignupOutputBoundary;
 import services.login_new_signup.LoginNewSignupPresenter;
+import data_access.UserDataAccessObject;
+import entities.UserFactory;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.TabView;
@@ -25,6 +27,8 @@ public class Main extends JPanel {
         ViewManager viewManager = new ViewManager(viewManagerModel, views, cardLayout);
 
 
+        // Create a new DAO in Main that should be passed to the UseCaseFactories, to use for the Controller
+        UserDataAccessObject UserDataAccessObject = new UserDataAccessObject(new UserFactory());
         LoginViewState loginViewState = new LoginViewState();
         LoginViewModel loginViewModel = new LoginViewModel("log in view", loginViewState);
         SignupViewState signupViewState = new SignupViewState();
