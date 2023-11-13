@@ -20,8 +20,8 @@ public class LoginView extends JPanel implements PropertyChangeListener {
     private final JButton signupButton;
 
     public LoginView(LoginViewModel loginViewModel,
-                     LoginCompleteController loginCompleteController,
-                     LoginNewSignupController loginNewSignupController) {
+        LoginCompleteController loginCompleteController,
+        LoginNewSignupController loginNewSignupController) {
 
         this.loginViewModel = loginViewModel;
         loginViewModel.addPropertyChangeListener(this);
@@ -29,11 +29,13 @@ public class LoginView extends JPanel implements PropertyChangeListener {
         this.loginNewSignupController = loginNewSignupController;
 
         usernameInputField = new JTextField(15);
-        LabelTextPanel usernamePanel = new LabelTextPanel(new JLabel(loginViewModel.state.usernameInputFieldText), usernameInputField);
+        LabelTextPanel usernamePanel = new LabelTextPanel(
+            new JLabel(loginViewModel.state.usernameInputFieldText), usernameInputField);
         add(usernamePanel);
 
         passwordInputField = new JPasswordField(15);
-        LabelTextPanel passwordPanel = new LabelTextPanel(new JLabel(loginViewModel.state.passwordInputFieldText), passwordInputField);
+        LabelTextPanel passwordPanel = new LabelTextPanel(
+            new JLabel(loginViewModel.state.passwordInputFieldText), passwordInputField);
         add(passwordPanel);
 
         loginButton = new JButton(loginViewModel.state.loginButtonText);
@@ -42,7 +44,7 @@ public class LoginView extends JPanel implements PropertyChangeListener {
 
         signupButton = new JButton(loginViewModel.state.signupButtonText);
         add(signupButton);
-        loginButton.addActionListener(e -> signupButtonPressed());
+        signupButton.addActionListener(e -> signupButtonPressed());
     }
 
     private void loginButtonPressed() {
@@ -50,7 +52,7 @@ public class LoginView extends JPanel implements PropertyChangeListener {
     }
 
     private void signupButtonPressed() {
-//        loginNewSignupController.execute(); todo
+        loginNewSignupController.execute();
     }
 
     @Override
