@@ -5,4 +5,5 @@ public class LoginViewState {
     public final String passwordInputFieldText = "password:";
     public final String loginButtonText = "log in";
     public final String signupButtonText = "create and account";
+    public String currentError = "";
 }

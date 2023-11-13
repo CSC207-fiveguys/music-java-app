@@ -13,7 +13,7 @@ public class LoginView extends JPanel implements PropertyChangeListener {
     private final LoginViewModel loginViewModel;
     private final LoginCompleteController loginCompleteController;
     private final LoginNewSignupController loginNewSignupController;
-
+    private final JLabel currentError;
     private final JTextField usernameInputField;
     private final JPasswordField passwordInputField;
     private final JButton loginButton;
@@ -27,6 +27,9 @@ public class LoginView extends JPanel implements PropertyChangeListener {
         loginViewModel.addPropertyChangeListener(this);
         this.loginCompleteController = loginCompleteController;
         this.loginNewSignupController = loginNewSignupController;
+
+        currentError = new JLabel(loginViewModel.state.currentError);
+        add(currentError);
 
         usernameInputField = new JTextField(15);
         LabelTextPanel usernamePanel = new LabelTextPanel(new JLabel(loginViewModel.state.usernameInputFieldText), usernameInputField);
@@ -46,7 +49,8 @@ public class LoginView extends JPanel implements PropertyChangeListener {
     }
 
     private void loginButtonPressed() {
-//        loginCompleteController.execute(); todo
+        loginCompleteController.execute(loginViewModel.state.usernameInputFieldText,
+            loginViewModel.state.passwordInputFieldText);
     }
 
     private void signupButtonPressed() {
