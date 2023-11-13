@@ -7,6 +7,11 @@ import services.login_new_signup.LoginNewSignupOutputBoundary;
 import services.login_new_signup.LoginNewSignupPresenter;
 import data_access.UserDataAccessObject;
 import entities.UserFactory;
+import services.signup_abort.SignupAbortController;
+import services.signup_abort.SignupAbortInputBoundary;
+import services.signup_abort.SignupAbortInteractor;
+import services.signup_abort.SignupAbortOutputBoundary;
+import services.signup_abort.SignupAbortPresenter;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.TabView;
@@ -26,7 +31,6 @@ public class Main extends JPanel {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         ViewManager viewManager = new ViewManager(viewManagerModel, views, cardLayout);
 
-
         // Create a new DAO in Main that should be passed to the UseCaseFactories, to use for the Controller
         UserDataAccessObject UserDataAccessObject = new UserDataAccessObject(new UserFactory());
         LoginViewState loginViewState = new LoginViewState();
@@ -41,9 +45,11 @@ public class Main extends JPanel {
         LoginView loginView = new LoginView(loginViewModel, null, loginNewSignupController); //todo
         views.add(loginView, loginViewModel.viewName);
 
+        SignupAbortOutputBoundary abortSignupPresenter = new SignupAbortPresenter(loginViewModel, viewManagerModel);
+        SignupAbortInputBoundary abortSignupInteractor = new SignupAbortInteractor(abortSignupPresenter);
+        SignupAbortController signupAbortController = new SignupAbortController(abortSignupInteractor);
 
-
-        SignupView signupView = new SignupView(signupViewModel, null, null); //todo
+        SignupView signupView = new SignupView(signupViewModel, null, signupAbortController); //todo
         views.add(signupView, signupViewModel.viewName);
 
 
