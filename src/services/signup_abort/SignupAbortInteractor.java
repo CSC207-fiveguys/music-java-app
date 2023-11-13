@@ -10,6 +10,6 @@ public class SignupAbortInteractor implements SignupAbortInputBoundary {
 
   @Override
   public void execute() {
-    userPresenter.presentLoginView();
+    userPresenter.prepareSuccessView();
   }
 }
