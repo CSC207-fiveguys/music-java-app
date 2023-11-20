@@ -29,7 +29,7 @@ public class LoginCompletePresenter implements LoginCompleteOutputBoundary {
 
   @Override
   public void prepareFailView(String error) {
-    viewManagerModel.activeView = loginViewModel.viewName;
-    // How do we set the user-name error, as we don't have a state
+    loginViewModel.state.currentError = error;
+    loginViewModel.firePropertyChanged();
   }
 }

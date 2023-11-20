@@ -5,28 +5,45 @@ import entities.UserFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import services.login_complete.LoginCompleteUserDataAccessInterface;
 
-public class UserDataAccessObject {
+public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface {
 
-    private final Map<String, User> users;
+  private final Map<String, User> users;
 
-    private final UserFactory userFactory;
+  private final UserFactory userFactory;
 
-    public UserDataAccessObject(UserFactory userFactory) {
-        this.userFactory = userFactory;
-        users = new HashMap<>();
-        // Create 2 fake users and store them in users
-        User fake_user1 = userFactory.create("_Jason", "pass123");
-        User fake_user2 = userFactory.create("bob445", "bananaPASS");
-        users.put(fake_user1.getUsername(), fake_user1);
-        users.put(fake_user2.getUsername(), fake_user2);
+  public UserDataAccessObject(UserFactory userFactory) {
+    this.userFactory = userFactory;
+    users = new HashMap<>();
+    // The DataAccessObject stores the usernames and User objects of all the users so far
+    // This data is kept in a json file
+    // Create 2 fake users and store them in users
+    User fake_user1 = userFactory.create("_Jason", "pass123");
+    User fake_user2 = userFactory.create("bob445", "bananaPASS");
+    users.put(fake_user1.getUsername(), fake_user1);
+    users.put(fake_user2.getUsername(), fake_user2);
 
-        // SOMETHING WE NEED TO FIGURE OUT: HOW WE'RE STORING THE USERS AND OTHER DATA PERSISTENCE
-    }
-    public User getUser(String username){return users.get(username);}
+    // TODO: Read from the json file that stores User information
+  }
 
-    public void saveUser(User user){users.put(user.getUsername(), user);}
+  public User getUser(String username) {
+    return users.get(username);
+  }
 
-    public boolean exists(String username){return users.containsKey(username);}
+  public void saveUser(User user) {
+    // Add the user to the dictionary and then update the json file
+    users.put(user.getUsername(), user);
+    save();
+  }
+
+  public boolean exists(String username) {
+    return users.containsKey(username);
+  }
+
+  private void save() {
+    // Write the user data from users to the json file
+    // TODO Implement this method
+  }
 
 }
