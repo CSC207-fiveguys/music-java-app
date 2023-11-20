@@ -7,8 +7,8 @@ public class LoginCompleteInteractor implements LoginCompleteInputBoundary {
   final LoginCompleteUserDataAccessInterface userDataAccessObject;
   final LoginCompleteOutputBoundary loginCompletePresenter;
 
-  public LoginCompleteInteractor(LoginCompleteUserDataAccessInterface userDataAccessObject,
-      LoginCompleteOutputBoundary loginCompletePresenter) {
+  public LoginCompleteInteractor(LoginCompleteOutputBoundary loginCompletePresenter,
+                                 LoginCompleteUserDataAccessInterface userDataAccessObject) {
     this.userDataAccessObject = userDataAccessObject;
     this.loginCompletePresenter = loginCompletePresenter;
   }
@@ -19,7 +19,7 @@ public class LoginCompleteInteractor implements LoginCompleteInputBoundary {
     String password = loginCompleteInputData.getPassword();
 
     if (!userDataAccessObject.exists(username)) {
-      loginCompletePresenter.prepareFailView(username + ": Account does not exist.");
+      loginCompletePresenter.prepareFailView("Account does not exist for " + username + ".");
     } else {
       String pwd = userDataAccessObject.getUser(username).getPassword();
       if (!password.equals(pwd)) {
