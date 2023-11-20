@@ -1,14 +1,14 @@
 package services.signup_complete;
 public class SignupCompleteController {
-    final SignupCompleteInputBoundary signupUseCaseInteractor;
+    final SignupCompleteInteractor signupUseCaseInteractor;
 
-    public SignupCompleteController(SignupCompleteInputBoundary signupUseCaseInteractor) {
+    public SignupCompleteController(SignupCompleteInteractor signupUseCaseInteractor) {
         this.signupUseCaseInteractor = signupUseCaseInteractor;
     }
 
-    public void execute(String username, String password){
+    public void execute(String username, String password1, String password2){
         SignupCompleteInputData signupCompleteInputData = new SignupCompleteInputData(
-                username, password);
+                username, password1, password2);
 
         signupUseCaseInteractor.execute(signupCompleteInputData);
     }

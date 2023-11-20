@@ -27,6 +27,7 @@ public class SignupCompletePresenter implements SignupCompleteOutputBoundary{
 
     @Override
     public void prepareFailView(String error){
-        viewManagerModel.activeView = signupViewModel.viewName;
+        signupViewModel.state.currentError = error;
+        signupViewModel.firePropertyChanged();
     }
 }

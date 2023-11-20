@@ -1,11 +1,17 @@
 package services.signup_complete;
 
-public class SignupCompleteInteractor implements SignupCompleteInputBoundary{
-    final SignupCompleteUserDataAccessInterface userDataAccessObject;
-    final SignupCompleteOutputBoundary signupCompletePresenter;
+import data_access.UserDataAccessObject;
+import entities.User;
+import entities.UserFactory;
 
-    public SignupCompleteInteractor(SignupCompleteUserDataAccessInterface userDataAccessObject,
-                                    SignupCompleteOutputBoundary signupCompletePresenter) {
+import java.util.Objects;
+
+public class SignupCompleteInteractor implements SignupCompleteInputBoundary{
+    final UserDataAccessObject userDataAccessObject;
+    final SignupCompletePresenter signupCompletePresenter;
+
+    public SignupCompleteInteractor(UserDataAccessObject userDataAccessObject,
+                                    SignupCompletePresenter signupCompletePresenter) {
         this.userDataAccessObject = userDataAccessObject;
         this.signupCompletePresenter = signupCompletePresenter;
     }
@@ -13,13 +19,19 @@ public class SignupCompleteInteractor implements SignupCompleteInputBoundary{
     @Override
     public void execute(SignupCompleteInputData signupCompleteInputData) {
         String username = signupCompleteInputData.getUsername();
-        String password = signupCompleteInputData.getPassword();
+        String password1 = signupCompleteInputData.getPassword1();
+        String password2 = signupCompleteInputData.getPassword2();
 
-        if (!userDataAccessObject.existsByName(username)){
+        if (userDataAccessObject.exists(username)){
             signupCompletePresenter.prepareFailView(username +
                     " is taken. Please choose a different username.");
+        } else if (!Objects.equals(password1, password2)) {
+            signupCompletePresenter.prepareFailView("Your passwords do not match. " +
+                    "Please try again.");
         } else{
-            userDataAccessObject.save(username, password);
+            UserFactory userFactory = new UserFactory();
+
+            userDataAccessObject.saveUser(userFactory.create(username, password2));
 
             SignupCompleteOutputData signupCompleteOutputData = new SignupCompleteOutputData(username);
 

@@ -1,6 +1,6 @@
 package view.logged_out;
 
-import services.signup.SignupCompleteController;
+import services.signup_complete.SignupCompleteController;
 import services.signup_abort.SignupAbortController;
 import view.components.LabelTextPanel;
 
@@ -19,6 +19,7 @@ public class SignupView extends JPanel implements PropertyChangeListener {
     private final JPasswordField password2InputField;
     private final JButton signupButton;
     private final JButton cancelButton;
+    private final JLabel currentError;
 
     public SignupView(SignupViewModel signupViewModel,
                       SignupCompleteController signupCompleteController,
@@ -47,10 +48,17 @@ public class SignupView extends JPanel implements PropertyChangeListener {
         cancelButton = new JButton(signupViewModel.state.cancelButtonText);
         add(cancelButton);
         signupButton.addActionListener(e -> cancelButtonPressed());
+
+        currentError = new JLabel(signupViewModel.state.currentError);
+        System.out.println(signupViewModel.state.currentError);
+        add(currentError);
     }
 
     private void signupButtonPressed() {
-//        signupCompleteController.execute(); todo
+         signupCompleteController.execute(
+                 usernameInputField.getText(),
+                 password1InputField.getText(),
+                 password2InputField.getText());
     }
 
     private void cancelButtonPressed() {
@@ -59,6 +67,7 @@ public class SignupView extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        // handle property changes fired from signupViewModel
+        SignupViewState state = (SignupViewState) evt.getNewValue();
+        currentError.setText(state.currentError);
     }
 }
