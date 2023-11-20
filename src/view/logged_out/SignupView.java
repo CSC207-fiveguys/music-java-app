@@ -21,23 +21,26 @@ public class SignupView extends JPanel implements PropertyChangeListener {
     private final JButton cancelButton;
 
     public SignupView(SignupViewModel signupViewModel,
-                      SignupCompleteController signupCompleteController,
-                      SignupAbortController signupAbortController) {
+        SignupCompleteController signupCompleteController,
+        SignupAbortController signupAbortController) {
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
         this.signupCompleteController = signupCompleteController;
         this.signupAbortController = signupAbortController;
 
         usernameInputField = new JTextField(15);
-        LabelTextPanel usernamePanel = new LabelTextPanel(new JLabel(signupViewModel.state.usernameInputFieldText), usernameInputField);
+        LabelTextPanel usernamePanel = new LabelTextPanel(
+            new JLabel(signupViewModel.state.usernameInputFieldText), usernameInputField);
         add(usernamePanel);
 
         password1InputField = new JPasswordField(15);
-        LabelTextPanel password1Panel = new LabelTextPanel(new JLabel(signupViewModel.state.password1InputFieldText), password1InputField);
+        LabelTextPanel password1Panel = new LabelTextPanel(
+            new JLabel(signupViewModel.state.password1InputFieldText), password1InputField);
         add(password1Panel);
 
         password2InputField = new JPasswordField(15);
-        LabelTextPanel password2Panel = new LabelTextPanel(new JLabel(signupViewModel.state.password2InputFieldText), password2InputField);
+        LabelTextPanel password2Panel = new LabelTextPanel(
+            new JLabel(signupViewModel.state.password2InputFieldText), password2InputField);
         add(password2Panel);
 
         signupButton = new JButton(signupViewModel.state.signupButtonText);
@@ -46,15 +49,15 @@ public class SignupView extends JPanel implements PropertyChangeListener {
 
         cancelButton = new JButton(signupViewModel.state.cancelButtonText);
         add(cancelButton);
-        signupButton.addActionListener(e -> cancelButtonPressed());
+        cancelButton.addActionListener(e -> cancelButtonPressed());
     }
 
     private void signupButtonPressed() {
-//        signupCompleteController.execute(); todo
+        // signupCompleteController.execute(); todo
     }
 
     private void cancelButtonPressed() {
-//        signupAbortController.execute(); todo
+        signupAbortController.execute();
     }
 
     @Override

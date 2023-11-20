@@ -24,15 +24,22 @@ public class LoginView extends JPanel implements PropertyChangeListener {
       LoginCompleteController loginCompleteController,
       LoginNewSignupController loginNewSignupController) {
 
+//<<<<<<< LoginComplete
     this.loginViewModel = loginViewModel;
     loginViewModel.addPropertyChangeListener(this);
     this.loginCompleteController = loginCompleteController;
     this.loginNewSignupController = loginNewSignupController;
+//=======
+    public LoginView(LoginViewModel loginViewModel,
+        LoginCompleteController loginCompleteController,
+        LoginNewSignupController loginNewSignupController) {
+//>>>>>>> main
 
     currentError = new JLabel(loginViewModel.state.currentError);
     System.out.println(loginViewModel.state.currentError);
     add(currentError);
 
+//<<<<<<< LoginComplete
     usernameInputField = new JTextField(15);
     LabelTextPanel usernamePanel = new LabelTextPanel(
         new JLabel(loginViewModel.state.usernameInputFieldText), usernameInputField);
@@ -42,24 +49,48 @@ public class LoginView extends JPanel implements PropertyChangeListener {
     LabelTextPanel passwordPanel = new LabelTextPanel(
         new JLabel(loginViewModel.state.passwordInputFieldText), passwordInputField);
     add(passwordPanel);
+//=======
+        usernameInputField = new JTextField(15);
+        LabelTextPanel usernamePanel = new LabelTextPanel(
+            new JLabel(loginViewModel.state.usernameInputFieldText), usernameInputField);
+        add(usernamePanel);
+
+        passwordInputField = new JPasswordField(15);
+        LabelTextPanel passwordPanel = new LabelTextPanel(
+            new JLabel(loginViewModel.state.passwordInputFieldText), passwordInputField);
+        add(passwordPanel);
+//>>>>>>> main
 
     loginButton = new JButton(loginViewModel.state.loginButtonText);
     add(loginButton);
     loginButton.addActionListener(e -> loginButtonPressed());
 
+//<<<<<<< LoginComplete
     signupButton = new JButton(loginViewModel.state.signupButtonText);
     add(signupButton);
     loginButton.addActionListener(e -> signupButtonPressed());
   }
+//=======
+        signupButton = new JButton(loginViewModel.state.signupButtonText);
+        add(signupButton);
+        signupButton.addActionListener(e -> signupButtonPressed());
+    }
+//>>>>>>> main
 
   private void loginButtonPressed() {
     loginCompleteController.execute(usernameInputField.getText(),
         passwordInputField.getText());
   }
 
+//<<<<<<< LoginComplete
   private void signupButtonPressed() {
 //        loginNewSignupController.execute(); todo
   }
+//=======
+    private void signupButtonPressed() {
+        loginNewSignupController.execute();
+    }
+//>>>>>>> main
 
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
