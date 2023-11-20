@@ -8,7 +8,7 @@ import java.beans.PropertyChangeSupport;
 public class LoginViewModel extends ViewModel {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-    public final LoginViewState state;
+    public LoginViewState state;
 
     public LoginViewModel(String viewName, LoginViewState state) {
         super(viewName);

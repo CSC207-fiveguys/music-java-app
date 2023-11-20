@@ -1,5 +1,6 @@
 package view.logged_out;
 
+import java.awt.event.KeyEvent;
 import services.login_complete.LoginCompleteController;
 import services.login_new_signup.LoginNewSignupController;
 import view.components.LabelTextPanel;
@@ -51,8 +52,8 @@ public class LoginView extends JPanel implements PropertyChangeListener {
   }
 
   private void loginButtonPressed() {
-    loginCompleteController.execute(loginViewModel.state.usernameInputFieldText,
-        loginViewModel.state.passwordInputFieldText);
+    loginCompleteController.execute(usernameInputField.getText(),
+        passwordInputField.getText());
   }
 
   private void signupButtonPressed() {
