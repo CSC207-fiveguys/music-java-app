@@ -11,5 +11,4 @@ public class SignupCompleteOutputData {
         return this.username;
     }
 
-
 }
