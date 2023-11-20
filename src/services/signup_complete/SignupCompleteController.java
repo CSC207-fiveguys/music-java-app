@@ -1,8 +1,8 @@
 package services.signup_complete;
 public class SignupCompleteController {
-    final SignupCompleteInteractor signupUseCaseInteractor;
+    final SignupCompleteInputBoundary signupUseCaseInteractor;
 
-    public SignupCompleteController(SignupCompleteInteractor signupUseCaseInteractor) {
+    public SignupCompleteController(SignupCompleteInputBoundary signupUseCaseInteractor) {
         this.signupUseCaseInteractor = signupUseCaseInteractor;
     }
 

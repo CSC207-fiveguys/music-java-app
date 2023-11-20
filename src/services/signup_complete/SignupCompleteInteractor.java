@@ -1,17 +1,16 @@
 package services.signup_complete;
 
 import data_access.UserDataAccessObject;
-import entities.User;
 import entities.UserFactory;
 
 import java.util.Objects;
 
 public class SignupCompleteInteractor implements SignupCompleteInputBoundary{
-    final UserDataAccessObject userDataAccessObject;
-    final SignupCompletePresenter signupCompletePresenter;
+    final SignupCompleteUserDataAccessInterface userDataAccessObject;
+    final SignupCompleteOutputBoundary signupCompletePresenter;
 
     public SignupCompleteInteractor(UserDataAccessObject userDataAccessObject,
-                                    SignupCompletePresenter signupCompletePresenter) {
+                                    SignupCompleteOutputBoundary signupCompletePresenter) {
         this.userDataAccessObject = userDataAccessObject;
         this.signupCompletePresenter = signupCompletePresenter;
     }

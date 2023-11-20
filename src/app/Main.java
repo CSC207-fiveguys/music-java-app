@@ -1,23 +1,11 @@
 package app;
 
-import services.login_new_signup.LoginNewSignupController;
-import services.login_new_signup.LoginNewSignupInputBoundary;
-import services.login_new_signup.LoginNewSignupInteractor;
-import services.login_new_signup.LoginNewSignupOutputBoundary;
-import services.login_new_signup.LoginNewSignupPresenter;
 import data_access.UserDataAccessObject;
 import entities.UserFactory;
-//<<<<<<< LoginComplete
-import services.login_complete.LoginCompleteController;
-import services.login_complete.LoginCompleteInteractor;
-import services.login_complete.LoginCompletePresenter;
-//=======
-import services.signup_abort.SignupAbortController;
-import services.signup_abort.SignupAbortInputBoundary;
-import services.signup_abort.SignupAbortInteractor;
-import services.signup_abort.SignupAbortOutputBoundary;
-import services.signup_abort.SignupAbortPresenter;
-//>>>>>>> main
+import services.login_complete.*;
+import services.login_new_signup.*;
+import services.signup_abort.*;
+import services.signup_complete.*;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.TabView;
@@ -33,24 +21,17 @@ public class Main extends JPanel {
         CardLayout cardLayout = new CardLayout();
         JPanel views = new JPanel(cardLayout);
 
-
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         ViewManager viewManager = new ViewManager(viewManagerModel, views, cardLayout);
-//<<<<<<< LoginComplete
         TabViewModel tabViewModel = new TabViewModel("tab view");
         JFrame frame = new JFrame("JFRAME TITLE");
-//=======
-//>>>>>>> main
 
         // Create a new DAO in Main that should be passed to the UseCaseFactories, to use for the Controller
         UserDataAccessObject userDataAccessObject = new UserDataAccessObject(new UserFactory());
+
         LoginViewState loginViewState = new LoginViewState();
         LoginViewModel loginViewModel = new LoginViewModel("log in view", loginViewState);
-//<<<<<<< LoginComplete
-        LoginView loginView = new LoginView(loginViewModel, new LoginCompleteController
-            (new LoginCompleteInteractor(userDataAccessObject,
-                new LoginCompletePresenter(viewManagerModel, loginViewModel, tabViewModel))), null); //todo
-//=======
+
         SignupViewState signupViewState = new SignupViewState();
         SignupViewModel signupViewModel = new SignupViewModel("sign up view", signupViewState);
 
@@ -58,15 +39,22 @@ public class Main extends JPanel {
         LoginNewSignupInputBoundary loginNewSignupInteractor = new LoginNewSignupInteractor(loginNewSignupPresenter);
         LoginNewSignupController loginNewSignupController = new LoginNewSignupController(loginNewSignupInteractor);
 
-        LoginView loginView = new LoginView(loginViewModel, null, loginNewSignupController); //todo
-//>>>>>>> main
+        LoginCompleteOutputBoundary loginCompletePresenter = new LoginCompletePresenter(viewManagerModel, loginViewModel, tabViewModel);
+        LoginCompleteInputBoundary loginCompleteInteractor = new LoginCompleteInteractor(userDataAccessObject, loginCompletePresenter);
+        LoginCompleteController loginCompleteController = new LoginCompleteController(loginCompleteInteractor);
+
+        LoginView loginView = new LoginView(loginViewModel, loginCompleteController, loginNewSignupController);
         views.add(loginView, loginViewModel.viewName);
 
         SignupAbortOutputBoundary abortSignupPresenter = new SignupAbortPresenter(loginViewModel, viewManagerModel);
         SignupAbortInputBoundary abortSignupInteractor = new SignupAbortInteractor(abortSignupPresenter);
         SignupAbortController signupAbortController = new SignupAbortController(abortSignupInteractor);
 
-        SignupView signupView = new SignupView(signupViewModel, null, signupAbortController); //todo
+        SignupCompleteOutputBoundary signupCompletePresenter = new SignupCompletePresenter(signupViewModel, loginViewModel, viewManagerModel);
+        SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
+        SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
+
+        SignupView signupView = new SignupView(signupViewModel, signupCompleteController, signupAbortController);
         views.add(signupView, signupViewModel.viewName);
 
         TabView temp = new TabView(tabViewModel);
@@ -75,7 +63,6 @@ public class Main extends JPanel {
         temp.add(new JLabel("my  friends VIEW"));
         temp.add(new JLabel("SEARCHHHHHH VIEW"));
         views.add(temp, tabViewModel.viewName);
-
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(views);
