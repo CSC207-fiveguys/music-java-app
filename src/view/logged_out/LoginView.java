@@ -30,6 +30,7 @@ public class LoginView extends JPanel implements PropertyChangeListener {
     this.loginNewSignupController = loginNewSignupController;
 
     currentError = new JLabel(loginViewModel.state.currentError);
+    System.out.println(loginViewModel.state.currentError);
     add(currentError);
 
     usernameInputField = new JTextField(15);
@@ -63,6 +64,9 @@ public class LoginView extends JPanel implements PropertyChangeListener {
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
     // handle property changes fired from signupViewModel
+    // reassign all non-final values from state to view
+    LoginViewState state = (LoginViewState) evt.getNewValue();
+    currentError.setText(state.currentError);
   }
 }
 
