@@ -9,8 +9,8 @@ public class LoginNewSignupPresenter implements LoginNewSignupOutputBoundary {
   private final SignupViewModel signupViewModel;
   private final ViewManagerModel viewManagerModel;
 
-  public LoginNewSignupPresenter(SignupViewModel signupViewModel,
-      ViewManagerModel viewManagerModel) {
+  public LoginNewSignupPresenter(ViewManagerModel viewManagerModel,
+                                 SignupViewModel signupViewModel) {
     this.signupViewModel = signupViewModel;
     this.viewManagerModel = viewManagerModel;
   }

@@ -35,12 +35,12 @@ public class Main extends JPanel {
         SignupViewState signupViewState = new SignupViewState();
         SignupViewModel signupViewModel = new SignupViewModel("sign up view", signupViewState);
 
-        LoginNewSignupOutputBoundary loginNewSignupPresenter = new LoginNewSignupPresenter(signupViewModel, viewManagerModel);
+        LoginNewSignupOutputBoundary loginNewSignupPresenter = new LoginNewSignupPresenter(viewManagerModel, signupViewModel);
         LoginNewSignupInputBoundary loginNewSignupInteractor = new LoginNewSignupInteractor(loginNewSignupPresenter);
         LoginNewSignupController loginNewSignupController = new LoginNewSignupController(loginNewSignupInteractor);
 
         LoginCompleteOutputBoundary loginCompletePresenter = new LoginCompletePresenter(viewManagerModel, loginViewModel, tabViewModel);
-        LoginCompleteInputBoundary loginCompleteInteractor = new LoginCompleteInteractor(userDataAccessObject, loginCompletePresenter);
+        LoginCompleteInputBoundary loginCompleteInteractor = new LoginCompleteInteractor(loginCompletePresenter, userDataAccessObject);
         LoginCompleteController loginCompleteController = new LoginCompleteController(loginCompleteInteractor);
 
         LoginView loginView = new LoginView(loginViewModel, loginCompleteController, loginNewSignupController);
