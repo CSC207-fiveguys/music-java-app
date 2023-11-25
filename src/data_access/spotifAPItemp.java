@@ -7,9 +7,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
 import java.io.IOException;
-import javax.sound.midi.Track;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 
@@ -19,7 +16,7 @@ public class spotifAPItemp {
     private HttpClient client;
     private String authB64Encoded;
 
-    public void requestToken() {
+    public String requestToken() {
         HttpClient client = HttpClient.newHttpClient();
         Base64.Encoder encoder = Base64.getUrlEncoder();
         String auth =
@@ -46,20 +43,79 @@ public class spotifAPItemp {
         }
 
         assert jsonResponse != null;
-        accessToken = String.valueOf(jsonResponse);
+        accessToken = jsonResponse.getString("access_token");
         System.out.println(jsonResponse);
+        return accessToken;
     }
 
-    public static String search(String query, String accessToken) throws Exception {
+    public JSONObject search(String query, String accessToken) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query, StandardCharsets.UTF_8) + "&type=track"))
+            .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query,
+                StandardCharsets.UTF_8) + "&type=track"))
             .header("Authorization", "Bearer " + accessToken)
-            .GET()
+            .method("GET", HttpRequest.BodyPublishers.noBody())
             .build();
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = null;
+        JSONObject jsonResponse = null;
 
-        return response.body();
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            jsonResponse = new JSONObject(response.body());
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(jsonResponse);
+        return jsonResponse;
+    }
+
+    public JSONObject getArtist(String artistId, String accessToken) {
+        HttpClient client = HttpClient.newHttpClient();
+        String endpoint = "https://api.spotify.com/v1/artists/" + artistId;
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(endpoint))
+            .header("Authorization", "Bearer " + accessToken)
+            .method("GET", HttpRequest.BodyPublishers.noBody())
+            .build();
+
+        HttpResponse<String> response = null;
+        JSONObject jsonResponse = null;
+
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            jsonResponse = new JSONObject(response.body());
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(jsonResponse);
+        return jsonResponse;
+    }
+
+    public JSONObject getTrack(String trackId, String accessToken) {
+        HttpClient client = HttpClient.newHttpClient();
+        String endpoint = "https://api.spotify.com/v1/tracks/" + trackId;
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(endpoint))
+            .header("Authorization", "Bearer " + accessToken)
+            .method("GET", HttpRequest.BodyPublishers.noBody())
+            .build();
+
+        HttpResponse<String> response = null;
+        JSONObject jsonResponse = null;
+
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            jsonResponse = new JSONObject(response.body());
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(jsonResponse);
+        return jsonResponse;
     }
 }
