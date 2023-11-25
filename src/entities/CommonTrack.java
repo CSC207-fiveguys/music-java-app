@@ -8,7 +8,7 @@ public class CommonTrack implements Track {
     private final int duration;
     private final boolean explicit;
 
-    CommonTrack(String id, String imageURL, String name, String artists, int duration, boolean explicit) {
+    public CommonTrack(String id, String imageURL, String name, String artists, int duration, boolean explicit) {
         this.id = id;
         this.imageURL = imageURL;
         this.name = name;
