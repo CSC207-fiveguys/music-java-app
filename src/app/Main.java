@@ -5,6 +5,7 @@ import entities.UserFactory;
 import services.login_complete.*;
 import services.login_new_signup.*;
 import services.signup_abort.*;
+import services.signup_complete.*;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.TabView;
@@ -49,7 +50,11 @@ public class Main extends JPanel {
         SignupAbortInputBoundary abortSignupInteractor = new SignupAbortInteractor(abortSignupPresenter);
         SignupAbortController signupAbortController = new SignupAbortController(abortSignupInteractor);
 
-        SignupView signupView = new SignupView(signupViewModel, null, signupAbortController); //todo
+        SignupCompleteOutputBoundary signupCompletePresenter = new SignupCompletePresenter(signupViewModel, loginViewModel, viewManagerModel);
+        SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
+        SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
+
+        SignupView signupView = new SignupView(signupViewModel, signupCompleteController, signupAbortController);
         views.add(signupView, signupViewModel.viewName);
 
         TabView temp = new TabView(tabViewModel);

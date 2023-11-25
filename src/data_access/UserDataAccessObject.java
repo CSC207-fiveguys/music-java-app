@@ -6,8 +6,9 @@ import entities.UserFactory;
 import java.util.HashMap;
 import java.util.Map;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
+import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
-public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface {
+public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface {
 
   private final Map<String, User> users;
 
