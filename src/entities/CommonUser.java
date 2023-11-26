@@ -15,7 +15,7 @@ public class CommonUser implements User {
      * @param username This is the User's username that they signed up with
      * @param password This is their password that the signed up with
      */
-    CommonUser(String username, String password) {
+    public CommonUser(String username, String password) {
         this.username = username;
         this.password = password;
         // DESIGN CHOICE 1: WHEN CREATING USERS, THEY WILL NOT HAVE ANY FILLED IN ATTRIBUTES OTHER THAN USERNAME/PASSWORD
