@@ -12,6 +12,7 @@ public class CommonUser implements User {
 
     /**
      * Requires: password is valid.
+     *
      * @param username This is the User's username that they signed up with
      * @param password This is their password that the signed up with
      */
@@ -30,6 +31,7 @@ public class CommonUser implements User {
         this.friends = new ArrayList<User>();
 
     }
+
     @Override
     public String getUsername() {
         return username;
@@ -46,12 +48,12 @@ public class CommonUser implements User {
     }
 
     @Override
-    public void likeTrack(String trackID){
+    public void likeTrack(String trackID) {
         addTrackToPlaylist(trackID, "Liked Tracks");
     }
 
     @Override
-    public void unlikeTrack(String trackID){
+    public void unlikeTrack(String trackID) {
         removeTrackFromPlaylist(trackID, "Liked Tracks");
     }
 
@@ -61,29 +63,34 @@ public class CommonUser implements User {
     }
 
     @Override
-    public void createPlaylist(String playlistName){
+    public void createPlaylist(String playlistName) {
         Playlist newPlaylist = new CommonPlaylist(playlistName, this, new ArrayList<String>());
         personalPlaylists.add(newPlaylist);
     }
 
     // TODO Fill in the bodies of addTrackToPlaylist() and removeTrackFromPlaylist()
     @Override
-    public void addTrackToPlaylist(String trackID, String playlistName){return;}
+    public void addTrackToPlaylist(String trackID, String playlistName) {
+        return;
+    }
 
     @Override
-    public void removeTrackFromPlaylist(String trackID, String playlistName){return;}
+    public void removeTrackFromPlaylist(String trackID, String playlistName) {
+        return;
+    }
+
     @Override
     public ArrayList<String> getFollowedArtists() {
         return followedArtists;
     }
 
     @Override
-    public void followArtist(String artistID){
+    public void followArtist(String artistID) {
         followedArtists.add(artistID);
     }
 
     @Override
-    public void unfollowArtist(String artistID){
+    public void unfollowArtist(String artistID) {
         followedArtists.remove(artistID);
     }
 
@@ -93,12 +100,12 @@ public class CommonUser implements User {
     }
 
     @Override
-    public void addFriend(User friend){
+    public void addFriend(User friend) {
         friends.add(friend);
     }
 
     @Override
-    public void removeFriend(User friend){
+    public void removeFriend(User friend) {
         friends.remove(friend);
     }
 

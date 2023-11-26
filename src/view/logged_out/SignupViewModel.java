@@ -2,12 +2,8 @@ package view.logged_out;
 
 import view.ViewModel;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-
 public class SignupViewModel extends ViewModel {
 
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     public final SignupViewState state;
 
     public SignupViewModel(String viewName, SignupViewState state) {
@@ -20,8 +16,4 @@ public class SignupViewModel extends ViewModel {
         support.firePropertyChange("state", null, state);
     }
 
-    @Override
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        support.addPropertyChangeListener(listener);
-    }
 }

@@ -1,7 +1,7 @@
 package view.logged_out;
 
-import services.signup_complete.SignupCompleteController;
 import services.signup_abort.SignupAbortController;
+import services.signup_complete.SignupCompleteController;
 import view.components.LabelTextPanel;
 
 import javax.swing.*;
@@ -30,15 +30,18 @@ public class SignupView extends JPanel implements PropertyChangeListener {
         this.signupAbortController = signupAbortController;
 
         usernameInputField = new JTextField(15);
-        LabelTextPanel usernamePanel = new LabelTextPanel(new JLabel(signupViewModel.state.usernameInputFieldText), usernameInputField);
+        LabelTextPanel usernamePanel = new LabelTextPanel(
+                new JLabel(signupViewModel.state.usernameInputFieldText), usernameInputField);
         add(usernamePanel);
 
         password1InputField = new JPasswordField(15);
-        LabelTextPanel password1Panel = new LabelTextPanel(new JLabel(signupViewModel.state.password1InputFieldText), password1InputField);
+        LabelTextPanel password1Panel = new LabelTextPanel(
+                new JLabel(signupViewModel.state.password1InputFieldText), password1InputField);
         add(password1Panel);
 
         password2InputField = new JPasswordField(15);
-        LabelTextPanel password2Panel = new LabelTextPanel(new JLabel(signupViewModel.state.password2InputFieldText), password2InputField);
+        LabelTextPanel password2Panel = new LabelTextPanel(
+                new JLabel(signupViewModel.state.password2InputFieldText), password2InputField);
         add(password2Panel);
 
         signupButton = new JButton(signupViewModel.state.signupButtonText);
@@ -47,7 +50,7 @@ public class SignupView extends JPanel implements PropertyChangeListener {
 
         cancelButton = new JButton(signupViewModel.state.cancelButtonText);
         add(cancelButton);
-        signupButton.addActionListener(e -> cancelButtonPressed());
+        cancelButton.addActionListener(e -> cancelButtonPressed());
 
         currentError = new JLabel(signupViewModel.state.currentError);
         System.out.println(signupViewModel.state.currentError);
@@ -58,16 +61,18 @@ public class SignupView extends JPanel implements PropertyChangeListener {
         signupCompleteController.execute(
                 usernameInputField.getText(),
                 password1InputField.getText(),
-                password2InputField.getText());
+                password2InputField.getText()
+        );
     }
 
     private void cancelButtonPressed() {
-//        signupAbortController.execute(); todo
+        signupAbortController.execute();
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        SignupViewState state = (SignupViewState) evt.getNewValue();
-        currentError.setText(state.currentError);
+        // UPDATE ALL NON-FINAL STATE ATTRIBUTES TO VIEW
+
+        currentError.setText(signupViewModel.state.currentError);
     }
 }

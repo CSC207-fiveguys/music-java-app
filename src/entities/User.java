@@ -10,7 +10,7 @@ public interface User {
 
     Playlist getLikedTracks();
 
-     void likeTrack(String trackID);
+    void likeTrack(String trackID);
 
     void unlikeTrack(String trackID);
 
@@ -30,8 +30,8 @@ public interface User {
 
     ArrayList<User> getFriends();
 
-     void addFriend(User friend);
+    void addFriend(User friend);
 
-     void removeFriend(User friend);
+    void removeFriend(User friend);
 
 }

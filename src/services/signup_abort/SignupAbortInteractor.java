@@ -2,14 +2,14 @@ package services.signup_abort;
 
 public class SignupAbortInteractor implements SignupAbortInputBoundary {
 
-  final SignupAbortOutputBoundary userPresenter;
+    final SignupAbortOutputBoundary userPresenter;
 
-  public SignupAbortInteractor(SignupAbortOutputBoundary outputBoundary) {
-    this.userPresenter = outputBoundary;
-  }
+    public SignupAbortInteractor(SignupAbortOutputBoundary outputBoundary) {
+        this.userPresenter = outputBoundary;
+    }
 
-  @Override
-  public void execute() {
-    userPresenter.prepareSuccessView();
-  }
+    @Override
+    public void execute() {
+        userPresenter.prepareSuccessView();
+    }
 }

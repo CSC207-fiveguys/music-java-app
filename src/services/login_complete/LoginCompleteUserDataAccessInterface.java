@@ -4,9 +4,9 @@ import entities.User;
 
 public interface LoginCompleteUserDataAccessInterface {
 
-  boolean exists(String identifier);
+    boolean exists(String identifier);
 
-  void saveUser(User user);
+    void saveUser(User user);
 
-  User getUser(String username);
+    User getUser(String username);
 }

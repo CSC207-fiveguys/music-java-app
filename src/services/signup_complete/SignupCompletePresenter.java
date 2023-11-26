@@ -4,7 +4,7 @@ import view.ViewManagerModel;
 import view.logged_out.LoginViewModel;
 import view.logged_out.SignupViewModel;
 
-public class SignupCompletePresenter implements SignupCompleteOutputBoundary{
+public class SignupCompletePresenter implements SignupCompleteOutputBoundary {
 
     private final SignupViewModel signupViewModel;
     private final LoginViewModel loginViewModel;
@@ -20,13 +20,13 @@ public class SignupCompletePresenter implements SignupCompleteOutputBoundary{
     }
 
     @Override
-    public void prepareSuccessView(SignupCompleteOutputData response){
+    public void prepareSuccessView(SignupCompleteOutputData response) {
         viewManagerModel.activeView = loginViewModel.viewName;
         viewManagerModel.firePropertyChanged();
     }
 
     @Override
-    public void prepareFailView(String error){
+    public void prepareFailView(String error) {
         signupViewModel.state.currentError = error;
         signupViewModel.firePropertyChanged();
     }

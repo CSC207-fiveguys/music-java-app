@@ -5,7 +5,7 @@ import entities.UserFactory;
 
 import java.util.Objects;
 
-public class SignupCompleteInteractor implements SignupCompleteInputBoundary{
+public class SignupCompleteInteractor implements SignupCompleteInputBoundary {
     final SignupCompleteUserDataAccessInterface userDataAccessObject;
     final SignupCompleteOutputBoundary signupCompletePresenter;
 
@@ -21,13 +21,13 @@ public class SignupCompleteInteractor implements SignupCompleteInputBoundary{
         String password1 = signupCompleteInputData.getPassword1();
         String password2 = signupCompleteInputData.getPassword2();
 
-        if (userDataAccessObject.exists(username)){
+        if (userDataAccessObject.exists(username)) {
             signupCompletePresenter.prepareFailView(username +
                     " is taken. Please choose a different username.");
         } else if (!Objects.equals(password1, password2)) {
             signupCompletePresenter.prepareFailView("Your passwords do not match. " +
                     "Please try again.");
-        } else{
+        } else {
             UserFactory userFactory = new UserFactory();
 
             userDataAccessObject.saveUser(userFactory.create(username, password2));

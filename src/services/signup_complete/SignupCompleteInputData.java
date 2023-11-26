@@ -13,11 +13,11 @@ public class SignupCompleteInputData {
         this.password2 = password2;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
 
-    public  String getPassword1(){
+    public String getPassword1() {
         return password1;
     }
 

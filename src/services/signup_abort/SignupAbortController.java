@@ -2,13 +2,14 @@ package services.signup_abort;
 
 public class SignupAbortController {
 
-  final SignupAbortInputBoundary signupAbortInteractor;
+    final SignupAbortInputBoundary signupAbortInteractor;
 
-  public SignupAbortController(SignupAbortInputBoundary signupAbortInteractor) {
-    this.signupAbortInteractor = signupAbortInteractor;
-  }
+    public SignupAbortController(SignupAbortInputBoundary signupAbortInteractor) {
+        this.signupAbortInteractor = signupAbortInteractor;
+    }
 
-  public void execute() {
-    signupAbortInteractor.execute();
-  }
+    public void execute() {
+        System.out.println("hi");
+        signupAbortInteractor.execute();
+    }
 }

@@ -2,7 +2,7 @@ package services.login_complete;
 
 public interface LoginCompleteOutputBoundary {
 
-  void prepareSuccessView(LoginCompleteOutputData user);
+    void prepareSuccessView(LoginCompleteOutputData user);
 
-  void prepareFailView(String error);
+    void prepareFailView(String error);
 }
