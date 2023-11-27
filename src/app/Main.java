@@ -2,6 +2,7 @@ package app;
 
 import data_access.UserDataAccessObject;
 import entities.UserFactory;
+import services.back_to_tab_view.*;
 import services.login_complete.*;
 import services.login_new_signup.*;
 import services.signup_abort.*;
@@ -71,6 +72,10 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+        BackToTabViewOutputBoundary backToTabViewPresenter = new BackToTabViewPresenter(tabViewModel, viewManagerModel);
+        BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
+        BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -108,7 +113,7 @@ public class Main extends JPanel {
 
         PlaylistView playlistView = new PlaylistView(
                 playlistViewModel,
-                null,
+                backToTabViewController,
                 null,
                 null
         );
