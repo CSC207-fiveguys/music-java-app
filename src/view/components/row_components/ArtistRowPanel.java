@@ -1,36 +1,59 @@
 package view.components.row_components;
 
-import javax.imageio.ImageIO;
+import services.follow_artist.FollowArtistController;
+import services.unfollow_artist.UnfollowArtistController;
+
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
-class ArtistRowPanel extends JPanel {
-    ArtistRowPanel(String imageURL, JLabel name, JLabel followers) {
+public class ArtistRowPanel extends ListedRowPanel {
 
-        Image image;
+    private final String id;
+    private final String username;
+    private final FollowArtistController followArtistController;
+    private final UnfollowArtistController unfollowArtistController;
 
-        try {
-            // load image of the selected artist from spotify's CDN
-            URL url = new URL(imageURL);
-            image = ImageIO.read(url);
-        } catch (Exception e) {
-            // if image is not able to be retrieved, use local generic error image
-            File imgageFile = new File("./error-image-generic.png");
-            try {
-                image = ImageIO.read(imgageFile);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+    public ArtistRowPanel(String name,
+                          String followers,
+                          String iconPath,
+                          String id,
+                          String username,
+                          FollowArtistController followArtistController,
+                          UnfollowArtistController unfollowArtistController) {
+        super(name, iconPath);
+        this.id = id;
+        this.username = username;
+        this.followArtistController = followArtistController;
+        this.unfollowArtistController = unfollowArtistController;
+
+        JLabel label = new JLabel(followers + " followers");
+        label.setMinimumSize(new Dimension(180, 52));
+        label.setPreferredSize(new Dimension(180, 52));
+        label.setMaximumSize(new Dimension(180, 52));
+        label.setOpaque(true);
+        label.setBackground(Color.GRAY);
+        add(label);
+
+        if (followArtistController != null) {
+            JButton followButton = new JButton("follow");
+            followButton.addActionListener(e -> followButtonPressed());
+            add(followButton);
         }
 
-        image = image.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        ImageIcon icon = new ImageIcon(image);
-        name.setIcon(icon);
+        if (unfollowArtistController != null) {
+            JButton unfollowButton = new JButton("unfollow");
+            unfollowButton.addActionListener(e -> unfollowButtonPressed());
+            add(unfollowButton);
+        }
 
-        this.add(name);
-        this.add(followers);
     }
+
+    private void followButtonPressed() {
+        followArtistController.execute(id, username);
+    }
+
+    private void unfollowButtonPressed() {
+        unfollowArtistController.execute(id, username);
+    }
+
 }

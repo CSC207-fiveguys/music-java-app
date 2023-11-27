@@ -15,7 +15,7 @@ public class ViewManagerModel {
     // SignupViewModel.viewName
     // LoginViewModel.viewName
     // TabViewModel.viewName
-    // ArtistViewModel.viewName
+    // PlaylistViewModel.viewName
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 

@@ -5,18 +5,19 @@ import view.logged_out.LoginViewModel;
 
 public class SignupAbortPresenter implements SignupAbortOutputBoundary {
 
-  private final LoginViewModel loginViewModel;
-  private final ViewManagerModel viewManagerModel;
+    private final LoginViewModel loginViewModel;
+    private final ViewManagerModel viewManagerModel;
 
-  public SignupAbortPresenter(LoginViewModel loginViewModel,
-      ViewManagerModel viewManagerModel) {
-    this.loginViewModel = loginViewModel;
-    this.viewManagerModel = viewManagerModel;
-  }
+    public SignupAbortPresenter(LoginViewModel loginViewModel,
+                                ViewManagerModel viewManagerModel) {
+        this.loginViewModel = loginViewModel;
+        this.viewManagerModel = viewManagerModel;
+    }
 
-  @Override
-  public void prepareSuccessView() {
-    viewManagerModel.activeView = loginViewModel.viewName;
-    viewManagerModel.firePropertyChanged();
-  }
+    @Override
+    public void prepareSuccessView() {
+        viewManagerModel.activeView = loginViewModel.viewName;
+        viewManagerModel.firePropertyChanged();
+
+    }
 }

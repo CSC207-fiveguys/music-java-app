@@ -10,13 +10,13 @@ import org.json.JSONObject;
 public class SpotifyDataAccessObject {
 
   String accessToken;
-  spotifAPItemp spotifyAPI;
+  SpotifyAPI spotifyAPI;
   TrackDataAccessObject trackDataAccessObject;
   ArtistDataAccessObject artistDataAccessObject;
 
   public SpotifyDataAccessObject(TrackDataAccessObject trackDataAccessObject,
       ArtistDataAccessObject artistDataAccessObject) {
-    spotifyAPI = new spotifAPItemp();
+    spotifyAPI = new SpotifyAPI();
     accessToken = spotifyAPI.requestToken();
     this.trackDataAccessObject = trackDataAccessObject;
     this.artistDataAccessObject = artistDataAccessObject;
@@ -27,7 +27,7 @@ public class SpotifyDataAccessObject {
     // Return a list of the Track objects for the top 5 results
     try {
 
-      JSONObject response = spotifyAPI.search(query, accessToken);
+      JSONObject response = spotifyAPI.search_track(query, accessToken);
 
       // Extract the tracks from the api call
       JSONObject x = (JSONObject) response.get("tracks");
