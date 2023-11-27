@@ -26,6 +26,8 @@ public class FollowedArtistsView extends TabPageView {
 
         usernameHeaderRowPanel.updateUsername(followedArtistsViewModel.state.username);
 
+        innerPanel.removeAll();
+
         for (Map<String, String> artist : followedArtistsViewModel.state.artists) {
             innerPanel.add(Box.createRigidArea(new Dimension(0, 4)));
             innerPanel.add(new ArtistRowPanel(
