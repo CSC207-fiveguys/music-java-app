@@ -46,11 +46,34 @@ public class SpotifyAPI {
         return accessToken;
     }
 
-    public JSONObject search(String query, String accessToken) throws Exception {
+    public JSONObject search_artist(String query, String accessToken) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query,
-                StandardCharsets.UTF_8) + "&type=track,artist" + "&market=CA" + "&limit=5"))
+                StandardCharsets.UTF_8) + "&type=artist" + "&market=CA" + "&limit=5"))
+            .header("Authorization", "Bearer " + accessToken)
+            .method("GET", HttpRequest.BodyPublishers.noBody())
+            .build();
+
+        HttpResponse<String> response = null;
+        JSONObject jsonResponse = null;
+
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            jsonResponse = new JSONObject(response.body());
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(jsonResponse);
+        return jsonResponse;
+    }
+
+    public JSONObject search_track(String query, String accessToken) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query,
+                StandardCharsets.UTF_8) + "&type=track" + "&market=CA" + "&limit=5"))
             .header("Authorization", "Bearer " + accessToken)
             .method("GET", HttpRequest.BodyPublishers.noBody())
             .build();
