@@ -26,27 +26,21 @@ public class SpotifyDataAccessObject {
   public ArrayList<Track> searchTrack(String query) {
     // Make the API call to search for Tracks matching the query
     // Return a list of the Track objects for the top 5 results
-    try {
+    JSONObject response = spotifyAPI.search_track(query, accessToken);
 
-      JSONObject response = spotifyAPI.search_track(query, accessToken);
+    // Extract the tracks from the api call
+    JSONObject x = (JSONObject) response.get("tracks");
+    JSONArray y = (JSONArray) x.get("items");
 
-      // Extract the tracks from the api call
-      JSONObject x = (JSONObject) response.get("tracks");
-      JSONArray y = (JSONArray) x.get("items");
-
-      ArrayList<Track> tracks = new ArrayList<>();
-      // For each track returned by the call, save the track in our Track DAO
-      for (Object track : y) {
-        // Cast the track into a JSONObject (which is what it always will be)
-        Track trackObject = saveTrack((JSONObject) track);
-        tracks.add(trackObject);
-      }
-
-      return tracks;
-
-    } catch (Exception e) {
-      throw new RuntimeException(e);
+    ArrayList<Track> tracks = new ArrayList<>();
+    // For each track returned by the call, save the track in our Track DAO
+    for (Object track : y) {
+      // Cast the track into a JSONObject (which is what it always will be)
+      Track trackObject = saveTrack((JSONObject) track);
+      tracks.add(trackObject);
     }
+
+    return tracks;
   }
 
   public Track saveTrack(JSONObject track) {
@@ -86,25 +80,20 @@ public class SpotifyDataAccessObject {
   }
 
   public ArrayList<Artist> searchArtist(String query) {
-    try {
-      JSONObject response = spotifyAPI.search_artist(query, accessToken);
+    JSONObject response = spotifyAPI.search_artist(query, accessToken);
 
-      // Extract the tracks from the api call
-      JSONObject x = (JSONObject) response.get("artists");
-      JSONArray y = (JSONArray) x.get("items");
+    // Extract the tracks from the api call
+    JSONObject x = (JSONObject) response.get("artists");
+    JSONArray y = (JSONArray) x.get("items");
 
-      ArrayList<Artist> artists = new ArrayList<>();
-      // For each track returned by the call, save the track in our Track DAO
-      for (Object artist : y) {
-        // Cast the track into a JSONObject (which is what it always will be)
-        Artist artistObject = saveArtist((JSONObject) artist);
-        artists.add(artistObject);
-      }
-      return artists;
-
-    } catch (Exception e) {
-      throw new RuntimeException(e);
+    ArrayList<Artist> artists = new ArrayList<>();
+    // For each track returned by the call, save the track in our Track DAO
+    for (Object artist : y) {
+      // Cast the track into a JSONObject (which is what it always will be)
+      Artist artistObject = saveArtist((JSONObject) artist);
+      artists.add(artistObject);
     }
+    return artists;
   }
 
   public Artist saveArtist(JSONObject artist) {
