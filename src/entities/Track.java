@@ -12,4 +12,6 @@ public interface Track {
 
     boolean isExplicit();
 
+    String getImageURL();
+
 }

@@ -71,7 +71,15 @@ public class SpotifyDataAccessObject {
         artists = artists.concat(((JSONObject) artist).get("name") + "   ");
       }
 
-      Track trackObject = new CommonTrack(id, name, artists, duration, explicit);
+      String imageURL = null;
+
+      // Store the image url if any images are given
+      JSONArray images = (JSONArray) ((JSONObject) track.get("album")).get("images");
+      if (!images.isEmpty()){
+        imageURL = (String) ((JSONObject) images.get(0)).get("url");
+      }
+
+      Track trackObject = new CommonTrack(id, name, artists, duration, explicit, imageURL);
       trackDataAccessObject.saveTrack(trackObject);
       return trackObject;
     }
@@ -114,7 +122,7 @@ public class SpotifyDataAccessObject {
       int numFollowers = (int) ((JSONObject) artist.get("followers")).get("total");
       String imageURL = null;
 
-      // Store all the artists in a String instead of a list
+      // Store the image url if any images are given
       JSONArray images = (JSONArray) artist.get("images");
       if (!images.isEmpty()){
         imageURL = (String) ((JSONObject) images.get(0)).get("url");
