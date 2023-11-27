@@ -46,7 +46,7 @@ public class SpotifyAPI {
         return accessToken;
     }
 
-    public JSONObject search_artist(String query, String accessToken) throws Exception {
+    public JSONObject search_artist(String query, String accessToken) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query,
@@ -69,7 +69,7 @@ public class SpotifyAPI {
         return jsonResponse;
     }
 
-    public JSONObject search_track(String query, String accessToken) throws Exception {
+    public JSONObject search_track(String query, String accessToken) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query,
