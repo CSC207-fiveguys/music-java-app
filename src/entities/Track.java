@@ -4,8 +4,6 @@ public interface Track {
 
     String getID();
 
-    String getImageURL();
-
     String getName();
 
     String getArtists();
@@ -13,5 +11,7 @@ public interface Track {
     int getDuration();
 
     boolean isExplicit();
+
+    String getImageURL();
 
 }

@@ -7,7 +7,7 @@ public class CommonArtist implements Artist {
     private final String name;
     private final int numFollowers;
 
-    CommonArtist(String id, String imageURL, String name, int numFollowers) {
+    public CommonArtist(String id, String imageURL, String name, int numFollowers) {
         this.id = id;
         this.imageURL = imageURL;
         this.name = name;
