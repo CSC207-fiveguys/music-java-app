@@ -1,6 +1,7 @@
 package data_access;
 
 import entities.Artist;
+import entities.CommonArtist;
 import entities.CommonTrack;
 import entities.Track;
 import java.util.ArrayList;
@@ -50,12 +51,11 @@ public class SpotifyDataAccessObject {
 
   public Track saveTrack(JSONObject track) {
     // Create a new Track object and save it in the Track DAO using the data in track
-    Track trackObject;
     String id = (String) track.get("id");
 
     if (trackDataAccessObject.exists(id)) {
       // The Track already exists in our DAO then simply get it and return it
-      trackObject = trackDataAccessObject.getTrack(id);
+      return trackDataAccessObject.getTrack(id);
     } else {
 
       // If the Track object does not already exist in our DAO, create a new Track Object
@@ -71,19 +71,59 @@ public class SpotifyDataAccessObject {
         artists = artists.concat(((JSONObject) artist).get("name") + "   ");
       }
 
-      trackObject = new CommonTrack(id, name, artists, duration, explicit);
+      Track trackObject = new CommonTrack(id, name, artists, duration, explicit);
       trackDataAccessObject.saveTrack(trackObject);
+      return trackObject;
     }
-
-    return trackObject;
   }
 
   public ArrayList<Artist> searchArtist(String query) {
-    return null;
+    try {
+      JSONObject response = spotifyAPI.search_artist(query, accessToken);
+
+      // Extract the tracks from the api call
+      JSONObject x = (JSONObject) response.get("artists");
+      JSONArray y = (JSONArray) x.get("items");
+
+      ArrayList<Artist> artists = new ArrayList<>();
+      // For each track returned by the call, save the track in our Track DAO
+      for (Object artist : y) {
+        // Cast the track into a JSONObject (which is what it always will be)
+        Artist artistObject = saveArtist((JSONObject) artist);
+        artists.add(artistObject);
+      }
+      return artists;
+
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
-  public void saveArtist(JSONObject artist) {
+  public Artist saveArtist(JSONObject artist) {
     // Create a new Artist object and save it in the Artist DAO using the data in artist
+    String id = (String) artist.get("id");
+
+    if (artistDataAccessObject.exists(id)) {
+      // The Track already exists in our DAO then simply get it and return it
+      return artistDataAccessObject.getArtist(id);
+
+    } else {
+      // If the Track object does not already exist in our DAO, create a new Track Object
+      // Get all the fields needed
+      String name = (String) artist.get("name");
+      int numFollowers = (int) ((JSONObject) artist.get("followers")).get("total");
+      String imageURL = null;
+
+      // Store all the artists in a String instead of a list
+      JSONArray images = (JSONArray) artist.get("images");
+      if (!images.isEmpty()){
+        imageURL = (String) ((JSONObject) images.get(0)).get("url");
+      }
+
+      Artist artistObject = new CommonArtist(id, imageURL, name, numFollowers);
+      artistDataAccessObject.saveArtist(artistObject);
+      return artistObject;
+    }
   }
 
 }
