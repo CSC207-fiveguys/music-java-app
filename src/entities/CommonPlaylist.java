@@ -10,7 +10,7 @@ public class CommonPlaylist implements Playlist {
     // keys in our cache dictionary, which actually stores the Track object
     private final ArrayList<String> tracks;
 
-    CommonPlaylist(String name, User owner, ArrayList<String> tracks) {
+    public CommonPlaylist(String name, User owner, ArrayList<String> tracks) {
         this.name = name;
         this.owner = owner;
         this.tracks = tracks;
