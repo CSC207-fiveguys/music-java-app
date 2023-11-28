@@ -48,11 +48,12 @@ public class UserDataAccessObject implements LoginCompleteUserDataAccessInterfac
         // TODO Implement this method
     }
 
-    public ArrayList<User> searchUser(String query){
-        ArrayList<User> matchingUsers = new ArrayList<>();
+    public ArrayList<String> searchUser(String query){
+
+        ArrayList<String> matchingUsers = new ArrayList<>();
         for (String user: users.keySet()){
             if (query.contains(user) || user.contains(query)){
-                matchingUsers.add(users.get(user));
+                matchingUsers.add(user);
             }
         }
         return matchingUsers;

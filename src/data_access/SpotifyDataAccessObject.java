@@ -7,8 +7,9 @@ import entities.Track;
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import services.search.SearchUserDataAccessInterface;
 
-public class SpotifyDataAccessObject {
+public class SpotifyDataAccessObject implements SearchUserDataAccessInterface {
 
   String accessToken;
   SpotifyAPI spotifyAPI;
