@@ -58,6 +58,8 @@ public class SearchView extends TabPageView {
 
         usernameHeaderRowPanel.updateUsername(searchViewModel.state.username);
 
+        innerPanel.removeAll();
+
         // show tracks
 
         for (Map<String, Object> track : searchViewModel.state.tracks) {

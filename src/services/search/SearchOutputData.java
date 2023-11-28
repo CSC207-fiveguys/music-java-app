@@ -8,13 +8,14 @@ import java.util.ArrayList;
 
 public class SearchOutputData {
 
-  private ArrayList<Artist> artists;
-  private ArrayList<Track> tracks;
-  private ArrayList<User> users;
+   ArrayList<Artist> artists;
+   ArrayList<Track> tracks;
+   ArrayList<String> users;
 
-  public SearchOutputData(ArrayList<Artist> artists, ArrayList<Track> tracks, ArrayList<User> users){
+  public SearchOutputData(ArrayList<Artist> artists, ArrayList<Track> tracks, ArrayList<String> users){
     this.artists = artists;
     this.tracks = tracks;
     this.users = users;
   }
+
 }

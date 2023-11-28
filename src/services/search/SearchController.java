@@ -9,8 +9,6 @@ public class SearchController {
     }
     public void execute(String searchQuery) {
         SearchInputData searchInputData = new SearchInputData(searchQuery);
-
         searchInteractor.execute(searchInputData);
-        // todo1. update SearchViewModel with up to 5 tracks, artists, and friends
     }
 }
