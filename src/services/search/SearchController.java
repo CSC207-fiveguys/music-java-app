@@ -11,4 +11,5 @@ public class SearchController {
         SearchInputData searchInputData = new SearchInputData(searchQuery);
         searchInteractor.execute(searchInputData);
     }
+
 }

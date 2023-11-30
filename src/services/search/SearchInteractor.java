@@ -6,13 +6,16 @@ import entities.Track;
 import entities.User;
 import java.util.ArrayList;
 
-public class SearchInteractor implements SearchInputBoundary{
+public class SearchInteractor implements SearchInputBoundary {
 
   final SearchOutputBoundary searchPresenter;
   final SearchUserDataAccessInterface spotifyDataAccessObject;
-
   final UserDataAccessObject userDataAccessObject;
-  public SearchInteractor(SearchOutputBoundary SearchPresenter, SearchUserDataAccessInterface SpotifyDataAccessObject, UserDataAccessObject userDataAccessObject){
+
+  public SearchInteractor(SearchOutputBoundary SearchPresenter,
+      SearchUserDataAccessInterface SpotifyDataAccessObject,
+      UserDataAccessObject userDataAccessObject) {
+
     this.searchPresenter = SearchPresenter;
     this.spotifyDataAccessObject = SpotifyDataAccessObject;
     this.userDataAccessObject = userDataAccessObject;

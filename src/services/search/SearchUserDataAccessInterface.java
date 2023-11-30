@@ -9,4 +9,5 @@ public interface SearchUserDataAccessInterface {
   ArrayList<Artist> searchArtist(String query);
 
   ArrayList<Track> searchTrack(String query);
+
 }

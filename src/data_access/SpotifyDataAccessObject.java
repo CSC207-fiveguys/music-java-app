@@ -42,6 +42,7 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface {
     }
 
     return tracks;
+
   }
 
   public Track saveTrack(JSONObject track) {
@@ -68,7 +69,7 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface {
 
       String imageURL = null;
 
-      // Store the image url if any images are given
+      // Store the first given image url if any images are given
       JSONArray images = (JSONArray) ((JSONObject) track.get("album")).get("images");
       if (!images.isEmpty()){
         imageURL = (String) ((JSONObject) images.get(0)).get("url");

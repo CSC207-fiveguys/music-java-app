@@ -20,7 +20,7 @@ public class SearchPresenter implements SearchOutputBoundary{
   }
   @Override
   public void prepareSuccessView(SearchOutputData searchOutputData) {
-    // Output Stuff
+    // Update the state fields
     SearchViewState state = searchViewModel.state;
     state.friendUsernames = searchOutputData.users;
 

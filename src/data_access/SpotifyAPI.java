@@ -88,7 +88,6 @@ public class SpotifyAPI {
             e.printStackTrace();
         }
 
-        System.out.println(jsonResponse);
         return jsonResponse;
     }
 }
