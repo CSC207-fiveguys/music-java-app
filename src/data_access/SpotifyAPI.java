@@ -42,7 +42,6 @@ public class SpotifyAPI {
 
         assert jsonResponse != null;
         accessToken = jsonResponse.getString("access_token");
-        System.out.println(jsonResponse);
         return accessToken;
     }
 
@@ -65,7 +64,6 @@ public class SpotifyAPI {
             e.printStackTrace();
         }
 
-        System.out.println(jsonResponse);
         return jsonResponse;
     }
 
@@ -88,7 +86,6 @@ public class SpotifyAPI {
             e.printStackTrace();
         }
 
-        System.out.println(jsonResponse);
         return jsonResponse;
     }
 }

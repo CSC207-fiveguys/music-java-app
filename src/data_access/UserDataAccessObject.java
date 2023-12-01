@@ -2,6 +2,7 @@ package data_access;
 
 import entities.User;
 import entities.UserFactory;
+import java.util.ArrayList;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
@@ -45,6 +46,17 @@ public class UserDataAccessObject implements LoginCompleteUserDataAccessInterfac
     private void save() {
         // Write the user data from users to the json file
         // TODO Implement this method
+    }
+
+    public ArrayList<String> searchUser(String query){
+
+        ArrayList<String> matchingUsers = new ArrayList<>();
+        for (String user: users.keySet()){
+            if (query.contains(user) || user.contains(query)){
+                matchingUsers.add(user);
+            }
+        }
+        return matchingUsers;
     }
 
 }
