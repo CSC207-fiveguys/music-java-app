@@ -2,6 +2,12 @@ package app;
 
 import data_access.UserDataAccessObject;
 import entities.UserFactory;
+import services.add_friend.AddFriendController;
+import services.add_friend.AddFriendInputBoundary;
+import services.add_friend.AddFriendInteractor;
+import services.add_friend.AddFriendOutputBoundary;
+import services.add_friend.AddFriendOutputData;
+import services.add_friend.AddFriendPresenter;
 import services.login_complete.*;
 import services.login_new_signup.*;
 import services.signup_abort.*;
@@ -71,6 +77,10 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+        AddFriendOutputBoundary addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel, searchViewModel, viewManagerModel);
+        AddFriendInputBoundary addFriendInteractor = new AddFriendInteractor(userDataAccessObject, addFriendPresenter);
+        AddFriendController addFriendController = new AddFriendController(addFriendInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -98,7 +108,7 @@ public class Main extends JPanel {
                 null,
                 null,
                 null,
-                null,
+                addFriendController,
                 null,
                 null,
                 null,

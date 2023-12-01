@@ -7,9 +7,13 @@ public class FollowedFriendsViewState {
     public String username;
     public ArrayList<String> friendUsernames;
 
+    public String error;
+
     public FollowedFriendsViewState() {
         // defines default state for testing purposes
         username = null;
+
+        error = null;
 
         friendUsernames = new ArrayList<>();
         friendUsernames.add("friend1");

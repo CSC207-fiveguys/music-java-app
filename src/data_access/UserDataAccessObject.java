@@ -2,13 +2,17 @@ package data_access;
 
 import entities.User;
 import entities.UserFactory;
+import services.add_friend.AddFriendUserDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface {
+public class UserDataAccessObject implements
+    LoginCompleteUserDataAccessInterface,
+    SignupCompleteUserDataAccessInterface,
+    AddFriendUserDataAccessInterface {
 
     private final Map<String, User> users;
 
