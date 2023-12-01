@@ -1,8 +1,6 @@
 package data_access;
 
-import entities.CommonPlaylist;
 import entities.Playlist;
-import entities.Track;
 import entities.User;
 import entities.UserFactory;
 import java.util.ArrayList;
@@ -55,8 +53,8 @@ public class UserDataAccessObject implements LoginCompleteUserDataAccessInterfac
 
     @Override
     public Playlist getPlaylist(String playlistName, String username) {
+        // Return the Playlist with the given name belonging to the given user
         User user = users.get(username);
-        ArrayList<String> tracks = new ArrayList<>();
         for (Playlist playlist: user.getPlaylists()) {
             if (playlist.getName().equals(playlistName)) {
                 return playlist;
