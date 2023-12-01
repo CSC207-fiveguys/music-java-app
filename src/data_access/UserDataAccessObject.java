@@ -1,14 +1,20 @@
 package data_access;
 
+import entities.CommonPlaylist;
+import entities.Playlist;
+import entities.Track;
 import entities.User;
 import entities.UserFactory;
+import java.util.ArrayList;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
+import services.view_playlist.ViewPlaylistDataAccessInterface;
 
-public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface {
+public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface,
+    ViewPlaylistDataAccessInterface {
 
     private final Map<String, User> users;
 
@@ -47,4 +53,18 @@ public class UserDataAccessObject implements LoginCompleteUserDataAccessInterfac
         // TODO Implement this method
     }
 
+    @Override
+    public Playlist getPlaylist(String playlistName, String username) {
+        User user = users.get(username);
+        ArrayList<String> tracks = new ArrayList<>();
+        tracks.add("1");
+        Playlist playlisttest = new CommonPlaylist(playlistName, user, tracks);
+        return playlisttest;
+//        for (Playlist playlist: user.getPlaylists()) {
+//            if (playlist.getName().equals(playlistName)) {
+//                return playlist;
+//            }
+//        }
+//        return null; // This line should never be reached as the playlist name will be valid
+    }
 }

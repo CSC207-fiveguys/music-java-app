@@ -1,5 +1,6 @@
 package app;
 
+import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.UserFactory;
 import services.back_to_tab_view.*;
@@ -7,6 +8,11 @@ import services.login_complete.*;
 import services.login_new_signup.*;
 import services.signup_abort.*;
 import services.signup_complete.*;
+import services.view_playlist.ViewPlaylistController;
+import services.view_playlist.ViewPlaylistInputBoundary;
+import services.view_playlist.ViewPlaylistInteractor;
+import services.view_playlist.ViewPlaylistOutputBoundary;
+import services.view_playlist.ViewPlaylistPresenter;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.*;
@@ -30,6 +36,7 @@ public class Main extends JPanel {
         // CREATE DAOs
 
         UserDataAccessObject userDataAccessObject = new UserDataAccessObject(new UserFactory());
+        TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
 
         // CREATE VIEW MODELS (that have states)
 
@@ -76,6 +83,11 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
+        ViewPlaylistOutputBoundary viewPlaylistPresenter = new ViewPlaylistPresenter(playlistViewModel,
+            viewManagerModel);
+        ViewPlaylistInputBoundary viewPlaylistInteractor = new ViewPlaylistInteractor(userDataAccessObject, viewPlaylistPresenter, trackDataAccessObject);
+        ViewPlaylistController viewPlaylistController = new ViewPlaylistController(viewPlaylistInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -99,7 +111,7 @@ public class Main extends JPanel {
                 followedFriendsViewModel,
                 searchViewModel,
                 null,
-                null,
+                viewPlaylistController,
                 null,
                 null,
                 null,

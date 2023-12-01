@@ -1,5 +1,6 @@
 package data_access;
 
+import entities.CommonTrack;
 import entities.Track;
 
 import java.util.HashMap;
@@ -15,6 +16,7 @@ public class TrackDataAccessObject {
         // having duplicate objects for the same track.
         // This data is kept in a json file
         tracks = new HashMap<>();
+        tracks.put("1", new CommonTrack("1", "funny", "hussain", 1, false, null));
         // TODO: Read from the json file that stores Track Data
     }
 
