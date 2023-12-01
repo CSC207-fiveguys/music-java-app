@@ -34,4 +34,6 @@ public interface User {
 
     void removeFriend(User friend);
 
+    void removePlaylist(Playlist playlist);
+
 }

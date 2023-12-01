@@ -1,7 +1,13 @@
 package services.remove_friend;
 
+import entities.User;
+import java.util.ArrayList;
+import java.util.List;
+
 public interface RemoveFriendOutputBoundary {
-  public void prepareSuccessView();
-  public void prepareFailView();
+
+  void prepareSuccessView(RemoveFriendOutputData userFriends);
+
+  void prepareFailView();
 
 }

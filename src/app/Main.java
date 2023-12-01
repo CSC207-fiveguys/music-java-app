@@ -4,6 +4,11 @@ import data_access.UserDataAccessObject;
 import entities.UserFactory;
 import services.login_complete.*;
 import services.login_new_signup.*;
+import services.remove_friend.RemoveFriendController;
+import services.remove_friend.RemoveFriendInputBoundary;
+import services.remove_friend.RemoveFriendInteractor;
+import services.remove_friend.RemoveFriendOutputBoundary;
+import services.remove_friend.RemoveFriendPresenter;
 import services.signup_abort.*;
 import services.signup_complete.*;
 import view.ViewManager;
@@ -71,6 +76,11 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+        RemoveFriendOutputBoundary removeFriendPresenter = new RemoveFriendPresenter(
+            followedFriendsViewModel, viewManagerModel);
+        RemoveFriendInputBoundary removeFriendInteractor = new RemoveFriendInteractor(userDataAccessObject, removeFriendPresenter);
+        RemoveFriendController removeFriendController = new RemoveFriendController(removeFriendInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -99,7 +109,7 @@ public class Main extends JPanel {
                 null,
                 null,
                 null,
-                null,
+                removeFriendController,
                 null,
                 null,
                 null
