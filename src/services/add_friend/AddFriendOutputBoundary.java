@@ -2,7 +2,7 @@ package services.add_friend;
 
 public interface AddFriendOutputBoundary {
 
-  void prepareSuccessView(AddFriendOutputData friendsPlaylists);
+  void prepareSuccessView(AddFriendOutputData friendUsername);
   void prepareFailView(String error);
 
 }

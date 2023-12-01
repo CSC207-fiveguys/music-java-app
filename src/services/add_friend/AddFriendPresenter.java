@@ -6,10 +6,11 @@ import view.logged_in.tabs.FollowedFriendsViewModel;
 import view.logged_in.tabs.FollowedFriendsViewState;
 import view.logged_in.tabs.MyLibraryViewModel;
 import view.logged_in.tabs.SearchViewModel;
+import view.logged_in.tabs.SearchViewState;
 
 public class AddFriendPresenter implements AddFriendOutputBoundary {
-  private final FollowedFriendsViewModel followedFriendsViewModel;
   private final SearchViewModel searchViewModel;
+  private final FollowedFriendsViewModel followedFriendsViewModel;
   private ViewManagerModel viewManagerModel;
 
 
@@ -22,16 +23,17 @@ public class AddFriendPresenter implements AddFriendOutputBoundary {
     this.viewManagerModel = viewManagerModel;
   }
   public void prepareSuccessView(AddFriendOutputData friendUsername){
+    SearchViewState searchViewState = searchViewModel.state;
+    searchViewModel.firePropertyChanged();
+
     FollowedFriendsViewState followedFriendsViewState = followedFriendsViewModel.state;
-    followedFriendsViewState.username = friendUsername.username;
-    this.followedFriendsViewModel.firePropertyChanged();
-
-    this.viewManagerModel.activeView = followedFriendsViewModel.viewName;
-    this.viewManagerModel.firePropertyChanged();
-
+    followedFriendsViewState.friendUsernames.add(friendUsername.username);
+    followedFriendsViewModel.firePropertyChanged();
   }
+
+
   public void prepareFailView(String error){
-    FollowedFriendsViewState followedFriendsViewState = followedFriendsViewModel.state;
-    followedFriendsViewState.error = error;
+    SearchViewState searchViewState = searchViewModel.state;
+    searchViewModel.firePropertyChanged();
   }
 }

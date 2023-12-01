@@ -6,4 +6,5 @@ public class AddFriendOutputData {
   public AddFriendOutputData(String username) {
     this.username = username;
   }
+
 }

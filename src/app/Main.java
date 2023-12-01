@@ -6,7 +6,6 @@ import services.add_friend.AddFriendController;
 import services.add_friend.AddFriendInputBoundary;
 import services.add_friend.AddFriendInteractor;
 import services.add_friend.AddFriendOutputBoundary;
-import services.add_friend.AddFriendOutputData;
 import services.add_friend.AddFriendPresenter;
 import services.login_complete.*;
 import services.login_new_signup.*;
