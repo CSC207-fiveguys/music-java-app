@@ -3,7 +3,6 @@ package data_access;
 import entities.Playlist;
 import entities.User;
 import entities.UserFactory;
-import java.util.ArrayList;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
