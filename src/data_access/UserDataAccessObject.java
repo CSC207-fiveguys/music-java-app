@@ -57,14 +57,11 @@ public class UserDataAccessObject implements LoginCompleteUserDataAccessInterfac
     public Playlist getPlaylist(String playlistName, String username) {
         User user = users.get(username);
         ArrayList<String> tracks = new ArrayList<>();
-        tracks.add("1");
-        Playlist playlisttest = new CommonPlaylist(playlistName, user, tracks);
-        return playlisttest;
-//        for (Playlist playlist: user.getPlaylists()) {
-//            if (playlist.getName().equals(playlistName)) {
-//                return playlist;
-//            }
-//        }
-//        return null; // This line should never be reached as the playlist name will be valid
+        for (Playlist playlist: user.getPlaylists()) {
+            if (playlist.getName().equals(playlistName)) {
+                return playlist;
+            }
+        }
+        return null; // This line should never be reached as the playlist name will be valid
     }
 }

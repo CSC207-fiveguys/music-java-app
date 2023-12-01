@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class ViewPlaylistInteractor implements ViewPlaylistInputBoundary{
 
   final ViewPlaylistDataAccessInterface userDataAccessObject;
+
   final ViewPlaylistOutputBoundary viewPlaylistPresenter;
 
   final TrackDataAccessObject trackDataAccessObject;
@@ -21,19 +22,19 @@ public class ViewPlaylistInteractor implements ViewPlaylistInputBoundary{
 
   @Override
   public void execute(ViewPlaylistInputData viewPlaylistInputData) {
-    // Get all the playlists from the UserDAO
+    // Get the playlists from the UserDAO
     Playlist playlist = userDataAccessObject.getPlaylist(viewPlaylistInputData.playlistName, viewPlaylistInputData.username);
     // Get a list of Tracks from the playlist
 
     ArrayList<Track> tracks = new ArrayList<>();
-    for (String trackID: playlist.getTracks()) {
-      Track track = trackDataAccessObject.getTrack(trackID);
-      tracks.add(track);
+    if (playlist != null) {
+      for (String trackID : playlist.getTracks()) {
+        Track track = trackDataAccessObject.getTrack(trackID);
+        tracks.add(track);
+      }
     }
 
-
-    ViewPlaylistOutputData viewPlaylistOutputData = new ViewPlaylistOutputData(viewPlaylistInputData.username, viewPlaylistInputData.playlistName, viewPlaylistInputData.isShowingLikedTracks, tracks);
-
+    ViewPlaylistOutputData viewPlaylistOutputData = new ViewPlaylistOutputData(viewPlaylistInputData.playlistName, viewPlaylistInputData.isShowingLikedTracks, tracks);
     viewPlaylistPresenter.prepareSuccessView(viewPlaylistOutputData);
   }
 

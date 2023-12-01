@@ -23,11 +23,13 @@ public class ViewPlaylistPresenter implements ViewPlaylistOutputBoundary {
   public void prepareSuccessView(ViewPlaylistOutputData viewPlaylistOutputData) {
     viewManagerModel.activeView = playlistViewModel.viewName;
     PlaylistViewState state = playlistViewModel.state;
+
+    // Update the state attributes
     state.playlistName = viewPlaylistOutputData.playlistName;
-    state.username = viewPlaylistOutputData.username;
     state.isShowingLikedTracks = viewPlaylistOutputData.isShowingLikedTracks;
     ArrayList<Track> trackArrayList = viewPlaylistOutputData.tracks;
 
+    // Create a list storing Track inforamtion
     ArrayList<Map<String, Object>> tracks = new ArrayList<>();
     for (Track track: trackArrayList){
       Map<String, Object> trackMap = new HashMap<>();
@@ -35,12 +37,16 @@ public class ViewPlaylistPresenter implements ViewPlaylistOutputBoundary {
       trackMap.put("iconPath", track.getImageURL());
       trackMap.put("artists", track.getArtists());
       trackMap.put("explicit", track.isExplicit());
-      trackMap.put("duration", track.getDuration());
+      int seconds = track.getDuration() / 1000;
+      int minutes =  (seconds / 60);
+      trackMap.put("duration", minutes  + ":" + String.format("%02d", seconds % 60));
       trackMap.put("id", track.getID());
       tracks.add(trackMap);
     }
+
     state.tracks = tracks;
     playlistViewModel.firePropertyChanged();
-
+    viewManagerModel.firePropertyChanged();
   }
+
 }
