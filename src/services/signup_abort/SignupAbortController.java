@@ -9,7 +9,6 @@ public class SignupAbortController {
     }
 
     public void execute() {
-        System.out.println("hello");
         signupAbortInteractor.execute();
     }
 }
