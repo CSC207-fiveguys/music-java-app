@@ -122,4 +122,18 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface {
     }
   }
 
+  public Track saveTrack(String id){
+    JSONObject track = spotifyAPI.get_track(id, accessToken);
+    Track trackObject = getTrack(track);
+    trackDataAccessObject.saveTrack(trackObject);
+    return trackObject;
+  }
+
+  public Artist saveArtist(String id){
+    JSONObject artist = spotifyAPI.get_artist(id, accessToken);
+    Artist artistObject = getArtist(artist);
+    artistDataAccessObject.saveArtist(artistObject);
+    return artistObject;
+  }
+
 }
