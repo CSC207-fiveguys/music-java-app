@@ -6,6 +6,7 @@ import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.Track;
 import entities.UserFactory;
+import services.back_to_tab_view.*;
 import services.login_complete.*;
 import services.login_new_signup.*;
 import services.search.SearchController;
@@ -87,6 +88,10 @@ public class Main extends JPanel {
         SearchInputBoundary searchInteractor = new SearchInteractor(searchPresenter, spotifyDataAccessObject, userDataAccessObject);
         SearchController searchController = new SearchController(searchInteractor);
 
+        BackToTabViewOutputBoundary backToTabViewPresenter = new BackToTabViewPresenter(tabViewModel, viewManagerModel);
+        BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
+        BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -124,7 +129,7 @@ public class Main extends JPanel {
 
         PlaylistView playlistView = new PlaylistView(
                 playlistViewModel,
-                null,
+                backToTabViewController,
                 null,
                 null
         );

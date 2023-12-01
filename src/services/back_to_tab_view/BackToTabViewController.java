@@ -1,7 +1,14 @@
 package services.back_to_tab_view;
 
 public class BackToTabViewController {
+
+    private final BackToTabViewInputBoundary backToTabViewInteractor;
+
+    public BackToTabViewController(BackToTabViewInputBoundary backToTabViewInteractor) {
+        this.backToTabViewInteractor = backToTabViewInteractor;
+    }
+
     public void execute() {
-        // todo 1. change view to tab view
+        backToTabViewInteractor.execute();
     }
 }
