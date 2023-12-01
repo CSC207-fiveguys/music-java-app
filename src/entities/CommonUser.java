@@ -108,9 +108,7 @@ public class CommonUser implements User {
     public void removeFriend(User friend) {
         friends.remove(friend);
     }
-
-    public void removePlayList(Playlist playlist){
+    public void removePlaylist(Playlist playlist){
         personalPlaylists.remove(playlist);
     }
-
 }
