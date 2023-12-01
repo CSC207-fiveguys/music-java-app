@@ -22,7 +22,7 @@ public class SearchPresenter implements SearchOutputBoundary{
   public void prepareSuccessView(SearchOutputData searchOutputData) {
     // Update the state fields
     SearchViewState state = searchViewModel.state;
-    state.friendUsernames = searchOutputData.users;
+    state.users = searchOutputData.users;
 
     ArrayList<Map<String, Object>> tracks = new ArrayList<>();
     for (Track track: searchOutputData.tracks){

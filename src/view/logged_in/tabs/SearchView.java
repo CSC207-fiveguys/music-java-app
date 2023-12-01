@@ -99,7 +99,7 @@ public class SearchView extends TabPageView {
 
         // show friends
 
-        for (String username : searchViewModel.state.friendUsernames) {
+        for (String username : searchViewModel.state.users) {
             innerPanel.add(Box.createRigidArea(new Dimension(0, 4)));
             innerPanel.add(new FriendRowPanel(
                     username,
