@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UnfollowArtistInteractor implements UnfollowArtistInputBoundary {
+
   final UnfollowArtistDataAccessInterface artistDataAccessObject;
   final UnfollowArtistUserDataAccessInterface userDataAccessObject;
   final UnfollowArtistOutputBoundary unfollowArtistPresenter;
@@ -24,7 +25,7 @@ public class UnfollowArtistInteractor implements UnfollowArtistInputBoundary {
     User user = userDataAccessObject.getUser(unfollowArtistInputData.username);
     user.unfollowArtist(unfollowArtistInputData.id);
     ArrayList<Map<String, String>> artists = new ArrayList<>();
-    for (String followArtist: user.getFollowedArtists()){
+    for (String followArtist : user.getFollowedArtists()) {
       Artist followedArtist = artistDataAccessObject.getArtist(followArtist);
       Map<String, String> artistMap = new HashMap<>();
       artistMap.put("name", followedArtist.getName());

@@ -4,6 +4,7 @@ import view.logged_in.tabs.FollowedArtistsViewModel;
 import view.logged_in.tabs.FollowedArtistsViewState;
 
 public class UnfollowArtistPresenter implements UnfollowArtistOutputBoundary {
+
   private final FollowedArtistsViewModel followedFriendsViewModel;
 
   public UnfollowArtistPresenter(FollowedArtistsViewModel followedFriendsViewModel) {
