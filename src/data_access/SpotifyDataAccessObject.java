@@ -1,8 +1,6 @@
 package data_access;
 
 import entities.Artist;
-import entities.CommonArtist;
-import entities.CommonTrack;
 import entities.Track;
 import java.util.ArrayList;
 import org.json.JSONArray;
@@ -76,7 +74,7 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface {
         imageURL = (String) ((JSONObject) images.get(0)).get("url");
       }
 
-      return new CommonTrack(id, name, artists, duration, explicit, imageURL);
+      return trackDataAccessObject.trackFactory.create(id, name, artists, duration, explicit, imageURL);
     }
   }
 
@@ -118,7 +116,7 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface {
         imageURL = (String) ((JSONObject) images.get(0)).get("url");
       }
 
-      return new CommonArtist(id, imageURL, name, numFollowers);
+      return artistDataAccessObject.artistFactory.create(id, imageURL, name, numFollowers);
     }
   }
 
@@ -136,6 +134,21 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface {
       Artist artistObject = getArtist(artist);
       artistDataAccessObject.saveArtist(artistObject);
     }
+  }
+
+  public ArrayList<Track> getTopTracks(String id) {
+    JSONObject x = spotifyAPI.get_artist_top_tracks(id, accessToken);
+    JSONArray tracksArray = (JSONArray) x.get("tracks");
+
+    ArrayList<Track> tracks = new ArrayList<>();
+    // For each track returned by the call, create a Track object and store in list
+    for (Object track : tracksArray) {
+      // Cast the track into a JSONObject (which is what it always will be)
+      Track trackObject = getTrack((JSONObject) track);
+      tracks.add(trackObject);
+    }
+
+    return tracks;
   }
 
 }
