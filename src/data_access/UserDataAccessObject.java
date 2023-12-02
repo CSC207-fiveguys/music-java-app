@@ -1,5 +1,6 @@
 package data_access;
 
+import entities.Playlist;
 import entities.User;
 import entities.UserFactory;
 import java.util.ArrayList;
@@ -8,8 +9,10 @@ import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
+import services.view_playlist.ViewPlaylistDataAccessInterface;
 
-public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface {
+public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface,
+    ViewPlaylistDataAccessInterface {
 
     private final Map<String, User> users;
 
@@ -46,6 +49,18 @@ public class UserDataAccessObject implements LoginCompleteUserDataAccessInterfac
     private void save() {
         // Write the user data from users to the json file
         // TODO Implement this method
+    }
+
+    @Override
+    public Playlist getPlaylist(String playlistName, String username) {
+        // Return the Playlist with the given name belonging to the given user
+        User user = users.get(username);
+        for (Playlist playlist: user.getPlaylists()) {
+            if (playlist.getName().equals(playlistName)) {
+                return playlist;
+            }
+        }
+        return null; // This line should never be reached as the playlist name will be valid
     }
 
     public ArrayList<String> searchUser(String query){
