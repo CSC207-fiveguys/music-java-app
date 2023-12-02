@@ -47,6 +47,7 @@ public class MyLibraryView extends TabPageView {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         // UPDATE ALL NON-FINAL STATE ATTRIBUTES TO VIEW
+        innerPanel.removeAll();
         usernameHeaderRowPanel.updateUsername(myLibraryViewModel.state.username);
 
         innerPanel.add(Box.createRigidArea(new Dimension(0, 4)));
@@ -74,5 +75,7 @@ public class MyLibraryView extends TabPageView {
             ));
             innerPanel.add(Box.createRigidArea(new Dimension(0, 4)));
         }
+        innerPanel.revalidate();
+        innerPanel.repaint();
     }
 }
