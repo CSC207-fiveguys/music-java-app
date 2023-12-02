@@ -32,17 +32,25 @@ public class AddFriendInteractor implements AddFriendInputBoundary {
       for (Playlist playlist : friend.getPlaylists()) {
         user.addPlaylist(playlist);
       }
-      ArrayList<Map<String, String>> userPlaylists = new ArrayList<Map<String, String>>();
-      for (Playlist playlist : user.getPlaylists()) {
 
-        // Structure the output data
-        Map<String, String> playlistAdded = new HashMap<>();
-        playlistAdded.put(playlist.getName(), playlist.getOwner().getUsername());
-        userPlaylists.add(playlistAdded);
-      }
-      AddFriendOutputData addFriendOutputData =
-          new AddFriendOutputData(friendUsername, userPlaylists);
+      AddFriendOutputData addFriendOutputData = getAddFriendOutputData(user,
+          friendUsername);
       addFriendPresenter.prepareSuccessView(addFriendOutputData);
     }
+  }
+
+  private static AddFriendOutputData getAddFriendOutputData(User user, String friendUsername) {
+    ArrayList<Map<String, String>> userPlaylists = new ArrayList<Map<String, String>>();
+    for (Playlist playlist : user.getPlaylists()) {
+
+      // Structure the output data
+      Map<String, String> playlistAdded = new HashMap<>();
+      playlistAdded.put("title", playlist.getName());
+      playlistAdded.put("owner", playlist.getOwner().getUsername());
+      userPlaylists.add(playlistAdded);
+    }
+    AddFriendOutputData addFriendOutputData =
+        new AddFriendOutputData(friendUsername, userPlaylists);
+    return addFriendOutputData;
   }
 }
