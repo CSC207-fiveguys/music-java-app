@@ -1,5 +1,8 @@
 package services.follow_artist;
 
-public interface FollowArtistOutputBoundary {
+import java.util.ArrayList;
+import java.util.Map;
 
+public interface FollowArtistOutputBoundary {
+  void prepareSuccessView(FollowArtistOutputData followArtistOutputData);
 }

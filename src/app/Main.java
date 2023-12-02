@@ -7,6 +7,11 @@ import data_access.UserDataAccessObject;
 import entities.Track;
 import entities.UserFactory;
 import services.back_to_tab_view.*;
+import services.follow_artist.FollowArtistController;
+import services.follow_artist.FollowArtistInputBoundary;
+import services.follow_artist.FollowArtistInteractor;
+import services.follow_artist.FollowArtistOutputBoundary;
+import services.follow_artist.FollowArtistPresenter;
 import services.login_complete.*;
 import services.login_new_signup.*;
 import services.search.SearchController;
@@ -92,6 +97,10 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
+        FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(searchViewModel, followedArtistsViewModel, myLibraryViewModel, viewManagerModel);
+        FollowArtistInputBoundary followArtistInteractor = new FollowArtistInteractor(artistDataAccessObject, userDataAccessObject, followArtistPresenter);
+        FollowArtistController followArtistController = new FollowArtistController(followArtistInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -117,7 +126,7 @@ public class Main extends JPanel {
                 null,
                 null,
                 null,
-                null,
+                followArtistController,
                 null,
                 null,
                 null,
