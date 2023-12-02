@@ -16,7 +16,6 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface {
 
   public SpotifyDataAccessObject(TrackDataAccessObject trackDataAccessObject,
       ArtistDataAccessObject artistDataAccessObject) {
-
     spotifyAPI = new SpotifyAPI();
     accessToken = spotifyAPI.requestToken();
     this.trackDataAccessObject = trackDataAccessObject;
