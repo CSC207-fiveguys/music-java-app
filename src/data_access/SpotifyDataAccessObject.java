@@ -7,8 +7,10 @@ import entities.Track;
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import services.add_track_to_playlist.AddTrackToPlaylistSpotifyDataAccessInterface;
 
-public class SpotifyDataAccessObject {
+public class SpotifyDataAccessObject implements
+    AddTrackToPlaylistSpotifyDataAccessInterface {
 
   String accessToken;
   SpotifyAPI spotifyAPI;
@@ -33,23 +35,25 @@ public class SpotifyDataAccessObject {
     JSONArray y = (JSONArray) x.get("items");
 
     ArrayList<Track> tracks = new ArrayList<>();
-    // For each track returned by the call, save the track in our Track DAO
+    // For each track returned by the call, create a Track object and store in list
     for (Object track : y) {
       // Cast the track into a JSONObject (which is what it always will be)
-      Track trackObject = saveTrack((JSONObject) track);
+      Track trackObject = getTrack((JSONObject) track);
       tracks.add(trackObject);
     }
 
     return tracks;
+
   }
 
-  public Track saveTrack(JSONObject track) {
-    // Create a new Track object and save it in the Track DAO using the data in track
+  public Track getTrack(JSONObject track) {
+    // Create a new Track object using the data in track
     String id = (String) track.get("id");
 
     if (trackDataAccessObject.exists(id)) {
       // The Track already exists in our DAO then simply get it and return it
       return trackDataAccessObject.getTrack(id);
+
     } else {
 
       // If the Track object does not already exist in our DAO, create a new Track Object
@@ -67,15 +71,13 @@ public class SpotifyDataAccessObject {
 
       String imageURL = null;
 
-      // Store the image url if any images are given
+      // Store the first given image url if any images are given
       JSONArray images = (JSONArray) ((JSONObject) track.get("album")).get("images");
       if (!images.isEmpty()){
         imageURL = (String) ((JSONObject) images.get(0)).get("url");
       }
 
-      Track trackObject = new CommonTrack(id, name, artists, duration, explicit, imageURL);
-      trackDataAccessObject.saveTrack(trackObject);
-      return trackObject;
+      return new CommonTrack(id, name, artists, duration, explicit, imageURL);
     }
   }
 
@@ -87,25 +89,25 @@ public class SpotifyDataAccessObject {
     JSONArray y = (JSONArray) x.get("items");
 
     ArrayList<Artist> artists = new ArrayList<>();
-    // For each track returned by the call, save the track in our Track DAO
+    // For each artist returned by the call, covert it into an Artist object and add it to the list
     for (Object artist : y) {
       // Cast the track into a JSONObject (which is what it always will be)
-      Artist artistObject = saveArtist((JSONObject) artist);
+      Artist artistObject = getArtist((JSONObject) artist);
       artists.add(artistObject);
     }
     return artists;
   }
 
-  public Artist saveArtist(JSONObject artist) {
-    // Create a new Artist object and save it in the Artist DAO using the data in artist
+  public Artist getArtist(JSONObject artist) {
+    // Create a new Artist object using the data in artist
     String id = (String) artist.get("id");
 
     if (artistDataAccessObject.exists(id)) {
-      // The Track already exists in our DAO then simply get it and return it
+      // If the Artist already exists in our DAO then simply get it and return it
       return artistDataAccessObject.getArtist(id);
 
     } else {
-      // If the Track object does not already exist in our DAO, create a new Track Object
+      // If the Artist object does not already exist in our DAO, create a new Artist Object
       // Get all the fields needed
       String name = (String) artist.get("name");
       int numFollowers = (int) ((JSONObject) artist.get("followers")).get("total");
@@ -117,9 +119,23 @@ public class SpotifyDataAccessObject {
         imageURL = (String) ((JSONObject) images.get(0)).get("url");
       }
 
-      Artist artistObject = new CommonArtist(id, imageURL, name, numFollowers);
+      return new CommonArtist(id, imageURL, name, numFollowers);
+    }
+  }
+
+  public void saveTrack(String id){
+    if (!trackDataAccessObject.exists(id)){
+      JSONObject track = spotifyAPI.get_track(id, accessToken);
+      Track trackObject = getTrack(track);
+      trackDataAccessObject.saveTrack(trackObject);
+    }
+  }
+
+  public void saveArtist(String id){
+    if (!artistDataAccessObject.exists(id)){
+      JSONObject artist = spotifyAPI.get_artist(id, accessToken);
+      Artist artistObject = getArtist(artist);
       artistDataAccessObject.saveArtist(artistObject);
-      return artistObject;
     }
   }
 

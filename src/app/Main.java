@@ -1,7 +1,11 @@
 package app;
 
+import data_access.ArtistDataAccessObject;
+import data_access.SpotifyDataAccessObject;
+import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.UserFactory;
+import services.add_track_to_playlist.*;
 import services.login_complete.*;
 import services.login_new_signup.*;
 import services.signup_abort.*;
@@ -29,6 +33,9 @@ public class Main extends JPanel {
         // CREATE DAOs
 
         UserDataAccessObject userDataAccessObject = new UserDataAccessObject(new UserFactory());
+        TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+        ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
+        SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
 
         // CREATE VIEW MODELS (that have states)
 
@@ -71,6 +78,10 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+        AddTrackToPlaylistOutputBoundary addTrackToPlaylistPresenter = new AddTrackToPlaylistPresenter();
+        AddTrackToPlaylistInputBoundary addTrackToPlaylistInteractor = new AddTrackToPlaylistInteractor(userDataAccessObject, spotifyDataAccessObject, addTrackToPlaylistPresenter);
+        AddTrackToPlaylistController addTrackToPlaylistController = new AddTrackToPlaylistController(addTrackToPlaylistInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -102,7 +113,7 @@ public class Main extends JPanel {
                 null,
                 null,
                 null,
-                null
+                addTrackToPlaylistController
         );
         views.add(tabView, tabViewModel.viewName);
 
