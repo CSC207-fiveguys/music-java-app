@@ -16,6 +16,11 @@ import services.search.SearchOutputBoundary;
 import services.search.SearchPresenter;
 import services.signup_abort.*;
 import services.signup_complete.*;
+import services.unfollow_artist.UnfollowArtistController;
+import services.unfollow_artist.UnfollowArtistInputBoundary;
+import services.unfollow_artist.UnfollowArtistInteractor;
+import services.unfollow_artist.UnfollowArtistOutputBoundary;
+import services.unfollow_artist.UnfollowArtistPresenter;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.*;
@@ -91,6 +96,10 @@ public class Main extends JPanel {
         BackToTabViewOutputBoundary backToTabViewPresenter = new BackToTabViewPresenter(tabViewModel, viewManagerModel);
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
+
+        UnfollowArtistOutputBoundary unfollowArtistPresenter = new UnfollowArtistPresenter(followedArtistsViewModel);
+        UnfollowArtistInputBoundary unfollowArtistInteractor = new UnfollowArtistInteractor(artistDataAccessObject, userDataAccessObject, unfollowArtistPresenter);
+        UnfollowArtistController unfollowArtistController = new UnfollowArtistController(unfollowArtistInteractor);
 
         // CREATE VIEWS
 
