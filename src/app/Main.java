@@ -127,7 +127,7 @@ public class Main extends JPanel {
                 null,
                 null,
                 null,
-                null,
+                unfollowArtistController,
                 null,
                 null,
                 searchController,
