@@ -36,21 +36,25 @@ public class RemoveFriendInteractor implements RemoveFriendInputBoundary {
 
         }
       }
-      // Create the output-data
-      ArrayList<String> allFriendsStrings = new ArrayList<String>();
-      for (User friend : allFriends) {
-        String name = friend.getUsername();
-        allFriendsStrings.add(name);
-      }
-      ArrayList<Map<String, String>> friendPlaylists = new ArrayList<Map<String, String>>();
-      for (Playlist playlist : user.getPlaylists()) {
-        Map<String, String> playlistOfUser = new HashMap<>();
-        playlistOfUser.put(playlist.getName(), playlist.getOwner().getUsername());
-        friendPlaylists.add(playlistOfUser);
-      }
-      RemoveFriendOutputData removeFriendOutputData =
-          new RemoveFriendOutputData(allFriendsStrings, friendPlaylists);
+      RemoveFriendOutputData removeFriendOutputData = getRemoveFriendOutputData(
+          allFriends, user);
       removeFriendPresenter.prepareSuccessView(removeFriendOutputData);
     }
+  }
+
+  private static RemoveFriendOutputData getRemoveFriendOutputData(ArrayList<User> allFriends,
+      User user) {
+    ArrayList<String> allFriendsStrings = new ArrayList<String>();
+    for (User friend : allFriends) {
+      String name = friend.getUsername();
+      allFriendsStrings.add(name);
+    }
+    ArrayList<Map<String, String>> friendPlaylists = new ArrayList<Map<String, String>>();
+    for (Playlist playlist : user.getPlaylists()) {
+      Map<String, String> playlistOfUser = new HashMap<>();
+      playlistOfUser.put(playlist.getName(), playlist.getOwner().getUsername());
+      friendPlaylists.add(playlistOfUser);
+    }
+    return new RemoveFriendOutputData(allFriendsStrings, friendPlaylists);
   }
 }

@@ -10,13 +10,11 @@ public class RemoveFriendPresenter implements RemoveFriendOutputBoundary {
 
   private final FollowedFriendsViewModel followedFriendsViewModel;
   private final MyLibraryViewModel myLibraryViewModel;
-  private final ViewManagerModel viewManagerModel;
 
   public RemoveFriendPresenter(FollowedFriendsViewModel followedFriendsViewModel,
-      MyLibraryViewModel myLibraryViewModel, ViewManagerModel viewManagerModel) {
+      MyLibraryViewModel myLibraryViewModel) {
     this.followedFriendsViewModel = followedFriendsViewModel;
     this.myLibraryViewModel = myLibraryViewModel;
-    this.viewManagerModel = viewManagerModel;
   }
 
   @Override
