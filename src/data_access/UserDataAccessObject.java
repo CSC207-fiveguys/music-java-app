@@ -3,6 +3,7 @@ package data_access;
 import entities.Playlist;
 import entities.User;
 import entities.UserFactory;
+import java.util.ArrayList;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
@@ -15,7 +16,7 @@ public class UserDataAccessObject implements LoginCompleteUserDataAccessInterfac
 
     private final Map<String, User> users;
 
-    private final UserFactory userFactory;
+    public final UserFactory userFactory;
 
     public UserDataAccessObject(UserFactory userFactory) {
         this.userFactory = userFactory;
@@ -61,4 +62,16 @@ public class UserDataAccessObject implements LoginCompleteUserDataAccessInterfac
         }
         return null; // This line should never be reached as the playlist name will be valid
     }
+
+    public ArrayList<String> searchUser(String query){
+
+        ArrayList<String> matchingUsers = new ArrayList<>();
+        for (String user: users.keySet()){
+            if (query.contains(user) || user.contains(query)){
+                matchingUsers.add(user);
+            }
+        }
+        return matchingUsers;
+    }
+
 }
