@@ -31,8 +31,6 @@ public class RemoveFriendPresenter implements RemoveFriendOutputBoundary {
 
   @Override
   public void prepareFailView() {
-    FollowedFriendsViewState followedFriendsViewState = followedFriendsViewModel.state;
-    followedFriendsViewModel.firePropertyChanged();
-
+    // Do nothing
   }
 }
