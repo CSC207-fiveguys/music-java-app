@@ -122,4 +122,20 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface {
     }
   }
 
+  public void saveTrack(String id){
+    if (!trackDataAccessObject.exists(id)){
+      JSONObject track = spotifyAPI.get_track(id, accessToken);
+      Track trackObject = getTrack(track);
+      trackDataAccessObject.saveTrack(trackObject);
+    }
+  }
+
+  public void saveArtist(String id){
+    if (!artistDataAccessObject.exists(id)){
+      JSONObject artist = spotifyAPI.get_artist(id, accessToken);
+      Artist artistObject = getArtist(artist);
+      artistDataAccessObject.saveArtist(artistObject);
+    }
+  }
+
 }
