@@ -1,17 +1,16 @@
 package services.like_track;
 
-import entities.Playlist;
 import entities.User;
 import java.util.ArrayList;
 
 public class LikeTrackInteractor implements LikeTrackInputBoundary {
-    final LikeTrackUserDataAccessObject userDataAccessObject;
+    final LikeTrackUserDataAccessInterface userDataAccessObject;
     final LikeTrackSpotifyDataAccessInterface spotifyDataAccessObject;
     final LikeTrackOutputBoundary likeTrackPresenter;
 
-    public LikeTrackInteractor(LikeTrackUserDataAccessObject userDataAccessObject,
-            LikeTrackSpotifyDataAccessInterface spotifyDataAccessObject,
-            LikeTrackOutputBoundary likeTrackPresenter) {
+    public LikeTrackInteractor(LikeTrackUserDataAccessInterface userDataAccessObject,
+                               LikeTrackSpotifyDataAccessInterface spotifyDataAccessObject,
+                               LikeTrackOutputBoundary likeTrackPresenter) {
         this.userDataAccessObject = userDataAccessObject;
         this.spotifyDataAccessObject = spotifyDataAccessObject;
         this.likeTrackPresenter = likeTrackPresenter;
