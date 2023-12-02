@@ -26,7 +26,8 @@ public class CommonUser implements User {
         // Design Choice 2: Instead of storing Tracks and Artists, we will store their ids. These ids will act as
         // keys in the cache dictionary, and the values will be the actual Track or Artist objects. This is done
         // to reduce API calls.
-        this.likedTracks = new CommonPlaylist("Liked Tracks", this, new ArrayList<String>());
+        PlaylistFactory playlistFactory = new PlaylistFactory();
+        likedTracks = playlistFactory.create("Liked Tracks", this, new ArrayList<String>());
         this.personalPlaylists = new ArrayList<Playlist>();
         this.followedArtists = new ArrayList<String>();
         this.friends = new ArrayList<User>();
@@ -65,7 +66,8 @@ public class CommonUser implements User {
 
     @Override
     public void createPlaylist(String playlistName) {
-        Playlist newPlaylist = new CommonPlaylist(playlistName, this, new ArrayList<String>());
+        PlaylistFactory playlistFactory = new PlaylistFactory();
+        Playlist newPlaylist = playlistFactory.create(playlistName, this, new ArrayList<String>());
         personalPlaylists.add(newPlaylist);
     }
 
