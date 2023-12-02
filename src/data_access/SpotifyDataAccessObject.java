@@ -1,8 +1,6 @@
 package data_access;
 
 import entities.Artist;
-import entities.CommonArtist;
-import entities.CommonTrack;
 import entities.Track;
 import java.util.ArrayList;
 import org.json.JSONArray;
