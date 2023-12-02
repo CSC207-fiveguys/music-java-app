@@ -97,7 +97,7 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
-        FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(searchViewModel, followedArtistsViewModel, myLibraryViewModel, viewManagerModel);
+        FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(followedArtistsViewModel);
         FollowArtistInputBoundary followArtistInteractor = new FollowArtistInteractor(artistDataAccessObject, userDataAccessObject, followArtistPresenter);
         FollowArtistController followArtistController = new FollowArtistController(followArtistInteractor);
 

@@ -9,27 +9,15 @@ import view.logged_in.tabs.SearchViewState;
 
 public class FollowArtistPresenter implements FollowArtistOutputBoundary {
 
-  private final SearchViewModel searchViewModel;
   private final FollowedArtistsViewModel followedFriendsViewModel;
-  private final MyLibraryViewModel myLibraryViewModel;
-  private ViewManagerModel viewManagerModel;
 
   public FollowArtistPresenter(
-      SearchViewModel searchViewModel,
-      FollowedArtistsViewModel followedFriendsViewModel,
-      MyLibraryViewModel myLibraryViewModel,
-      ViewManagerModel viewManagerModel) {
-    this.searchViewModel = searchViewModel;
+      FollowedArtistsViewModel followedFriendsViewModel) {
     this.followedFriendsViewModel = followedFriendsViewModel;
-    this.myLibraryViewModel = myLibraryViewModel;
-    this.viewManagerModel = viewManagerModel;
   }
 
   @Override
   public void prepareSuccessView(FollowArtistOutputData followArtistOutputData) {
-    SearchViewState searchViewState = searchViewModel.state;
-    searchViewModel.firePropertyChanged();
-
     FollowedArtistsViewState followedArtistsViewState = followedFriendsViewModel.state;
     followedArtistsViewState.artists = followArtistOutputData.artists;
     followedFriendsViewModel.firePropertyChanged();

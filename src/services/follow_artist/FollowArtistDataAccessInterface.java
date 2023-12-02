@@ -10,7 +10,4 @@ public interface FollowArtistDataAccessInterface {
 
   public boolean exists(String artistID);
 
-  private void save() {
-
-  }
 }

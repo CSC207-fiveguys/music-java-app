@@ -7,14 +7,6 @@ public interface FollowArtistUserDataAccessInterface {
 
   public User getUser(String username);
 
-  public void saveUser(User user);
-
-  public boolean exists(String username);
-
-  private void save() {
-
-  }
-
   public ArrayList<String> searchUser(String query);
 
 }
