@@ -5,13 +5,14 @@ import entities.UserFactory;
 import java.util.ArrayList;
 import services.create_new_playlist.CreateNewPlaylistDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
+import services.remove_playlist.RemovePlaylistDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface,
-    CreateNewPlaylistDataAccessInterface {
+    CreateNewPlaylistDataAccessInterface, RemovePlaylistDataAccessInterface {
 
     private final Map<String, User> users;
 

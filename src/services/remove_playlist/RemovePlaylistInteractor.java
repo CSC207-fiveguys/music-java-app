@@ -6,9 +6,9 @@ import entities.User;
 import java.util.Objects;
 
 public class RemovePlaylistInteractor implements RemovePlaylistInputBoundary {
-    final UserDataAccessObject userDataAccessObject;
+    final RemovePlaylistDataAccessInterface userDataAccessObject;
     final RemovePlaylistOutputBoundary removePlaylistPresenter;
-    public RemovePlaylistInteractor(UserDataAccessObject userDataAccessObject,
+    public RemovePlaylistInteractor(RemovePlaylistDataAccessInterface userDataAccessObject,
         RemovePlaylistOutputBoundary removePlaylistOutputBoundary) {
         this.userDataAccessObject = userDataAccessObject;
         this.removePlaylistPresenter = removePlaylistOutputBoundary;
