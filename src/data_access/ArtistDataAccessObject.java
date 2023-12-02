@@ -4,9 +4,10 @@ import entities.Artist;
 
 import java.util.HashMap;
 import java.util.Map;
-import services.unfollow_artist.FollowArtistDataAccessInterface;
+import services.unfollow_artist.UnfollowArtistDataAccessInterface;
 
-public class ArtistDataAccessObject implements FollowArtistDataAccessInterface {
+public class ArtistDataAccessObject implements
+    UnfollowArtistDataAccessInterface {
 
     private final Map<String, Artist> artists;
 

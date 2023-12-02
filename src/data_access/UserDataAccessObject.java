@@ -8,8 +8,12 @@ import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
+import services.unfollow_artist.UnfollowArtistUserDataAccessInterface;
 
-public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface {
+public class UserDataAccessObject implements
+    LoginCompleteUserDataAccessInterface,
+    SignupCompleteUserDataAccessInterface,
+    UnfollowArtistUserDataAccessInterface {
 
     private final Map<String, User> users;
 
