@@ -77,7 +77,7 @@ public class Main extends JPanel {
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
         RemoveFriendOutputBoundary removeFriendPresenter = new RemoveFriendPresenter(
-            followedFriendsViewModel, viewManagerModel);
+            followedFriendsViewModel, myLibraryViewModel, viewManagerModel);
         RemoveFriendInputBoundary removeFriendInteractor = new RemoveFriendInteractor(userDataAccessObject, removeFriendPresenter);
         RemoveFriendController removeFriendController = new RemoveFriendController(removeFriendInteractor);
 

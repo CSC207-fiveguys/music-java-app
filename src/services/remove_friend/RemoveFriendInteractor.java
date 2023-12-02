@@ -3,7 +3,8 @@ package services.remove_friend;
 import entities.Playlist;
 import entities.User;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RemoveFriendInteractor implements RemoveFriendInputBoundary{
   final RemoveFriendDataAccessInterface userDataAccessObject;
@@ -23,6 +24,7 @@ public class RemoveFriendInteractor implements RemoveFriendInputBoundary{
     User friendUser = userDataAccessObject.getUser(friendUsername);
 
     ArrayList<User> allFriends = user.getFriends();
+    ArrayList<Playlist> friendAllPlaylists = friendUser.getPlaylists();
 
     if (!allFriends.contains(friendUser)){
       removeFriendPresenter.prepareFailView();
@@ -39,8 +41,14 @@ public class RemoveFriendInteractor implements RemoveFriendInputBoundary{
         String name = friend.getUsername();
         allFriendsStrings.add(name);
       }
+      ArrayList<Map<String, String>> friendPlaylists = new ArrayList<Map<String, String>>();
+      for (Playlist playlist: friendAllPlaylists){
+        Map<String, String> playlistRemoved = new HashMap<>();
+        playlistRemoved.put(playlist.getName(), playlist.getOwner().getUsername());
+        friendPlaylists.add(new HashMap<>());
+      }
       RemoveFriendOutputData removeFriendOutputData =
-          new RemoveFriendOutputData(allFriendsStrings);
+          new RemoveFriendOutputData(allFriendsStrings, friendPlaylists);
       removeFriendPresenter.prepareSuccessView(removeFriendOutputData);
     }
   }
