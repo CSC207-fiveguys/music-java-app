@@ -7,8 +7,18 @@ import data_access.UserDataAccessObject;
 import entities.Track;
 import entities.UserFactory;
 import services.back_to_tab_view.*;
+import services.create_new_playlist.CreateNewPlaylistController;
+import services.create_new_playlist.CreateNewPlaylistInputBoundary;
+import services.create_new_playlist.CreateNewPlaylistInteractor;
+import services.create_new_playlist.CreateNewPlaylistOutputBoundary;
+import services.create_new_playlist.CreateNewPlaylistPresenter;
 import services.login_complete.*;
 import services.login_new_signup.*;
+import services.remove_playlist.RemovePlaylistController;
+import services.remove_playlist.RemovePlaylistInputBoundary;
+import services.remove_playlist.RemovePlaylistInteractor;
+import services.remove_playlist.RemovePlaylistOutputBoundary;
+import services.remove_playlist.RemovePlaylistPresenter;
 import services.search.SearchController;
 import services.search.SearchInputBoundary;
 import services.search.SearchInteractor;
@@ -92,6 +102,15 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
+        CreateNewPlaylistOutputBoundary createNewPlaylistPresenter = new CreateNewPlaylistPresenter(viewManagerModel, myLibraryViewModel);
+        CreateNewPlaylistInputBoundary createNewPlaylistInteractor = new CreateNewPlaylistInteractor(userDataAccessObject, createNewPlaylistPresenter);
+        CreateNewPlaylistController createNewPlaylistController = new CreateNewPlaylistController(createNewPlaylistInteractor);
+
+        RemovePlaylistOutputBoundary removePlaylistPresenter = new RemovePlaylistPresenter(myLibraryViewModel, viewManagerModel);
+        RemovePlaylistInputBoundary removePlaylistInteractor = new RemovePlaylistInteractor(userDataAccessObject, removePlaylistPresenter);
+        RemovePlaylistController removePlaylistController = new RemovePlaylistController(removePlaylistInteractor);
+
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -114,9 +133,9 @@ public class Main extends JPanel {
                 followedArtistsViewModel,
                 followedFriendsViewModel,
                 searchViewModel,
+                createNewPlaylistController,
                 null,
-                null,
-                null,
+                removePlaylistController,
                 null,
                 null,
                 null,

@@ -3,13 +3,15 @@ package data_access;
 import entities.User;
 import entities.UserFactory;
 import java.util.ArrayList;
+import services.create_new_playlist.CreateNewPlaylistDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface {
+public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface,
+    CreateNewPlaylistDataAccessInterface {
 
     private final Map<String, User> users;
 
