@@ -1,12 +1,9 @@
 package services.add_friend;
 
-import view.ViewManagerModel;
 import view.logged_in.tabs.FollowedFriendsViewModel;
 import view.logged_in.tabs.FollowedFriendsViewState;
 import view.logged_in.tabs.MyLibraryViewModel;
 import view.logged_in.tabs.MyLibraryViewState;
-import view.logged_in.tabs.SearchViewModel;
-import view.logged_in.tabs.SearchViewState;
 
 public class AddFriendPresenter implements AddFriendOutputBoundary {
 
@@ -16,8 +13,7 @@ public class AddFriendPresenter implements AddFriendOutputBoundary {
 
   public AddFriendPresenter(
       FollowedFriendsViewModel followedFriendsViewModel,
-      SearchViewModel searchViewModel,
-      MyLibraryViewModel myLibraryViewModel, ViewManagerModel viewManagerModel) {
+      MyLibraryViewModel myLibraryViewModel) {
     this.followedFriendsViewModel = followedFriendsViewModel;
     this.myLibraryViewModel = myLibraryViewModel;
   }

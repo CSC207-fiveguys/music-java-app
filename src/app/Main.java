@@ -76,8 +76,8 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
-        AddFriendOutputBoundary addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel, searchViewModel,
-            myLibraryViewModel, viewManagerModel);
+        AddFriendOutputBoundary addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel,
+            myLibraryViewModel);
         AddFriendInputBoundary addFriendInteractor = new AddFriendInteractor(userDataAccessObject, addFriendPresenter);
         AddFriendController addFriendController = new AddFriendController(addFriendInteractor);
 

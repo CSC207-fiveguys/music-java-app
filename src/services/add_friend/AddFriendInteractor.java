@@ -28,12 +28,12 @@ public class AddFriendInteractor implements AddFriendInputBoundary {
     if (userFriends.contains(friend)) {
       addFriendPresenter.prepareFailView();  // stay in the search tab
     } else {
-      // todo 1. add friend "friendUsername" to user "username"
       user.addFriend(friend);
+      for (Playlist playlist : friend.getPlaylists()) {
+        user.addPlaylist(playlist);
+      }
       ArrayList<Map<String, String>> userPlaylists = new ArrayList<Map<String, String>>();
       for (Playlist playlist : user.getPlaylists()) {
-        // todo 2. add playlists from "friendUsername" to user "username"
-        user.addPlaylist(playlist);
 
         // Structure the output data
         Map<String, String> playlistAdded = new HashMap<>();
