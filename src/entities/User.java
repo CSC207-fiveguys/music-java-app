@@ -34,4 +34,8 @@ public interface User {
 
     void removeFriend(User friend);
 
+    void addPlaylist(Playlist playlist);
+
+    void removePlaylist(String playlist);
+
 }
