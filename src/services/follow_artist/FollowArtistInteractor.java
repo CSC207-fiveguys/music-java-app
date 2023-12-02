@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FollowArtistInteractor implements FollowArtistInputBoundary {
+
   final FollowArtistDataAccessInterface artistDataAccessObject;
   final FollowArtistUserDataAccessInterface userDataAccessObject;
   final FollowArtistOutputBoundary followArtistPresenter;
@@ -27,7 +28,7 @@ public class FollowArtistInteractor implements FollowArtistInputBoundary {
     user.followArtist(followArtistInputData.id);
     // prepare the output data
     ArrayList<Map<String, String>> artists = new ArrayList<>();
-    for (String followArtist: user.getFollowedArtists()){
+    for (String followArtist : user.getFollowedArtists()) {
       Artist followedArtist = artistDataAccessObject.getArtist(followArtist);
       Map<String, String> artistMap = new HashMap<>();
       artistMap.put("name", followedArtist.getName());

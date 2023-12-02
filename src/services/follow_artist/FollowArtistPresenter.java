@@ -1,9 +1,5 @@
 package services.follow_artist;
 
-import entities.Artist;
-import java.util.ArrayList;
-import java.util.Map;
-import javax.lang.model.type.ArrayType;
 import view.ViewManagerModel;
 import view.logged_in.tabs.FollowedArtistsViewModel;
 import view.logged_in.tabs.FollowedArtistsViewState;
@@ -12,6 +8,7 @@ import view.logged_in.tabs.SearchViewModel;
 import view.logged_in.tabs.SearchViewState;
 
 public class FollowArtistPresenter implements FollowArtistOutputBoundary {
+
   private final SearchViewModel searchViewModel;
   private final FollowedArtistsViewModel followedFriendsViewModel;
   private final MyLibraryViewModel myLibraryViewModel;
