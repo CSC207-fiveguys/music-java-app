@@ -1,4 +1,5 @@
 package services.create_new_playlist;
+
 import java.util.Map;
 import view.ViewManagerModel;
 import view.logged_in.PlaylistViewModel;
@@ -6,7 +7,8 @@ import view.logged_in.PlaylistViewState;
 import view.logged_in.tabs.MyLibraryViewModel;
 import view.logged_in.tabs.MyLibraryViewState;
 
-public class CreateNewPlaylistPresenter implements CreateNewPlaylistOutputBoundary{
+public class CreateNewPlaylistPresenter implements CreateNewPlaylistOutputBoundary {
+
     private final MyLibraryViewModel myLibraryViewModel;
     private ViewManagerModel viewManagerModel;
 

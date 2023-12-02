@@ -7,6 +7,7 @@ public class CreateNewPlaylistController {
     public CreateNewPlaylistController(CreateNewPlaylistInputBoundary createNewPlaylistInteractor) {
         this.createNewPlaylistInteractor = createNewPlaylistInteractor;
     }
+
     public void execute(String playlistName, String username) {
         CreateNewPlaylistInputData createNewPlaylistInputData = new CreateNewPlaylistInputData(
             playlistName, username

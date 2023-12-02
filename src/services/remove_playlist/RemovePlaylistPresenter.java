@@ -7,9 +7,11 @@ import view.logged_in.PlaylistViewModel;
 import view.logged_in.tabs.MyLibraryViewModel;
 import view.logged_in.tabs.MyLibraryViewState;
 
-public class RemovePlaylistPresenter implements RemovePlaylistOutputBoundary{
+public class RemovePlaylistPresenter implements RemovePlaylistOutputBoundary {
+
     private final MyLibraryViewModel myLibraryViewModel;
     private ViewManagerModel viewManagerModel;
+
     public RemovePlaylistPresenter(MyLibraryViewModel myLibraryViewModel,
         ViewManagerModel viewManagerModel) {
         this.myLibraryViewModel = myLibraryViewModel;
