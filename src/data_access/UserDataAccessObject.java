@@ -13,7 +13,7 @@ public class UserDataAccessObject implements LoginCompleteUserDataAccessInterfac
 
     private final Map<String, User> users;
 
-    private final UserFactory userFactory;
+    public final UserFactory userFactory;
 
     public UserDataAccessObject(UserFactory userFactory) {
         this.userFactory = userFactory;
