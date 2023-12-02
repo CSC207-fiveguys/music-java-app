@@ -1,22 +1,27 @@
 package data_access;
 
+import entities.Playlist;
 import entities.User;
 import entities.UserFactory;
 import services.add_friend.AddFriendUserDataAccessInterface;
+import java.util.ArrayList;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
+import services.view_playlist.ViewPlaylistDataAccessInterface;
 
 public class UserDataAccessObject implements
     LoginCompleteUserDataAccessInterface,
     SignupCompleteUserDataAccessInterface,
     AddFriendUserDataAccessInterface {
+public class UserDataAccessObject implements LoginCompleteUserDataAccessInterface, SignupCompleteUserDataAccessInterface,
+    ViewPlaylistDataAccessInterface {
 
     private final Map<String, User> users;
 
-    private final UserFactory userFactory;
+    public final UserFactory userFactory;
 
     public UserDataAccessObject(UserFactory userFactory) {
         this.userFactory = userFactory;
@@ -49,6 +54,29 @@ public class UserDataAccessObject implements
     private void save() {
         // Write the user data from users to the json file
         // TODO Implement this method
+    }
+
+    @Override
+    public Playlist getPlaylist(String playlistName, String username) {
+        // Return the Playlist with the given name belonging to the given user
+        User user = users.get(username);
+        for (Playlist playlist: user.getPlaylists()) {
+            if (playlist.getName().equals(playlistName)) {
+                return playlist;
+            }
+        }
+        return null; // This line should never be reached as the playlist name will be valid
+    }
+
+    public ArrayList<String> searchUser(String query){
+
+        ArrayList<String> matchingUsers = new ArrayList<>();
+        for (String user: users.keySet()){
+            if (query.contains(user) || user.contains(query)){
+                matchingUsers.add(user);
+            }
+        }
+        return matchingUsers;
     }
 
 }
