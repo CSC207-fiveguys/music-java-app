@@ -1,7 +1,12 @@
 package app;
 
+import data_access.ArtistDataAccessObject;
+import data_access.SpotifyDataAccessObject;
+import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
+import entities.Track;
 import entities.UserFactory;
+import services.back_to_tab_view.*;
 import services.login_complete.*;
 import services.login_new_signup.*;
 import services.remove_friend.RemoveFriendController;
@@ -9,6 +14,11 @@ import services.remove_friend.RemoveFriendInputBoundary;
 import services.remove_friend.RemoveFriendInteractor;
 import services.remove_friend.RemoveFriendOutputBoundary;
 import services.remove_friend.RemoveFriendPresenter;
+import services.search.SearchController;
+import services.search.SearchInputBoundary;
+import services.search.SearchInteractor;
+import services.search.SearchOutputBoundary;
+import services.search.SearchPresenter;
 import services.signup_abort.*;
 import services.signup_complete.*;
 import view.ViewManager;
@@ -34,6 +44,9 @@ public class Main extends JPanel {
         // CREATE DAOs
 
         UserDataAccessObject userDataAccessObject = new UserDataAccessObject(new UserFactory());
+        TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+        ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
+        SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
 
         // CREATE VIEW MODELS (that have states)
 
@@ -76,10 +89,19 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+
         RemoveFriendOutputBoundary removeFriendPresenter = new RemoveFriendPresenter(
             followedFriendsViewModel, myLibraryViewModel);
         RemoveFriendInputBoundary removeFriendInteractor = new RemoveFriendInteractor(userDataAccessObject, removeFriendPresenter);
         RemoveFriendController removeFriendController = new RemoveFriendController(removeFriendInteractor);
+      
+        SearchOutputBoundary searchPresenter = new SearchPresenter(searchViewModel);
+        SearchInputBoundary searchInteractor = new SearchInteractor(searchPresenter, spotifyDataAccessObject, userDataAccessObject);
+        SearchController searchController = new SearchController(searchInteractor);
+
+        BackToTabViewOutputBoundary backToTabViewPresenter = new BackToTabViewPresenter(tabViewModel, viewManagerModel);
+        BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
+        BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
         // CREATE VIEWS
 
@@ -112,13 +134,15 @@ public class Main extends JPanel {
                 removeFriendController,
                 null,
                 null,
+                searchController,
+                null,
                 null
         );
         views.add(tabView, tabViewModel.viewName);
 
         PlaylistView playlistView = new PlaylistView(
                 playlistViewModel,
-                null,
+                backToTabViewController,
                 null,
                 null
         );
