@@ -26,7 +26,7 @@ public class RemoveFriendPresenter implements RemoveFriendOutputBoundary {
     followedFriendsViewModel.firePropertyChanged();
 
     MyLibraryViewState myLibraryViewState = myLibraryViewModel.state;
-    myLibraryViewState.personalPlaylists = removeFriendsOutput.friendPlaylists;
+    myLibraryViewState.personalPlaylists = removeFriendsOutput.userPlaylists;
     followedFriendsViewModel.firePropertyChanged();
   }
 

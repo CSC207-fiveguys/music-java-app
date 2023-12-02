@@ -24,7 +24,6 @@ public class RemoveFriendInteractor implements RemoveFriendInputBoundary{
     User friendUser = userDataAccessObject.getUser(friendUsername);
 
     ArrayList<User> allFriends = user.getFriends();
-    ArrayList<Playlist> friendAllPlaylists = friendUser.getPlaylists();
 
     if (!allFriends.contains(friendUser)){
       removeFriendPresenter.prepareFailView();
@@ -33,6 +32,7 @@ public class RemoveFriendInteractor implements RemoveFriendInputBoundary{
       for (Playlist playlist: friendUser.getPlaylists()){
         if (user.getPlaylists().contains(playlist)){
           user.removePlaylist(playlist);
+
         }
       }
       // Create the output-data
@@ -42,10 +42,10 @@ public class RemoveFriendInteractor implements RemoveFriendInputBoundary{
         allFriendsStrings.add(name);
       }
       ArrayList<Map<String, String>> friendPlaylists = new ArrayList<Map<String, String>>();
-      for (Playlist playlist: friendAllPlaylists){
-        Map<String, String> playlistRemoved = new HashMap<>();
-        playlistRemoved.put(playlist.getName(), playlist.getOwner().getUsername());
-        friendPlaylists.add(new HashMap<>());
+      for (Playlist playlist: user.getPlaylists()){
+        Map<String, String> playlistOfUser = new HashMap<>();
+        playlistOfUser.put(playlist.getName(), playlist.getOwner().getUsername());
+        friendPlaylists.add(playlistOfUser);
       }
       RemoveFriendOutputData removeFriendOutputData =
           new RemoveFriendOutputData(allFriendsStrings, friendPlaylists);
