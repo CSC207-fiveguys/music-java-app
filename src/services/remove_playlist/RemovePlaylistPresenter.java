@@ -18,12 +18,10 @@ public class RemovePlaylistPresenter implements RemovePlaylistOutputBoundary {
     public void prepareSuccessView(RemovePlaylistOutputData removePlaylistOutputData) {
         MyLibraryViewState myLibraryViewState = this.myLibraryViewModel.state;
         myLibraryViewState.username = removePlaylistOutputData.username;
-        Map<String, String> removePlaylist = null;
-        for (Map<String, String> playlist : myLibraryViewState.personalPlaylists) {
-            if (Objects.equals(playlist.get("title"), removePlaylistOutputData.playlistname)) {
-                removePlaylist = playlist;
-            }
-        }
+        Map<String, String> removePlaylist = myLibraryViewState.personalPlaylists.stream()
+            .filter(playlist -> Objects.equals(playlist.get("title"), removePlaylistOutputData.playlistname))
+            .findFirst()
+            .orElse(null);
         myLibraryViewState.personalPlaylists.remove(removePlaylist);
         myLibraryViewModel.firePropertyChanged();
     }

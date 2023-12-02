@@ -21,12 +21,8 @@ public class CreateNewPlaylistInteractor implements CreateNewPlaylistInputBounda
     public void execute(CreateNewPlaylistInputData createNewPlaylistInputData) {
         String playlistname = createNewPlaylistInputData.playlistName;
         String username = createNewPlaylistInputData.username;
-        boolean exists = false;
-        for (Playlist playlist : userDataAccessObject.getUser(username).getPlaylists()) {
-            if (Objects.equals(playlist.getName(), playlistname)) {
-                exists = true;
-            }
-        }
+        boolean exists = userDataAccessObject.getUser(username).getPlaylists().stream()
+            .anyMatch(playlist -> Objects.equals(playlist.getName(), playlistname));
         if (exists) {
             createNewPlaylistPresenter.prepareFailView(playlistname + "already exists");
         } else {

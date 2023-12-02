@@ -1,9 +1,6 @@
 package services.create_new_playlist;
 
 import java.util.Map;
-import view.ViewManagerModel;
-import view.logged_in.PlaylistViewModel;
-import view.logged_in.PlaylistViewState;
 import view.logged_in.tabs.MyLibraryViewModel;
 import view.logged_in.tabs.MyLibraryViewState;
 
@@ -28,7 +25,6 @@ public class CreateNewPlaylistPresenter implements CreateNewPlaylistOutputBounda
     }
 
     public void prepareFailView(String error) {
-        MyLibraryViewState myLibraryViewState = myLibraryViewModel.state;
         this.myLibraryViewModel.firePropertyChanged();
     }
 }
