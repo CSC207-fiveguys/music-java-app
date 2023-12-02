@@ -1,9 +1,19 @@
 package app;
 
+import data_access.ArtistDataAccessObject;
+import data_access.SpotifyDataAccessObject;
+import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
+import entities.Track;
 import entities.UserFactory;
+import services.back_to_tab_view.*;
 import services.login_complete.*;
 import services.login_new_signup.*;
+import services.search.SearchController;
+import services.search.SearchInputBoundary;
+import services.search.SearchInteractor;
+import services.search.SearchOutputBoundary;
+import services.search.SearchPresenter;
 import services.signup_abort.*;
 import services.signup_complete.*;
 import view.ViewManager;
@@ -29,6 +39,9 @@ public class Main extends JPanel {
         // CREATE DAOs
 
         UserDataAccessObject userDataAccessObject = new UserDataAccessObject(new UserFactory());
+        TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+        ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
+        SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
 
         // CREATE VIEW MODELS (that have states)
 
@@ -71,6 +84,14 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+        SearchOutputBoundary searchPresenter = new SearchPresenter(searchViewModel);
+        SearchInputBoundary searchInteractor = new SearchInteractor(searchPresenter, spotifyDataAccessObject, userDataAccessObject);
+        SearchController searchController = new SearchController(searchInteractor);
+
+        BackToTabViewOutputBoundary backToTabViewPresenter = new BackToTabViewPresenter(tabViewModel, viewManagerModel);
+        BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
+        BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -100,7 +121,7 @@ public class Main extends JPanel {
                 null,
                 null,
                 null,
-                null,
+                searchController,
                 null,
                 null
         );
@@ -108,7 +129,7 @@ public class Main extends JPanel {
 
         PlaylistView playlistView = new PlaylistView(
                 playlistViewModel,
-                null,
+                backToTabViewController,
                 null,
                 null
         );
