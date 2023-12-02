@@ -21,6 +21,11 @@ import services.search.SearchOutputBoundary;
 import services.search.SearchPresenter;
 import services.signup_abort.*;
 import services.signup_complete.*;
+import services.view_playlist.ViewPlaylistController;
+import services.view_playlist.ViewPlaylistInputBoundary;
+import services.view_playlist.ViewPlaylistInteractor;
+import services.view_playlist.ViewPlaylistOutputBoundary;
+import services.view_playlist.ViewPlaylistPresenter;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.*;
@@ -45,6 +50,7 @@ public class Main extends JPanel {
 
         UserDataAccessObject userDataAccessObject = new UserDataAccessObject(new UserFactory());
         TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+
         ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
         SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
 
@@ -102,6 +108,11 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
+        ViewPlaylistOutputBoundary viewPlaylistPresenter = new ViewPlaylistPresenter(playlistViewModel,
+            viewManagerModel);
+        ViewPlaylistInputBoundary viewPlaylistInteractor = new ViewPlaylistInteractor(userDataAccessObject, viewPlaylistPresenter, trackDataAccessObject);
+        ViewPlaylistController viewPlaylistController = new ViewPlaylistController(viewPlaylistInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -125,7 +136,7 @@ public class Main extends JPanel {
                 followedFriendsViewModel,
                 searchViewModel,
                 null,
-                null,
+                viewPlaylistController,
                 null,
                 null,
                 null,
