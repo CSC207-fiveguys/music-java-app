@@ -10,11 +10,8 @@ import view.logged_in.tabs.MyLibraryViewState;
 public class CreateNewPlaylistPresenter implements CreateNewPlaylistOutputBoundary {
 
     private final MyLibraryViewModel myLibraryViewModel;
-    private ViewManagerModel viewManagerModel;
 
-    public CreateNewPlaylistPresenter(ViewManagerModel viewManagerModel,
-        MyLibraryViewModel myLibraryViewModel) {
-        this.viewManagerModel = viewManagerModel;
+    public CreateNewPlaylistPresenter(MyLibraryViewModel myLibraryViewModel) {
         this.myLibraryViewModel = myLibraryViewModel;
     }
 
