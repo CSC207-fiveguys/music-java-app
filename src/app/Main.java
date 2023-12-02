@@ -1,23 +1,26 @@
 package app;
 
-import data_access.ArtistDataAccessObject;
-import data_access.SpotifyDataAccessObject;
-import data_access.TrackDataAccessObject;
-import data_access.UserDataAccessObject;
-import entities.UserFactory;
-import services.add_track_to_playlist.*;
-import services.login_complete.*;
-import services.login_new_signup.*;
-import services.signup_abort.*;
-import services.signup_complete.*;
-import view.ViewManager;
-import view.ViewManagerModel;
-import view.logged_in.*;
-import view.logged_in.tabs.*;
-import view.logged_out.*;
+    import data_access.ArtistDataAccessObject;
+    import data_access.SpotifyDataAccessObject;
+    import data_access.TrackDataAccessObject;
+    import data_access.UserDataAccessObject;
+    import entities.Track;
+    import entities.UserFactory;
+    import services.add_track_to_playlist.*;
+    import services.like_track.*;
+    import services.back_to_tab_view.*;
+    import services.login_complete.*;
+    import services.login_new_signup.*;
+    import services.signup_abort.*;
+    import services.signup_complete.*;
+    import view.ViewManager;
+    import view.ViewManagerModel;
+    import view.logged_in.*;
+    import view.logged_in.tabs.*;
+    import view.logged_out.*;
 
-import javax.swing.*;
-import java.awt.*;
+    import javax.swing.*;
+    import java.awt.*;
 
 public class Main extends JPanel {
 
@@ -82,46 +85,50 @@ public class Main extends JPanel {
         AddTrackToPlaylistInputBoundary addTrackToPlaylistInteractor = new AddTrackToPlaylistInteractor(userDataAccessObject, spotifyDataAccessObject, addTrackToPlaylistPresenter);
         AddTrackToPlaylistController addTrackToPlaylistController = new AddTrackToPlaylistController(addTrackToPlaylistInteractor);
 
+        LikeTrackOutputBoundary likeTrackPresenter = new LikeTrackPresenter();
+        LikeTrackInputBoundary likeTrackInteractor = new LikeTrackInteractor(userDataAccessObject, spotifyDataAccessObject, likeTrackPresenter);
+        LikeTrackController likeTrackController = new LikeTrackController(likeTrackInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
-                loginViewModel,
-                loginCompleteController,
-                loginNewSignupController
+            loginViewModel,
+            loginCompleteController,
+            loginNewSignupController
         );
         views.add(loginView, loginViewModel.viewName);
 
         SignupView signupView = new SignupView(
-                signupViewModel,
-                signupCompleteController,
-                signupAbortController
+            signupViewModel,
+            signupCompleteController,
+            signupAbortController
         );
         views.add(signupView, signupViewModel.viewName);
 
         TabView tabView = new TabView(
-                tabViewModel,
-                myLibraryViewModel,
-                followedArtistsViewModel,
-                followedFriendsViewModel,
-                searchViewModel,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                addTrackToPlaylistController
+            tabViewModel,
+            myLibraryViewModel,
+            followedArtistsViewModel,
+            followedFriendsViewModel,
+            searchViewModel,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            likeTrackController,
+            addTrackToPlaylistController
         );
         views.add(tabView, tabViewModel.viewName);
 
         PlaylistView playlistView = new PlaylistView(
-                playlistViewModel,
-                null,
-                null,
-                null
+            playlistViewModel,
+            null,
+            null,
+            null
         );
         views.add(playlistView, playlistViewModel.viewName);
         playlistViewModel.firePropertyChanged();

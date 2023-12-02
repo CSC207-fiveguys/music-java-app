@@ -1,7 +1,15 @@
 package services.like_track;
 
 public class LikeTrackController {
+    final LikeTrackInputBoundary likeTrackInteractor;
+
+    public LikeTrackController(LikeTrackInputBoundary likeTrackInteractor) {
+        this.likeTrackInteractor = likeTrackInteractor;
+    }
+
     public void execute(String id, String username) {
-        // todo 1. add track with track id to "username"s liked tracks
+        LikeTrackInputData likeTrackInputData = new LikeTrackInputData(id, username);
+
+        likeTrackInteractor.execute(likeTrackInputData);
     }
 }
