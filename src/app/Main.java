@@ -132,12 +132,9 @@ public class Main extends JPanel {
                 null,
                 null,
                 removeFriendController,
-                null,
-                null,
                 searchController,
                 null,
-                null
-        );
+                null);
         views.add(tabView, tabViewModel.viewName);
 
         PlaylistView playlistView = new PlaylistView(
