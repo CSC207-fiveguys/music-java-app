@@ -4,7 +4,6 @@ import data_access.ArtistDataAccessObject;
 import data_access.SpotifyDataAccessObject;
 import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
-import entities.Track;
 import entities.UserFactory;
 import services.back_to_tab_view.*;
 import services.follow_artist.FollowArtistController;
@@ -98,7 +97,8 @@ public class Main extends JPanel {
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
         FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(followedArtistsViewModel);
-        FollowArtistInputBoundary followArtistInteractor = new FollowArtistInteractor(artistDataAccessObject, userDataAccessObject, followArtistPresenter);
+        FollowArtistInputBoundary followArtistInteractor = new FollowArtistInteractor(
+            spotifyDataAccessObject, artistDataAccessObject, userDataAccessObject, followArtistPresenter);
         FollowArtistController followArtistController = new FollowArtistController(followArtistInteractor);
 
         // CREATE VIEWS

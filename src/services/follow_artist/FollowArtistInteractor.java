@@ -8,13 +8,16 @@ import java.util.Map;
 
 public class FollowArtistInteractor implements FollowArtistInputBoundary {
 
+  final FollowArtistSpotifyDataAccessInterface spotifyDataAccessObject;
   final FollowArtistDataAccessInterface artistDataAccessObject;
   final FollowArtistUserDataAccessInterface userDataAccessObject;
   final FollowArtistOutputBoundary followArtistPresenter;
 
-  public FollowArtistInteractor(FollowArtistDataAccessInterface userDataAccessObject,
+  public FollowArtistInteractor(FollowArtistSpotifyDataAccessInterface spotifyDataAccessObject,
+      FollowArtistDataAccessInterface userDataAccessObject,
       FollowArtistUserDataAccessInterface userDataAccessObject1,
       FollowArtistOutputBoundary followArtistPresenter) {
+    this.spotifyDataAccessObject = spotifyDataAccessObject;
     this.artistDataAccessObject = userDataAccessObject;
     this.userDataAccessObject = userDataAccessObject1;
     this.followArtistPresenter = followArtistPresenter;
@@ -40,7 +43,7 @@ public class FollowArtistInteractor implements FollowArtistInputBoundary {
     FollowArtistOutputData followArtistOutputData = new FollowArtistOutputData(artists);
     followArtistPresenter.prepareSuccessView(followArtistOutputData);
     // todo 2. add playlist to "usernames" library with songs from the artist
-    // todo 2.i check for duplicate playlist name issues ???
+
 
   }
 
