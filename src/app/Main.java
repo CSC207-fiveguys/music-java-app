@@ -6,6 +6,11 @@ import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.Track;
 import entities.UserFactory;
+import services.add_friend.AddFriendController;
+import services.add_friend.AddFriendInputBoundary;
+import services.add_friend.AddFriendInteractor;
+import services.add_friend.AddFriendOutputBoundary;
+import services.add_friend.AddFriendPresenter;
 import services.back_to_tab_view.*;
 import services.login_complete.*;
 import services.login_new_signup.*;
@@ -90,6 +95,11 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+        AddFriendOutputBoundary addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel,
+            myLibraryViewModel);
+        AddFriendInputBoundary addFriendInteractor = new AddFriendInteractor(userDataAccessObject, addFriendPresenter);
+        AddFriendController addFriendController = new AddFriendController(addFriendInteractor);
+      
         SearchOutputBoundary searchPresenter = new SearchPresenter(searchViewModel);
         SearchInputBoundary searchInteractor = new SearchInteractor(searchPresenter, spotifyDataAccessObject, userDataAccessObject);
         SearchController searchController = new SearchController(searchInteractor);
@@ -130,7 +140,7 @@ public class Main extends JPanel {
                 null,
                 null,
                 null,
-                null,
+                addFriendController,
                 null,
                 searchController,
                 null,
