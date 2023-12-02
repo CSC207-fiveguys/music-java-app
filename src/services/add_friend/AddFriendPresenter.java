@@ -9,6 +9,7 @@ import view.logged_in.tabs.SearchViewModel;
 import view.logged_in.tabs.SearchViewState;
 
 public class AddFriendPresenter implements AddFriendOutputBoundary {
+
   private final SearchViewModel searchViewModel;
   private final FollowedFriendsViewModel followedFriendsViewModel;
   private final MyLibraryViewModel myLibraryViewModel;
@@ -24,7 +25,8 @@ public class AddFriendPresenter implements AddFriendOutputBoundary {
     this.myLibraryViewModel = myLibraryViewModel;
     this.viewManagerModel = viewManagerModel;
   }
-  public void prepareSuccessView(AddFriendOutputData addFriendOutputData){
+
+  public void prepareSuccessView(AddFriendOutputData addFriendOutputData) {
     SearchViewState searchViewState = searchViewModel.state;
     searchViewModel.firePropertyChanged();
 
@@ -38,7 +40,7 @@ public class AddFriendPresenter implements AddFriendOutputBoundary {
   }
 
 
-  public void prepareFailView(){
+  public void prepareFailView() {
     SearchViewState searchViewState = searchViewModel.state;
     searchViewModel.firePropertyChanged();
   }
