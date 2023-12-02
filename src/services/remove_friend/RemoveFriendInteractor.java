@@ -52,7 +52,8 @@ public class RemoveFriendInteractor implements RemoveFriendInputBoundary {
     ArrayList<Map<String, String>> friendPlaylists = new ArrayList<Map<String, String>>();
     for (Playlist playlist : user.getPlaylists()) {
       Map<String, String> playlistOfUser = new HashMap<>();
-      playlistOfUser.put(playlist.getName(), playlist.getOwner().getUsername());
+      playlistOfUser.put("title", playlist.getName());
+      playlistOfUser.put("owner", playlist.getOwner().getUsername());
       friendPlaylists.add(playlistOfUser);
     }
     return new RemoveFriendOutputData(allFriendsStrings, friendPlaylists);
