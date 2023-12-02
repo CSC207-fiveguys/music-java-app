@@ -25,6 +25,8 @@ public class FollowedFriendsView extends TabPageView {
 
         usernameHeaderRowPanel.updateUsername(followedFriendsViewModel.state.username);
 
+        innerPanel.removeAll();
+
         for (String username : followedFriendsViewModel.state.friendUsernames) {
             innerPanel.add(Box.createRigidArea(new Dimension(0, 4)));
             innerPanel.add(new FriendRowPanel(

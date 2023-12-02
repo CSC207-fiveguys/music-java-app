@@ -128,7 +128,7 @@ public class SpotifyAPI {
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
-
+      
         System.out.println(jsonResponse);
         return jsonResponse;
     }
@@ -150,7 +150,7 @@ public class SpotifyAPI {
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
-
+      
         System.out.println(jsonResponse);
         return jsonResponse;
     }

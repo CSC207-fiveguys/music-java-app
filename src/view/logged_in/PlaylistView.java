@@ -44,6 +44,8 @@ public class PlaylistView extends TabPageView {
         // UPDATE ALL NON-FINAL STATE ATTRIBUTES TO VIEW
         usernameHeaderRowPanel.updateUsername(playlistViewModel.state.username);
 
+        innerPanel.removeAll();
+
         if (playlistViewModel.state.isShowingLikedTracks) {
             for (Map<String, Object> track : playlistViewModel.state.tracks) {
                 innerPanel.add(Box.createRigidArea(new Dimension(0, 4)));
