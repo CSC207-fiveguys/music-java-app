@@ -1,21 +1,32 @@
 package data_access;
 
+import entities.Playlist;
 import entities.User;
 import entities.UserFactory;
+import services.add_friend.AddFriendUserDataAccessInterface;
 import java.util.ArrayList;
+
 import services.add_track_to_playlist.AddTrackToPlaylistUserDataAccessInterface;
-import services.like_track.LikeTrackUserDataAccessObject;
+import services.create_new_playlist.CreateNewPlaylistDataAccessInterface;
+import services.like_track.LikeTrackUserDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
+import services.remove_playlist.RemovePlaylistDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
+
 
 import java.util.HashMap;
 import java.util.Map;
+import services.view_playlist.ViewPlaylistDataAccessInterface;
 
 public class UserDataAccessObject implements
-    LoginCompleteUserDataAccessInterface,
-    SignupCompleteUserDataAccessInterface,
-    AddTrackToPlaylistUserDataAccessInterface,
-    LikeTrackUserDataAccessObject {
+        LoginCompleteUserDataAccessInterface,
+        SignupCompleteUserDataAccessInterface,
+        CreateNewPlaylistDataAccessInterface,
+        RemovePlaylistDataAccessInterface,
+        ViewPlaylistDataAccessInterface,
+        AddFriendUserDataAccessInterface,
+        AddTrackToPlaylistUserDataAccessInterface,
+        LikeTrackUserDataAccessInterface {
 
     private final Map<String, User> users;
 
@@ -31,6 +42,8 @@ public class UserDataAccessObject implements
         User fake_user2 = userFactory.create("bob445", "bananaPASS");
         users.put(fake_user1.getUsername(), fake_user1);
         users.put(fake_user2.getUsername(), fake_user2);
+        fake_user1.createPlaylist("Hussain");
+        fake_user2.createPlaylist("Evan");
 
         // TODO: Read from the json file that stores User information
     }
@@ -54,11 +67,23 @@ public class UserDataAccessObject implements
         // TODO Implement this method
     }
 
-    public ArrayList<String> searchUser(String query){
+    @Override
+    public Playlist getPlaylist(String playlistName, String username) {
+        // Return the Playlist with the given name belonging to the given user
+        User user = users.get(username);
+        for (Playlist playlist : user.getPlaylists()) {
+            if (playlist.getName().equals(playlistName)) {
+                return playlist;
+            }
+        }
+        return null; // This line should never be reached as the playlist name will be valid
+    }
+
+    public ArrayList<String> searchUser(String query) {
 
         ArrayList<String> matchingUsers = new ArrayList<>();
-        for (String user: users.keySet()){
-            if (query.contains(user) || user.contains(query)){
+        for (String user : users.keySet()) {
+            if (query.contains(user) || user.contains(query)) {
                 matchingUsers.add(user);
             }
         }

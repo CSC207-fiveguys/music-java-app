@@ -74,6 +74,7 @@ public class CommonUser implements User {
         for (int i = 0; i < playlists.size(); i++) {
             if (playlists.get(i).getName().equals(playlistName)) {
                 playlists.get(i).addTrack(trackID);
+                break;
             }
         }
     }
@@ -84,6 +85,7 @@ public class CommonUser implements User {
         for (int i = 0; i < playlists.size(); i++) {
             if (playlists.get(i).getName().equals(playlistName)) {
                 playlists.get(i).removeTrack(trackID);
+                break;
             }
         }
     }

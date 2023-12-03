@@ -2,6 +2,7 @@ package data_access;
 
 import entities.Track;
 
+import entities.TrackFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,12 +10,16 @@ public class TrackDataAccessObject {
 
     private final Map<String, Track> tracks;
 
+    public final TrackFactory trackFactory;
+
     public TrackDataAccessObject() {
         // The DataAccessObject stores the track ids and Track objects of all the tracks that we
         // have gotten from the Spotify API so far. This is to reduce API calls and prevent
         // having duplicate objects for the same track.
         // This data is kept in a json file
         tracks = new HashMap<>();
+        trackFactory = new TrackFactory();
+
         // TODO: Read from the json file that stores Track Data
     }
 

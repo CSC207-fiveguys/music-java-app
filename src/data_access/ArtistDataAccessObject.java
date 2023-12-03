@@ -2,12 +2,14 @@ package data_access;
 
 import entities.Artist;
 
+import entities.ArtistFactory;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ArtistDataAccessObject {
 
     private final Map<String, Artist> artists;
+    public final ArtistFactory artistFactory;
 
     public ArtistDataAccessObject() {
         // The DataAccessObject stores the artist ids and Artist objects of all the artists that we
@@ -15,6 +17,7 @@ public class ArtistDataAccessObject {
         // having duplicate objects for the same artist.
         // This data is kept in a json file
         artists = new HashMap<>();
+        artistFactory = new ArtistFactory();
         // TODO: Read from the json file that stores the Artist data and store it in artists
     }
 
