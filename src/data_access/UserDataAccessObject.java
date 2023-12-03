@@ -7,6 +7,7 @@ import services.add_track_to_playlist.AddTrackToPlaylistUserDataAccessInterface;
 import services.like_track.LikeTrackUserDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
 import services.remove_track_from_liked.RemoveTrackFromLikedUserDataAccessInterface;
+import services.remove_track_from_playlist.RemoveTrackFromPlaylistUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
@@ -17,7 +18,8 @@ public class UserDataAccessObject implements
     SignupCompleteUserDataAccessInterface,
     AddTrackToPlaylistUserDataAccessInterface,
         RemoveTrackFromLikedUserDataAccessInterface,
-        LikeTrackUserDataAccessInterface
+        LikeTrackUserDataAccessInterface,
+        RemoveTrackFromPlaylistUserDataAccessInterface
     {
 
     private final Map<String, User> users;
