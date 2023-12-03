@@ -1,6 +1,8 @@
 package services.follow_artist;
 
 import entities.Artist;
+import entities.Playlist;
+import entities.PlaylistFactory;
 import entities.User;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,13 +28,20 @@ public class FollowArtistInteractor implements FollowArtistInputBoundary {
 
   @Override
   public void execute(FollowArtistInputData followArtistInputData) {
-    // todo 1. make user with "username" follow artist with "id"
     User user = userDataAccessObject.getUser(followArtistInputData.username);
     user.followArtist(followArtistInputData.id);
+    // todo 2. add playlist to "usernames" library with songs from the artist
+    ArrayList<String> topTracks = spotifyDataAccessObject.getTopTracks(followArtistInputData.id);
+    PlaylistFactory playlistFactory = new PlaylistFactory();
+    Playlist playlist = playlistFactory.create(
+        "Best of " + spotifyDataAccessObject.getArtistID(followArtistInputData.id).getName(),
+        user,
+        topTracks);
+    user.addPlaylist(playlist);
     // prepare the output data
     ArrayList<Map<String, String>> artists = new ArrayList<>();
     for (String followArtist : user.getFollowedArtists()) {
-      Artist followedArtist = artistDataAccessObject.getArtist(followArtist);
+      Artist followedArtist = spotifyDataAccessObject.getArtistID(followArtist);
       Map<String, String> artistMap = new HashMap<>();
       artistMap.put("name", followedArtist.getName());
       artistMap.put("followers", followedArtist.getNumFollowers() + "");
@@ -40,9 +49,19 @@ public class FollowArtistInteractor implements FollowArtistInputBoundary {
       artistMap.put("id", followedArtist.getID());
       artists.add(artistMap);
     }
-    FollowArtistOutputData followArtistOutputData = new FollowArtistOutputData(artists);
+    ArrayList<Map<String, String>> playlists = new ArrayList<Map<String, String>>();
+    for (Playlist playlistUser : user.getPlaylists()) {
+
+      // Structure the output data
+      Map<String, String> playlistAdded = new HashMap<>();
+      playlistAdded.put("title", playlistUser.getName());
+      playlistAdded.put("owner", playlistUser.getOwner().getUsername());
+      playlists.add(playlistAdded);
+    }
+
+    FollowArtistOutputData followArtistOutputData = new FollowArtistOutputData(artists, playlists);
     followArtistPresenter.prepareSuccessView(followArtistOutputData);
-    // todo 2. add playlist to "usernames" library with songs from the artist
+
 
 
   }

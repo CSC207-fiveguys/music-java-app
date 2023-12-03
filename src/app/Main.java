@@ -122,7 +122,8 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
-        FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(followedArtistsViewModel);
+        FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(followedArtistsViewModel,
+            myLibraryViewModel);
         FollowArtistInputBoundary followArtistInteractor = new FollowArtistInteractor(
             spotifyDataAccessObject, artistDataAccessObject, userDataAccessObject, followArtistPresenter);
         FollowArtistController followArtistController = new FollowArtistController(followArtistInteractor);
