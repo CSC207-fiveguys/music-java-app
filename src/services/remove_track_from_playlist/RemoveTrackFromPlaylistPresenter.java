@@ -17,14 +17,10 @@ public class RemoveTrackFromPlaylistPresenter implements RemoveTrackFromPlaylist
 
     @Override
     public void prepareSuccessView(RemoveTrackFromPlaylistOutputData id) {
-//        playlistViewModel.state.tracks.remove(id); BAD CODE
 
         for (Map<String, Object> track : playlistViewModel.state.tracks) {
             if (Objects.equals((String) track.get("id"), id.id)) {
-                System.out.println(track);
-                System.out.println(playlistViewModel.state.tracks);
                 playlistViewModel.state.tracks.remove(track);
-                System.out.println(playlistViewModel.state.tracks);
                 break;
             }
         }

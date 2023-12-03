@@ -11,8 +11,12 @@ import services.add_track_to_playlist.AddTrackToPlaylistSpotifyDataAccessInterfa
 import services.like_track.LikeTrackSpotifyDataAccessInterface;
 import services.search.SearchUserDataAccessInterface;
 
-public class SpotifyDataAccessObject implements SearchUserDataAccessInterface,
-          AddTrackToPlaylistSpotifyDataAccessInterface, LikeTrackSpotifyDataAccessInterface {
+public class SpotifyDataAccessObject implements
+    SearchUserDataAccessInterface,
+    AddTrackToPlaylistSpotifyDataAccessInterface,
+    LikeTrackSpotifyDataAccessInterface,
+    FollowArtistSpotifyDataAccessInterface
+{
 
   String accessToken;
   SpotifyAPI spotifyAPI;
@@ -42,6 +46,7 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface,
       // Cast the track into a JSONObject (which is what it always will be)
       Track trackObject = getTrack((JSONObject) track);
       tracks.add(trackObject);
+      System.out.println(trackObject.getID());
     }
 
     return tracks;

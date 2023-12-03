@@ -3,6 +3,9 @@ package services.remove_track_from_liked;
 import view.ViewManagerModel;
 import view.logged_in.PlaylistViewModel;
 
+import java.util.Map;
+import java.util.Objects;
+
 public class RemoveTrackFromLikedPresenter implements RemoveTrackFromLikedOutputBoundary {
     private final ViewManagerModel viewManagerModel;
     private final PlaylistViewModel playlistViewModel;
@@ -14,10 +17,15 @@ public class RemoveTrackFromLikedPresenter implements RemoveTrackFromLikedOutput
 
     @Override
     public void prepareSuccessView(RemoveTrackFromLikedOutputData id) {
-        playlistViewModel.state.tracks.remove(id);
-        viewManagerModel.activeView = playlistViewModel.viewName;
+
+        for (Map<String, Object> track : playlistViewModel.state.tracks) {
+            if (Objects.equals((String) track.get("id"), id.id)) {
+                playlistViewModel.state.tracks.remove(track);
+                break;
+            }
+        }
+
         playlistViewModel.firePropertyChanged();
-        viewManagerModel.firePropertyChanged();
     }
     @Override
     public void prepareFailView() {}

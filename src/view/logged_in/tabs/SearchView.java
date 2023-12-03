@@ -59,6 +59,8 @@ public class SearchView extends TabPageView {
         usernameHeaderRowPanel.updateUsername(searchViewModel.state.username);
 
         innerPanel.removeAll();
+        innerPanel.revalidate();
+        innerPanel.repaint();
 
         // show tracks
 

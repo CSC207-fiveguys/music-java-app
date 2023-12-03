@@ -76,11 +76,13 @@ public class Main extends JPanel {
 
         // CREATE DAOs
 
-        UserDataAccessObject userDataAccessObject = new UserDataAccessObject(new UserFactory());
         TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
 
         ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
         SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
+
+        UserDataAccessObject userDataAccessObject = new UserDataAccessObject(new UserFactory(), spotifyDataAccessObject);
+
 
         // CREATE VIEW MODELS (that have states)
 
