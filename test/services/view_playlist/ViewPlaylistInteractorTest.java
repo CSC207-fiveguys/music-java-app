@@ -1,11 +1,13 @@
 package services.view_playlist;
 
 import data_access.TrackDataAccessObject;
+import data_access.UserDataAccessObject;
 import entities.CommonPlaylist;
 import entities.CommonTrack;
 import entities.CommonUser;
 import entities.Playlist;
 import entities.Track;
+import entities.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -21,7 +23,8 @@ class ViewPlaylistInteractorTest {
 
     @BeforeEach
     void setUp() {
-        userDataAccessObject = new ViewPlaylistDataAccessInterface() {
+        UserFactory userFactory = new UserFactory();
+        userDataAccessObject = new UserDataAccessObject(userFactory) {
             @Override
             public Playlist getPlaylist(String playlistName, String username) {
                 if ("testPlaylist".equals(playlistName) && "testUser".equals(username)) {

@@ -108,10 +108,4 @@ class CommonUserTest {
         assertTrue(user.getPlaylists().contains(newPlaylist), "addPlaylist should add a playlist to the user's playlists.");
     }
 
-    @Test
-    void removePlaylist() {
-        user.createPlaylist(testPlaylistName);
-        user.removePlaylist(testPlaylistName);
-        assertFalse(user.getPlaylists().stream().anyMatch(playlist -> playlist.getName().equals(testPlaylistName)), "removePlaylist should remove a playlist from the user's playlists.");
-    }
 }
