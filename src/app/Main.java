@@ -5,14 +5,32 @@ import data_access.SpotifyDataAccessObject;
 import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.UserFactory;
+import services.add_friend.AddFriendController;
+import services.add_friend.AddFriendInputBoundary;
+import services.add_friend.AddFriendInteractor;
+import services.add_friend.AddFriendOutputBoundary;
+import services.add_friend.AddFriendPresenter;
 import services.back_to_tab_view.*;
+<<<<<<< HEAD
 import services.follow_artist.FollowArtistController;
 import services.follow_artist.FollowArtistInputBoundary;
 import services.follow_artist.FollowArtistInteractor;
 import services.follow_artist.FollowArtistOutputBoundary;
 import services.follow_artist.FollowArtistPresenter;
+=======
+import services.create_new_playlist.CreateNewPlaylistController;
+import services.create_new_playlist.CreateNewPlaylistInputBoundary;
+import services.create_new_playlist.CreateNewPlaylistInteractor;
+import services.create_new_playlist.CreateNewPlaylistOutputBoundary;
+import services.create_new_playlist.CreateNewPlaylistPresenter;
+>>>>>>> 2eaf514f0c48415ee09c62f2f1de8319708abacd
 import services.login_complete.*;
 import services.login_new_signup.*;
+import services.remove_playlist.RemovePlaylistController;
+import services.remove_playlist.RemovePlaylistInputBoundary;
+import services.remove_playlist.RemovePlaylistInteractor;
+import services.remove_playlist.RemovePlaylistOutputBoundary;
+import services.remove_playlist.RemovePlaylistPresenter;
 import services.search.SearchController;
 import services.search.SearchInputBoundary;
 import services.search.SearchInteractor;
@@ -20,6 +38,11 @@ import services.search.SearchOutputBoundary;
 import services.search.SearchPresenter;
 import services.signup_abort.*;
 import services.signup_complete.*;
+import services.view_playlist.ViewPlaylistController;
+import services.view_playlist.ViewPlaylistInputBoundary;
+import services.view_playlist.ViewPlaylistInteractor;
+import services.view_playlist.ViewPlaylistOutputBoundary;
+import services.view_playlist.ViewPlaylistPresenter;
 import view.ViewManager;
 import view.ViewManagerModel;
 import view.logged_in.*;
@@ -44,6 +67,7 @@ public class Main extends JPanel {
 
         UserDataAccessObject userDataAccessObject = new UserDataAccessObject(new UserFactory());
         TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+
         ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
         SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
 
@@ -88,6 +112,11 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+        AddFriendOutputBoundary addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel,
+            myLibraryViewModel);
+        AddFriendInputBoundary addFriendInteractor = new AddFriendInteractor(userDataAccessObject, addFriendPresenter);
+        AddFriendController addFriendController = new AddFriendController(addFriendInteractor);
+      
         SearchOutputBoundary searchPresenter = new SearchPresenter(searchViewModel);
         SearchInputBoundary searchInteractor = new SearchInteractor(searchPresenter, spotifyDataAccessObject, userDataAccessObject);
         SearchController searchController = new SearchController(searchInteractor);
@@ -96,10 +125,25 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
+<<<<<<< HEAD
         FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(followedArtistsViewModel);
         FollowArtistInputBoundary followArtistInteractor = new FollowArtistInteractor(
             spotifyDataAccessObject, artistDataAccessObject, userDataAccessObject, followArtistPresenter);
         FollowArtistController followArtistController = new FollowArtistController(followArtistInteractor);
+=======
+        CreateNewPlaylistOutputBoundary createNewPlaylistPresenter = new CreateNewPlaylistPresenter(myLibraryViewModel);
+        CreateNewPlaylistInputBoundary createNewPlaylistInteractor = new CreateNewPlaylistInteractor(userDataAccessObject, createNewPlaylistPresenter);
+        CreateNewPlaylistController createNewPlaylistController = new CreateNewPlaylistController(createNewPlaylistInteractor);
+
+        RemovePlaylistOutputBoundary removePlaylistPresenter = new RemovePlaylistPresenter(myLibraryViewModel);
+        RemovePlaylistInputBoundary removePlaylistInteractor = new RemovePlaylistInteractor(userDataAccessObject, removePlaylistPresenter);
+        RemovePlaylistController removePlaylistController = new RemovePlaylistController(removePlaylistInteractor);
+
+        ViewPlaylistOutputBoundary viewPlaylistPresenter = new ViewPlaylistPresenter(playlistViewModel,
+            viewManagerModel);
+        ViewPlaylistInputBoundary viewPlaylistInteractor = new ViewPlaylistInteractor(userDataAccessObject, viewPlaylistPresenter, trackDataAccessObject);
+        ViewPlaylistController viewPlaylistController = new ViewPlaylistController(viewPlaylistInteractor);
+>>>>>>> 2eaf514f0c48415ee09c62f2f1de8319708abacd
 
         // CREATE VIEWS
 
@@ -123,12 +167,19 @@ public class Main extends JPanel {
                 followedArtistsViewModel,
                 followedFriendsViewModel,
                 searchViewModel,
+                createNewPlaylistController,
+                viewPlaylistController,
+                removePlaylistController,
                 null,
                 null,
+<<<<<<< HEAD
                 null,
                 followArtistController,
                 null,
                 null,
+=======
+                addFriendController,
+>>>>>>> 2eaf514f0c48415ee09c62f2f1de8319708abacd
                 null,
                 searchController,
                 null,
