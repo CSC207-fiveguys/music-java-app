@@ -40,8 +40,8 @@ public class FollowedArtistsViewState {
                 "id", "a-z"
         );
 
-        artists.add(artist1);
-        artists.add(artist2);
-        artists.add(artist3);
+//        artists.add(artist1);
+//        artists.add(artist2);
+//        artists.add(artist3);
     }
 }

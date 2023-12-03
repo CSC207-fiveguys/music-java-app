@@ -51,8 +51,8 @@ public class PlaylistViewState {
                 "id", "3abc"
         );
 
-        tracks.add(track1);
-        tracks.add(track2);
-        tracks.add(track3);
+//        tracks.add(track1);
+//        tracks.add(track2);
+//        tracks.add(track3);
     }
 }

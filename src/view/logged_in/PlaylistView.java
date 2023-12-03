@@ -45,8 +45,12 @@ public class PlaylistView extends TabPageView {
         usernameHeaderRowPanel.updateUsername(playlistViewModel.state.username);
 
         innerPanel.removeAll();
+        innerPanel.revalidate();
+        innerPanel.repaint();
 
         if (playlistViewModel.state.isShowingLikedTracks) {
+            System.out.println("LIKED TRACKS");
+            System.out.println(playlistViewModel.state.tracks);
             for (Map<String, Object> track : playlistViewModel.state.tracks) {
                 innerPanel.add(Box.createRigidArea(new Dimension(0, 4)));
                 innerPanel.add(new TrackRowPanel(

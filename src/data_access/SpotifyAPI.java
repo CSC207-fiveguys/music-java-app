@@ -18,17 +18,17 @@ public class SpotifyAPI {
         HttpClient client = HttpClient.newHttpClient();
         Base64.Encoder encoder = Base64.getUrlEncoder();
         String auth =
-            System.getenv("SPOTIFY_CLIENT_ID") + ":" + System.getenv("SPOTIFY_CLIENT_SECRET");
+                System.getenv("SPOTIFY_CLIENT_ID") + ":" + System.getenv("SPOTIFY_CLIENT_SECRET");
         byte[] authByteEncoded = auth.getBytes();
         authB64Encoded = encoder.encodeToString(authByteEncoded);
 
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(
-                "https://accounts.spotify.com/api/token" + "?" + "grant_type=client_credentials"))
-            .header("Authorization", "Basic " + authB64Encoded)
-            .header("Content-Type", "application/x-www-form-urlencoded")
-            .method("POST", HttpRequest.BodyPublishers.noBody())
-            .build();
+                .uri(URI.create(
+                        "https://accounts.spotify.com/api/token" + "?" + "grant_type=client_credentials"))
+                .header("Authorization", "Basic " + authB64Encoded)
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .method("POST", HttpRequest.BodyPublishers.noBody())
+                .build();
 
         HttpResponse<String> response = null;
         JSONObject jsonResponse = null;
@@ -48,11 +48,11 @@ public class SpotifyAPI {
     public JSONObject search_artist(String query, String accessToken) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query,
-                StandardCharsets.UTF_8) + "&type=artist" + "&market=CA" + "&limit=5"))
-            .header("Authorization", "Bearer " + accessToken)
-            .method("GET", HttpRequest.BodyPublishers.noBody())
-            .build();
+                .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query,
+                        StandardCharsets.UTF_8) + "&type=artist" + "&market=CA" + "&limit=5"))
+                .header("Authorization", "Bearer " + accessToken)
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
 
         HttpResponse<String> response = null;
         JSONObject jsonResponse = null;
@@ -70,11 +70,11 @@ public class SpotifyAPI {
     public JSONObject search_track(String query, String accessToken) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query,
-                StandardCharsets.UTF_8) + "&type=track" + "&market=CA" + "&limit=5"))
-            .header("Authorization", "Bearer " + accessToken)
-            .method("GET", HttpRequest.BodyPublishers.noBody())
-            .build();
+                .uri(URI.create("https://api.spotify.com/v1/search?q=" + URLEncoder.encode(query,
+                        StandardCharsets.UTF_8) + "&type=track" + "&market=CA" + "&limit=5"))
+                .header("Authorization", "Bearer " + accessToken)
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
 
         HttpResponse<String> response = null;
         JSONObject jsonResponse = null;
@@ -92,10 +92,10 @@ public class SpotifyAPI {
     public JSONObject get_artist(String id, String accessToken) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("https://api.spotify.com/v1/artists/" + id))
-            .header("Authorization", "Bearer " + accessToken)
-            .method("GET", HttpRequest.BodyPublishers.noBody())
-            .build();
+                .uri(URI.create("https://api.spotify.com/v1/artists/" + id))
+                .header("Authorization", "Bearer " + accessToken)
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
 
         HttpResponse<String> response = null;
         JSONObject jsonResponse = null;
@@ -107,7 +107,6 @@ public class SpotifyAPI {
             e.printStackTrace();
         }
 
-        System.out.println(jsonResponse);
         return jsonResponse;
     }
 
@@ -154,4 +153,5 @@ public class SpotifyAPI {
         System.out.println(jsonResponse);
         return jsonResponse;
     }
+
 }

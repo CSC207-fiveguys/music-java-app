@@ -51,6 +51,8 @@ public class MyLibraryView extends TabPageView {
         usernameHeaderRowPanel.updateUsername(myLibraryViewModel.state.username);
 
         innerPanel.removeAll();
+        innerPanel.revalidate();
+        innerPanel.repaint();
 
         innerPanel.add(Box.createRigidArea(new Dimension(0, 4)));
         innerPanel.add(new PlaylistRowPanel(

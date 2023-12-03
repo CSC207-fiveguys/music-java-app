@@ -33,9 +33,9 @@ public class MyLibraryViewState {
                 "owner", "owner3"
         );
 
-        personalPlaylists.add(playlist1);
-        personalPlaylists.add(playlist2);
-        personalPlaylists.add(playlist3);
+//        personalPlaylists.add(playlist1);
+//        personalPlaylists.add(playlist2);
+//        personalPlaylists.add(playlist3);
     }
 
 
