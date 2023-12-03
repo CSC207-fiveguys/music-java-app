@@ -62,8 +62,6 @@ public class FollowArtistInteractor implements FollowArtistInputBoundary {
     FollowArtistOutputData followArtistOutputData = new FollowArtistOutputData(artists, playlists);
     followArtistPresenter.prepareSuccessView(followArtistOutputData);
 
-
-
   }
 
 }
