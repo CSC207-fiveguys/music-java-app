@@ -26,7 +26,7 @@ public class SearchInteractor implements SearchInputBoundary {
     // Call the Spotify DAO to return a list of Tracks and Artists
      ArrayList<Artist> artists = spotifyDataAccessObject.searchArtist(query);
      ArrayList<Track> tracks = spotifyDataAccessObject.searchTrack(query);
-     ArrayList<String> users = userDataAccessObject.searchUser(query);
+     ArrayList<String> users = searchInputData.searchAlgorithm.searchUser(query);
 
      // Create and return the Output Data
      SearchOutputData searchOutputData = new SearchOutputData(artists, tracks, users);

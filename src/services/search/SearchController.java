@@ -7,8 +7,8 @@ public class SearchController {
     public SearchController(SearchInputBoundary searchInteractor){
         this.searchInteractor = searchInteractor;
     }
-    public void execute(String searchQuery) {
-        SearchInputData searchInputData = new SearchInputData(searchQuery);
+    public void execute(String searchQuery, SearchAlgorithm searchAlgorithm) {
+        SearchInputData searchInputData = new SearchInputData(searchQuery, searchAlgorithm);
         searchInteractor.execute(searchInputData);
     }
 
