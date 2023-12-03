@@ -153,5 +153,4 @@ public class SpotifyDataAccessObject implements SearchUserDataAccessInterface,
 
     return tracks;
   }
-
 }

@@ -1,26 +1,51 @@
 package app;
 
-    import data_access.ArtistDataAccessObject;
-    import data_access.SpotifyDataAccessObject;
-    import data_access.TrackDataAccessObject;
-    import data_access.UserDataAccessObject;
-    import entities.Track;
-    import entities.UserFactory;
-    import services.add_track_to_playlist.*;
-    import services.like_track.*;
-    import services.back_to_tab_view.*;
-    import services.login_complete.*;
-    import services.login_new_signup.*;
-    import services.signup_abort.*;
-    import services.signup_complete.*;
-    import view.ViewManager;
-    import view.ViewManagerModel;
-    import view.logged_in.*;
-    import view.logged_in.tabs.*;
-    import view.logged_out.*;
+import data_access.ArtistDataAccessObject;
+import data_access.SpotifyDataAccessObject;
+import data_access.TrackDataAccessObject;
+import data_access.UserDataAccessObject;
+import entities.Track;
+import entities.UserFactory;
+import services.add_friend.AddFriendController;
+import services.add_friend.AddFriendInputBoundary;
+import services.add_friend.AddFriendInteractor;
+import services.add_friend.AddFriendOutputBoundary;
+import services.add_friend.AddFriendPresenter;
+import services.add_track_to_playlist.*;
+import services.like_track.*;
+import services.back_to_tab_view.*;
+import services.create_new_playlist.CreateNewPlaylistController;
+import services.create_new_playlist.CreateNewPlaylistInputBoundary;
+import services.create_new_playlist.CreateNewPlaylistInteractor;
+import services.create_new_playlist.CreateNewPlaylistOutputBoundary;
+import services.create_new_playlist.CreateNewPlaylistPresenter;
+import services.login_complete.*;
+import services.login_new_signup.*;
+import services.remove_playlist.RemovePlaylistController;
+import services.remove_playlist.RemovePlaylistInputBoundary;
+import services.remove_playlist.RemovePlaylistInteractor;
+import services.remove_playlist.RemovePlaylistOutputBoundary;
+import services.remove_playlist.RemovePlaylistPresenter;
+import services.search.SearchController;
+import services.search.SearchInputBoundary;
+import services.search.SearchInteractor;
+import services.search.SearchOutputBoundary;
+import services.search.SearchPresenter;
+import services.signup_abort.*;
+import services.signup_complete.*;
+import services.view_playlist.ViewPlaylistController;
+import services.view_playlist.ViewPlaylistInputBoundary;
+import services.view_playlist.ViewPlaylistInteractor;
+import services.view_playlist.ViewPlaylistOutputBoundary;
+import services.view_playlist.ViewPlaylistPresenter;
+import view.ViewManager;
+import view.ViewManagerModel;
+import view.logged_in.*;
+import view.logged_in.tabs.*;
+import view.logged_out.*;
 
-    import javax.swing.*;
-    import java.awt.*;
+import javax.swing.*;
+import java.awt.*;
 
 public class Main extends JPanel {
 
@@ -80,7 +105,33 @@ public class Main extends JPanel {
         SignupCompleteOutputBoundary signupCompletePresenter = new SignupCompletePresenter(signupViewModel, loginViewModel, viewManagerModel);
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
+        
+        AddFriendOutputBoundary addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel,
+            myLibraryViewModel);
+        AddFriendInputBoundary addFriendInteractor = new AddFriendInteractor(userDataAccessObject, addFriendPresenter);
+        AddFriendController addFriendController = new AddFriendController(addFriendInteractor);
+      
+        SearchOutputBoundary searchPresenter = new SearchPresenter(searchViewModel);
+        SearchInputBoundary searchInteractor = new SearchInteractor(searchPresenter, spotifyDataAccessObject, userDataAccessObject);
+        SearchController searchController = new SearchController(searchInteractor);
 
+        BackToTabViewOutputBoundary backToTabViewPresenter = new BackToTabViewPresenter(tabViewModel, viewManagerModel);
+        BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
+        BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
+
+        CreateNewPlaylistOutputBoundary createNewPlaylistPresenter = new CreateNewPlaylistPresenter(myLibraryViewModel);
+        CreateNewPlaylistInputBoundary createNewPlaylistInteractor = new CreateNewPlaylistInteractor(userDataAccessObject, createNewPlaylistPresenter);
+        CreateNewPlaylistController createNewPlaylistController = new CreateNewPlaylistController(createNewPlaylistInteractor);
+
+        RemovePlaylistOutputBoundary removePlaylistPresenter = new RemovePlaylistPresenter(myLibraryViewModel);
+        RemovePlaylistInputBoundary removePlaylistInteractor = new RemovePlaylistInteractor(userDataAccessObject, removePlaylistPresenter);
+        RemovePlaylistController removePlaylistController = new RemovePlaylistController(removePlaylistInteractor);
+
+        ViewPlaylistOutputBoundary viewPlaylistPresenter = new ViewPlaylistPresenter(playlistViewModel,
+            viewManagerModel);
+        ViewPlaylistInputBoundary viewPlaylistInteractor = new ViewPlaylistInteractor(userDataAccessObject, viewPlaylistPresenter, trackDataAccessObject);
+        ViewPlaylistController viewPlaylistController = new ViewPlaylistController(viewPlaylistInteractor);
+        
         AddTrackToPlaylistOutputBoundary addTrackToPlaylistPresenter = new AddTrackToPlaylistPresenter();
         AddTrackToPlaylistInputBoundary addTrackToPlaylistInteractor = new AddTrackToPlaylistInteractor(userDataAccessObject, spotifyDataAccessObject, addTrackToPlaylistPresenter);
         AddTrackToPlaylistController addTrackToPlaylistController = new AddTrackToPlaylistController(addTrackToPlaylistInteractor);
@@ -106,29 +157,29 @@ public class Main extends JPanel {
         views.add(signupView, signupViewModel.viewName);
 
         TabView tabView = new TabView(
-            tabViewModel,
-            myLibraryViewModel,
-            followedArtistsViewModel,
-            followedFriendsViewModel,
-            searchViewModel,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            likeTrackController,
-            addTrackToPlaylistController
+                tabViewModel,
+                myLibraryViewModel,
+                followedArtistsViewModel,
+                followedFriendsViewModel,
+                searchViewModel,
+                createNewPlaylistController,
+                viewPlaylistController,
+                removePlaylistController,
+                null,
+                null,
+                addFriendController,
+                null,
+                searchController,
+                likeTrackController,
+                addTrackToPlaylistController
         );
         views.add(tabView, tabViewModel.viewName);
 
         PlaylistView playlistView = new PlaylistView(
-            playlistViewModel,
-            null,
-            null,
-            null
+                playlistViewModel,
+                backToTabViewController,
+                null,
+                null
         );
         views.add(playlistView, playlistViewModel.viewName);
         playlistViewModel.firePropertyChanged();

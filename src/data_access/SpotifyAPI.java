@@ -107,6 +107,71 @@ public class SpotifyAPI {
             e.printStackTrace();
         }
 
+        return jsonResponse;
+    }
+
+    public JSONObject get_artist(String id, String accessToken) {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://api.spotify.com/v1/artists/" + id))
+            .header("Authorization", "Bearer " + accessToken)
+            .method("GET", HttpRequest.BodyPublishers.noBody())
+            .build();
+
+        HttpResponse<String> response = null;
+        JSONObject jsonResponse = null;
+
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            jsonResponse = new JSONObject(response.body());
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(jsonResponse);
+        return jsonResponse;
+    }
+
+    public JSONObject get_track(String id, String accessToken) {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://api.spotify.com/v1/tracks/" + id))
+            .header("Authorization", "Bearer " + accessToken)
+            .method("GET", HttpRequest.BodyPublishers.noBody())
+            .build();
+
+        HttpResponse<String> response = null;
+        JSONObject jsonResponse = null;
+
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            jsonResponse = new JSONObject(response.body());
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+      
+        System.out.println(jsonResponse);
+        return jsonResponse;
+    }
+
+    public JSONObject get_artist_top_tracks(String id, String accessToken) {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://api.spotify.com/v1/artists/" + id + "/top-tracks" + "?market=CA" +"&limit=5"))
+            .header("Authorization", "Bearer " + accessToken)
+            .method("GET", HttpRequest.BodyPublishers.noBody())
+            .build();
+
+        HttpResponse<String> response = null;
+        JSONObject jsonResponse = null;
+
+        try {
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            jsonResponse = new JSONObject(response.body());
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+      
         System.out.println(jsonResponse);
         return jsonResponse;
     }
