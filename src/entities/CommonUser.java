@@ -112,8 +112,13 @@ public class CommonUser implements User {
         friends.remove(friend);
     }
 
-    @Override
-    public void addPlaylist(Playlist playlist) {personalPlaylists.add(playlist);}
+    public void removePlaylist(Playlist playlist){
+        personalPlaylists.remove(playlist);
+    }
+
+    public void addPlaylist(Playlist playlist){
+        this.personalPlaylists.add(playlist);
+    }
 
     @Override
     public void removePlaylist(String playlistname) {
