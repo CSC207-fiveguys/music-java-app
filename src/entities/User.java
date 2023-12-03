@@ -33,6 +33,7 @@ public interface User {
     void addFriend(User friend);
 
     void removeFriend(User friend);
+  
     void addPlaylist(Playlist playlist);
 
     void removePlaylist(String playlist);

@@ -5,12 +5,13 @@ import entities.Track;
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import services.search.SearchUserDataAccessInterface;
 import services.add_track_to_playlist.AddTrackToPlaylistSpotifyDataAccessInterface;
 import services.like_track.LikeTrackSpotifyDataAccessInterface;
 import services.search.SearchUserDataAccessInterface;
 
 public class SpotifyDataAccessObject implements SearchUserDataAccessInterface,
-        AddTrackToPlaylistSpotifyDataAccessInterface, LikeTrackSpotifyDataAccessInterface {
+          AddTrackToPlaylistSpotifyDataAccessInterface, LikeTrackSpotifyDataAccessInterface {
 
   String accessToken;
   SpotifyAPI spotifyAPI;

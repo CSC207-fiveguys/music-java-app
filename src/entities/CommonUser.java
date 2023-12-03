@@ -71,7 +71,6 @@ public class CommonUser implements User {
         personalPlaylists.add(newPlaylist);
     }
 
-    // TODO Fill in the bodies of addTrackToPlaylist() and removeTrackFromPlaylist()
     @Override
     public void addTrackToPlaylist(String trackID, String playlistName) {
         ArrayList<Playlist> playlists = this.personalPlaylists;
@@ -130,6 +129,6 @@ public class CommonUser implements User {
     @Override
     public void removePlaylist(String playlistname) {
         this.personalPlaylists.removeIf(
-                playlist -> Objects.equals(playlist.getName(), playlistname));
+            playlist -> Objects.equals(playlist.getName(), playlistname));
     }
 }
