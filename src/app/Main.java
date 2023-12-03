@@ -37,6 +37,7 @@ import services.remove_playlist.RemovePlaylistInputBoundary;
 import services.remove_playlist.RemovePlaylistInteractor;
 import services.remove_playlist.RemovePlaylistOutputBoundary;
 import services.remove_playlist.RemovePlaylistPresenter;
+import services.search.SearchAlgorithmContains;
 import services.search.SearchController;
 import services.search.SearchInputBoundary;
 import services.search.SearchInteractor;
@@ -137,7 +138,7 @@ public class Main extends JPanel {
       
         SearchOutputBoundary searchPresenter = new SearchPresenter(searchViewModel);
         SearchInputBoundary searchInteractor = new SearchInteractor(searchPresenter, spotifyDataAccessObject, userDataAccessObject);
-        SearchController searchController = new SearchController(searchInteractor);
+        SearchController searchController = new SearchController(searchInteractor, new SearchAlgorithmContains());
 
         BackToTabViewOutputBoundary backToTabViewPresenter = new BackToTabViewPresenter(tabViewModel, viewManagerModel);
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);

@@ -7,6 +7,5 @@ public interface FollowArtistUserDataAccessInterface {
 
   public User getUser(String username);
 
-  public ArrayList<String> searchUser(String query);
 
 }
