@@ -31,7 +31,12 @@ public interface User {
     ArrayList<User> getFriends();
 
     void addFriend(User friend);
-
     void removeFriend(User friend);
+  
+    void addPlaylist(Playlist playlist);
+
+    void removePlaylist(Playlist playlist);
+  
+    void removePlaylistName(String playlist);
 
 }
