@@ -23,7 +23,7 @@ public class SearchViewState {
     // String "iconPath"
     // String "id"
 
-    public ArrayList<String> friendUsernames;
+    public ArrayList<String> users;
 
     public SearchViewState() {
         // defines default state for testing purposes
@@ -89,9 +89,9 @@ public class SearchViewState {
         artists.add(artist2);
         artists.add(artist3);
 
-        friendUsernames = new ArrayList<>();
-        friendUsernames.add("friend1");
-        friendUsernames.add("friend2");
-        friendUsernames.add("friend3");
+        users = new ArrayList<>();
+        users.add("friend1");
+        users.add("friend2");
+        users.add("friend3");
     }
 }
