@@ -1,5 +1,6 @@
 package services.like_track;
 
+import entities.Playlist;
 import entities.User;
 import java.util.ArrayList;
 
@@ -22,11 +23,11 @@ public class LikeTrackInteractor implements LikeTrackInputBoundary {
 
         User user = userDataAccessObject.getUser(username);
 
-        ArrayList<String> playlist = user.getLikedTracks().getTracks();
+        Playlist playlist = user.getLikedTracks();
 
-        if (!playlist.contains(id)) {
+        if (!playlist.getTracks().contains(id)) {
             spotifyDataAccessObject.saveTrack(id);
-            user.getLikedTracks().addTrack(id);
+            playlist.addTrack(id);
             likeTrackPresenter.prepareSuccessView();
         }
     }

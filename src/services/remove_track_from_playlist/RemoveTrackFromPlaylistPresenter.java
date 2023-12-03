@@ -16,6 +16,7 @@ public class RemoveTrackFromPlaylistPresenter implements RemoveTrackFromPlaylist
     public void prepareSuccessView(RemoveTrackFromPlaylistOutputData id) {
         playlistViewModel.state.tracks.remove(id);
         viewManagerModel.activeView = playlistViewModel.viewName;
+        playlistViewModel.firePropertyChanged();
         viewManagerModel.firePropertyChanged();
     }
 

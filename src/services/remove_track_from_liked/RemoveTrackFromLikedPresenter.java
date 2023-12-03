@@ -16,6 +16,7 @@ public class RemoveTrackFromLikedPresenter implements RemoveTrackFromLikedOutput
     public void prepareSuccessView(RemoveTrackFromLikedOutputData id) {
         playlistViewModel.state.tracks.remove(id);
         viewManagerModel.activeView = playlistViewModel.viewName;
+        playlistViewModel.firePropertyChanged();
         viewManagerModel.firePropertyChanged();
     }
     @Override
