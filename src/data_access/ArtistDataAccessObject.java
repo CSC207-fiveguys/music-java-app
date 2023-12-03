@@ -6,8 +6,11 @@ import entities.ArtistFactory;
 import java.util.HashMap;
 import java.util.Map;
 import services.follow_artist.FollowArtistDataAccessInterface;
+import services.unfollow_artist.UnfollowArtistDataAccessInterface;
 
-public class ArtistDataAccessObject implements FollowArtistDataAccessInterface {
+public class ArtistDataAccessObject implements
+    UnfollowArtistDataAccessInterface,
+    FollowArtistDataAccessInterface {
 
     private final Map<String, Artist> artists;
     public final ArtistFactory artistFactory;

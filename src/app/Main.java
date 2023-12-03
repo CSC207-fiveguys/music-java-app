@@ -40,6 +40,11 @@ import services.search.SearchOutputBoundary;
 import services.search.SearchPresenter;
 import services.signup_abort.*;
 import services.signup_complete.*;
+import services.unfollow_artist.UnfollowArtistController;
+import services.unfollow_artist.UnfollowArtistInputBoundary;
+import services.unfollow_artist.UnfollowArtistInteractor;
+import services.unfollow_artist.UnfollowArtistOutputBoundary;
+import services.unfollow_artist.UnfollowArtistPresenter;
 import services.view_playlist.ViewPlaylistController;
 import services.view_playlist.ViewPlaylistInputBoundary;
 import services.view_playlist.ViewPlaylistInteractor;
@@ -132,6 +137,10 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
+        UnfollowArtistOutputBoundary unfollowArtistPresenter = new UnfollowArtistPresenter(followedArtistsViewModel);
+        UnfollowArtistInputBoundary unfollowArtistInteractor = new UnfollowArtistInteractor(artistDataAccessObject, userDataAccessObject, unfollowArtistPresenter);
+        UnfollowArtistController unfollowArtistController = new UnfollowArtistController(unfollowArtistInteractor);
+
         FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(followedArtistsViewModel,
             myLibraryViewModel);
         FollowArtistInputBoundary followArtistInteractor = new FollowArtistInteractor(
@@ -177,12 +186,13 @@ public class Main extends JPanel {
                 viewPlaylistController,
                 removePlaylistController,
                 followArtistController,
-                null,
+                unfollowArtistController,
                 addFriendController,
                 removeFriendController,
                 searchController,
                 null,
-                null);
+                null
+                );
         views.add(tabView, tabViewModel.viewName);
 
         PlaylistView playlistView = new PlaylistView(

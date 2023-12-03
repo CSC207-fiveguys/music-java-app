@@ -14,11 +14,13 @@ import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
+import services.unfollow_artist.UnfollowArtistUserDataAccessInterface;
 import services.view_playlist.ViewPlaylistDataAccessInterface;
 
 public class UserDataAccessObject implements
     LoginCompleteUserDataAccessInterface,
     SignupCompleteUserDataAccessInterface,
+    UnfollowArtistUserDataAccessInterface,
     CreateNewPlaylistDataAccessInterface,
     RemovePlaylistDataAccessInterface,
     ViewPlaylistDataAccessInterface,
