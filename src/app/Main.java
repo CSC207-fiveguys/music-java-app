@@ -11,6 +11,8 @@ package app;
     import services.back_to_tab_view.*;
     import services.login_complete.*;
     import services.login_new_signup.*;
+    import services.remove_track_from_liked.*;
+    import services.remove_track_from_playlist.*;
     import services.signup_abort.*;
     import services.signup_complete.*;
     import view.ViewManager;
@@ -89,6 +91,14 @@ public class Main extends JPanel {
         LikeTrackInputBoundary likeTrackInteractor = new LikeTrackInteractor(userDataAccessObject, spotifyDataAccessObject, likeTrackPresenter);
         LikeTrackController likeTrackController = new LikeTrackController(likeTrackInteractor);
 
+        RemoveTrackFromPlaylistOutputBoundary removeTrackFromPlaylistPresenter = new RemoveTrackFromPlaylistPresenter(viewManagerModel, playlistViewModel);
+        RemoveTrackFromPlaylistInputBoundary removeTrackFromPlaylistInteractor = new RemoveTrackFromPlaylistInteractor(userDataAccessObject, removeTrackFromPlaylistPresenter);
+        RemoveTrackFromPlaylistController removeTrackFromPlaylistController = new RemoveTrackFromPlaylistController(removeTrackFromPlaylistInteractor);
+
+        RemoveTrackFromLikedOutputBoundary removeTrackFromLikedPresenter = new RemoveTrackFromLikedPresenter(viewManagerModel, playlistViewModel);
+        RemoveTrackFromLikedInputBoundary removeTrackFromLikedInteractor = new RemoveTrackFromLikedInteractor(userDataAccessObject, removeTrackFromLikedPresenter);
+        RemoveTrackFromLikedController removeTrackFromLikedController = new RemoveTrackFromLikedController(removeTrackFromLikedInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -127,8 +137,8 @@ public class Main extends JPanel {
         PlaylistView playlistView = new PlaylistView(
             playlistViewModel,
             null,
-            null,
-            null
+            removeTrackFromLikedController,
+            removeTrackFromPlaylistController
         );
         views.add(playlistView, playlistViewModel.viewName);
         playlistViewModel.firePropertyChanged();

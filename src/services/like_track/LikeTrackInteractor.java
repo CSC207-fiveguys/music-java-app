@@ -26,7 +26,7 @@ public class LikeTrackInteractor implements LikeTrackInputBoundary {
 
         if (!playlist.contains(id)) {
             spotifyDataAccessObject.saveTrack(id);
-            user.likeTrack(id);
+            user.getLikedTracks().addTrack(id);
             likeTrackPresenter.prepareSuccessView();
         }
     }

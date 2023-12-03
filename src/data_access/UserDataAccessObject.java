@@ -3,30 +3,26 @@ package data_access;
 import entities.Playlist;
 import entities.User;
 import entities.UserFactory;
-import services.add_friend.AddFriendUserDataAccessInterface;
 import java.util.ArrayList;
 
 import services.add_track_to_playlist.AddTrackToPlaylistUserDataAccessInterface;
-import services.create_new_playlist.CreateNewPlaylistDataAccessInterface;
 import services.like_track.LikeTrackUserDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
-import services.remove_playlist.RemovePlaylistDataAccessInterface;
+import services.remove_track_from_liked.RemoveTrackFromLikedUserDataAccessInterface;
+import services.remove_track_from_playlist.RemoveTrackFromPlaylistUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 
 import java.util.HashMap;
 import java.util.Map;
-import services.view_playlist.ViewPlaylistDataAccessInterface;
 
 public class UserDataAccessObject implements
         LoginCompleteUserDataAccessInterface,
         SignupCompleteUserDataAccessInterface,
-        CreateNewPlaylistDataAccessInterface,
-        RemovePlaylistDataAccessInterface,
-        ViewPlaylistDataAccessInterface,
-        AddFriendUserDataAccessInterface,
         AddTrackToPlaylistUserDataAccessInterface,
-        LikeTrackUserDataAccessInterface {
+        LikeTrackUserDataAccessInterface,
+        RemoveTrackFromPlaylistUserDataAccessInterface,
+        RemoveTrackFromLikedUserDataAccessInterface {
 
     private final Map<String, User> users;
 
@@ -67,7 +63,6 @@ public class UserDataAccessObject implements
         // TODO Implement this method
     }
 
-    @Override
     public Playlist getPlaylist(String playlistName, String username) {
         // Return the Playlist with the given name belonging to the given user
         User user = users.get(username);

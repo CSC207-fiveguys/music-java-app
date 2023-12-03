@@ -29,9 +29,11 @@ public class AddTrackToPlaylistInteractor implements AddTrackToPlaylistInputBoun
 
         for (Playlist curr_playlist : playlists) {
             if (curr_playlist.getName().equals(playlistName)) {
-                spotifyDataAccessObject.saveTrack(id);
-                curr_playlist.addTrack(id);
-                addTrackToPlaylistPresenter.prepareSuccessView();
+                if (!curr_playlist.getTracks().contains(id)) {
+                    spotifyDataAccessObject.saveTrack(id);
+                    curr_playlist.addTrack(id);
+                    addTrackToPlaylistPresenter.prepareSuccessView();
+                }
             }
         }
     }
