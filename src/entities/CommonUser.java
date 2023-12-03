@@ -68,15 +68,24 @@ public class CommonUser implements User {
         personalPlaylists.add(newPlaylist);
     }
 
-    // TODO Fill in the bodies of addTrackToPlaylist() and removeTrackFromPlaylist()
-    @Override
+   @Override
     public void addTrackToPlaylist(String trackID, String playlistName) {
-        return;
+        ArrayList<Playlist> playlists = this.personalPlaylists;
+        for (int i = 0; i < playlists.size(); i++) {
+            if (playlists.get(i).getName().equals(playlistName)) {
+                playlists.get(i).addTrack(trackID);
+            }
+        }
     }
 
     @Override
     public void removeTrackFromPlaylist(String trackID, String playlistName) {
-        return;
+        ArrayList<Playlist> playlists = this.personalPlaylists;
+        for (int i = 0; i < playlists.size(); i++) {
+            if (playlists.get(i).getName().equals(playlistName)) {
+                playlists.get(i).removeTrack(trackID);
+            }
+        }
     }
 
     @Override
