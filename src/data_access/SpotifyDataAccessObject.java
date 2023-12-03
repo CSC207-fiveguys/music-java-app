@@ -7,11 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import services.follow_artist.FollowArtistSpotifyDataAccessInterface;
 import services.search.SearchUserDataAccessInterface;
+import services.add_track_to_playlist.AddTrackToPlaylistSpotifyDataAccessInterface;
+import services.like_track.LikeTrackSpotifyDataAccessInterface;
+import services.search.SearchUserDataAccessInterface;
 
-public class SpotifyDataAccessObject implements
-    SearchUserDataAccessInterface,
-    FollowArtistSpotifyDataAccessInterface
-    {
+public class SpotifyDataAccessObject implements SearchUserDataAccessInterface,
+          AddTrackToPlaylistSpotifyDataAccessInterface, LikeTrackSpotifyDataAccessInterface {
 
   String accessToken;
   SpotifyAPI spotifyAPI;
@@ -19,7 +20,7 @@ public class SpotifyDataAccessObject implements
   ArtistDataAccessObject artistDataAccessObject;
 
   public SpotifyDataAccessObject(TrackDataAccessObject trackDataAccessObject,
-      ArtistDataAccessObject artistDataAccessObject) {
+                                 ArtistDataAccessObject artistDataAccessObject) {
     spotifyAPI = new SpotifyAPI();
     accessToken = spotifyAPI.requestToken();
     this.trackDataAccessObject = trackDataAccessObject;

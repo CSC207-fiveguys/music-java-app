@@ -1,7 +1,16 @@
 package services.remove_track_from_playlist;
 
 public class RemoveTrackFromPlaylistController {
+    final RemoveTrackFromPlaylistInputBoundary removeTrackFromPlaylistInteractor;
+
+    public RemoveTrackFromPlaylistController(RemoveTrackFromPlaylistInputBoundary removeTrackFromPlaylistInteractor) {
+        this.removeTrackFromPlaylistInteractor = removeTrackFromPlaylistInteractor;
+    }
+
     public void execute(String id, String username, String playlistName) {
-        //todo 1. remove track with "id" from playlist with name "playlistName" owned by user with username "username"
+        RemoveTrackFromPlaylistInputData removeTrackFromPlaylistInputData = new RemoveTrackFromPlaylistInputData(
+                id, username, playlistName);
+
+        removeTrackFromPlaylistInteractor.execute(removeTrackFromPlaylistInputData);
     }
 }

@@ -5,6 +5,8 @@ import data_access.SpotifyDataAccessObject;
 import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.UserFactory;
+import services.add_track_to_playlist.*;
+import services.like_track.*;
 import services.add_friend.AddFriendController;
 import services.add_friend.AddFriendInputBoundary;
 import services.add_friend.AddFriendInteractor;
@@ -23,6 +25,8 @@ import services.create_new_playlist.CreateNewPlaylistOutputBoundary;
 import services.create_new_playlist.CreateNewPlaylistPresenter;
 import services.login_complete.*;
 import services.login_new_signup.*;
+import services.remove_track_from_liked.*;
+import services.remove_track_from_playlist.*;
 import services.remove_friend.RemoveFriendController;
 import services.remove_friend.RemoveFriendInputBoundary;
 import services.remove_friend.RemoveFriendInteractor;
@@ -159,20 +163,37 @@ public class Main extends JPanel {
             viewManagerModel);
         ViewPlaylistInputBoundary viewPlaylistInteractor = new ViewPlaylistInteractor(userDataAccessObject, viewPlaylistPresenter, trackDataAccessObject);
         ViewPlaylistController viewPlaylistController = new ViewPlaylistController(viewPlaylistInteractor);
+        
+        AddTrackToPlaylistOutputBoundary addTrackToPlaylistPresenter = new AddTrackToPlaylistPresenter();
+        AddTrackToPlaylistInputBoundary addTrackToPlaylistInteractor = new AddTrackToPlaylistInteractor(userDataAccessObject, spotifyDataAccessObject, addTrackToPlaylistPresenter);
+        AddTrackToPlaylistController addTrackToPlaylistController = new AddTrackToPlaylistController(addTrackToPlaylistInteractor);
+
+        LikeTrackOutputBoundary likeTrackPresenter = new LikeTrackPresenter();
+        LikeTrackInputBoundary likeTrackInteractor = new LikeTrackInteractor(userDataAccessObject, spotifyDataAccessObject, likeTrackPresenter);
+        LikeTrackController likeTrackController = new LikeTrackController(likeTrackInteractor);
+
+        RemoveTrackFromPlaylistOutputBoundary removeTrackFromPlaylistPresenter = new RemoveTrackFromPlaylistPresenter(viewManagerModel, playlistViewModel);
+        RemoveTrackFromPlaylistInputBoundary removeTrackFromPlaylistInteractor = new RemoveTrackFromPlaylistInteractor(userDataAccessObject, removeTrackFromPlaylistPresenter);
+        RemoveTrackFromPlaylistController removeTrackFromPlaylistController = new RemoveTrackFromPlaylistController(removeTrackFromPlaylistInteractor);
+
+        RemoveTrackFromLikedOutputBoundary removeTrackFromLikedPresenter = new RemoveTrackFromLikedPresenter(viewManagerModel, playlistViewModel);
+        RemoveTrackFromLikedInputBoundary removeTrackFromLikedInteractor = new RemoveTrackFromLikedInteractor(userDataAccessObject, removeTrackFromLikedPresenter);
+        RemoveTrackFromLikedController removeTrackFromLikedController = new RemoveTrackFromLikedController(removeTrackFromLikedInteractor);
+
 
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
-                loginViewModel,
-                loginCompleteController,
-                loginNewSignupController
+            loginViewModel,
+            loginCompleteController,
+            loginNewSignupController
         );
         views.add(loginView, loginViewModel.viewName);
 
         SignupView signupView = new SignupView(
-                signupViewModel,
-                signupCompleteController,
-                signupAbortController
+            signupViewModel,
+            signupCompleteController,
+            signupAbortController
         );
         views.add(signupView, signupViewModel.viewName);
 
@@ -190,16 +211,17 @@ public class Main extends JPanel {
                 addFriendController,
                 removeFriendController,
                 searchController,
-                null,
-                null
-                );
+                likeTrackController,
+                addTrackToPlaylistController
+        );
+
         views.add(tabView, tabViewModel.viewName);
 
         PlaylistView playlistView = new PlaylistView(
                 playlistViewModel,
                 backToTabViewController,
-                null,
-                null
+                removeTrackFromLikedController,
+                removeTrackFromPlaylistController
         );
         views.add(playlistView, playlistViewModel.viewName);
         playlistViewModel.firePropertyChanged();
