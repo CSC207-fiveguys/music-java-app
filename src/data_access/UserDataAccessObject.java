@@ -2,8 +2,11 @@ package data_access;
 
 import entities.User;
 import entities.UserFactory;
+import java.util.ArrayList;
 import services.add_track_to_playlist.AddTrackToPlaylistUserDataAccessInterface;
+import services.like_track.LikeTrackUserDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
+import services.remove_track_from_liked.RemoveTrackFromLikedUserDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
@@ -12,11 +15,14 @@ import java.util.Map;
 public class UserDataAccessObject implements
     LoginCompleteUserDataAccessInterface,
     SignupCompleteUserDataAccessInterface,
-    AddTrackToPlaylistUserDataAccessInterface {
+    AddTrackToPlaylistUserDataAccessInterface,
+        RemoveTrackFromLikedUserDataAccessInterface,
+        LikeTrackUserDataAccessInterface
+    {
 
     private final Map<String, User> users;
 
-    private final UserFactory userFactory;
+    public final UserFactory userFactory;
 
     public UserDataAccessObject(UserFactory userFactory) {
         this.userFactory = userFactory;
@@ -49,6 +55,17 @@ public class UserDataAccessObject implements
     private void save() {
         // Write the user data from users to the json file
         // TODO Implement this method
+    }
+
+    public ArrayList<String> searchUser(String query){
+
+        ArrayList<String> matchingUsers = new ArrayList<>();
+        for (String user: users.keySet()){
+            if (query.contains(user) || user.contains(query)){
+                matchingUsers.add(user);
+            }
+        }
+        return matchingUsers;
     }
 
 }

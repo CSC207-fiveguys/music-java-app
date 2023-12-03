@@ -6,8 +6,11 @@ import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.UserFactory;
 import services.add_track_to_playlist.*;
+import services.like_track.LikeTrackController;
+import services.like_track.LikeTrackInputBoundary;
 import services.login_complete.*;
 import services.login_new_signup.*;
+import services.remove_track_from_liked.*;
 import services.signup_abort.*;
 import services.signup_complete.*;
 import view.ViewManager;
@@ -82,6 +85,14 @@ public class Main extends JPanel {
         AddTrackToPlaylistInputBoundary addTrackToPlaylistInteractor = new AddTrackToPlaylistInteractor(userDataAccessObject, spotifyDataAccessObject, addTrackToPlaylistPresenter);
         AddTrackToPlaylistController addTrackToPlaylistController = new AddTrackToPlaylistController(addTrackToPlaylistInteractor);
 
+        LikeTrackOutputBoundary likeTrackPresenter = new LikeTrackPresenter();
+        LikeTrackInputBoundary likeTrackInteractor = new LikeTrackInteractor(userDataAccessObject, spotifyDataAccessObject, likeTrackPresenter);
+        LikeTrackController likeTrackController = new LikeTrackController(likeTrackInteractor);
+
+        RemoveTrackFromLikedOutputBoundary removeTrackFromLikedPresenter = new RemoveTrackFromLikedPresenter(viewManagerModel, playlistViewModel);
+        RemoveTrackFromLikedInputBoundary removeTrackFromLikedInteractor = new RemoveTrackFromLikedInteractor(userDataAccessObject, removeTrackFromLikedPresenter);
+        RemoveTrackFromLikedController removeTrackFromLikedController = new RemoveTrackFromLikedController(removeTrackFromLikedInteractor);
+
         // CREATE VIEWS
 
         LoginView loginView = new LoginView(
@@ -112,7 +123,7 @@ public class Main extends JPanel {
                 null,
                 null,
                 null,
-                null,
+                likeTrackController,
                 addTrackToPlaylistController
         );
         views.add(tabView, tabViewModel.viewName);
@@ -120,7 +131,7 @@ public class Main extends JPanel {
         PlaylistView playlistView = new PlaylistView(
                 playlistViewModel,
                 null,
-                null,
+                removeTrackFromLikedController,
                 null
         );
         views.add(playlistView, playlistViewModel.viewName);
