@@ -58,9 +58,9 @@ public class SearchViewState {
                 "id", "3abc"
         );
 
-        tracks.add(track1);
-        tracks.add(track2);
-        tracks.add(track3);
+//        tracks.add(track1);
+//        tracks.add(track2);
+//        tracks.add(track3);
 
         artists = new ArrayList<>();
 
@@ -85,13 +85,13 @@ public class SearchViewState {
                 "id", "a-z"
         );
 
-        artists.add(artist1);
-        artists.add(artist2);
-        artists.add(artist3);
+//        artists.add(artist1);
+//        artists.add(artist2);
+//        artists.add(artist3);
 
         users = new ArrayList<>();
-        users.add("friend1");
-        users.add("friend2");
-        users.add("friend3");
+//        users.add("friend1");
+//        users.add("friend2");
+//        users.add("friend3");
     }
 }
