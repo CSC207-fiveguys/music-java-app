@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CommonUser implements User {
     private final String username;
@@ -119,4 +120,9 @@ public class CommonUser implements User {
         this.personalPlaylists.add(playlist);
     }
 
+    @Override
+    public void removePlaylist(String playlistname) {
+        this.personalPlaylists.removeIf(
+            playlist -> Objects.equals(playlist.getName(), playlistname));
+    }
 }

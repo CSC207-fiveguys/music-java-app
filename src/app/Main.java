@@ -12,6 +12,11 @@ import services.add_friend.AddFriendInteractor;
 import services.add_friend.AddFriendOutputBoundary;
 import services.add_friend.AddFriendPresenter;
 import services.back_to_tab_view.*;
+import services.create_new_playlist.CreateNewPlaylistController;
+import services.create_new_playlist.CreateNewPlaylistInputBoundary;
+import services.create_new_playlist.CreateNewPlaylistInteractor;
+import services.create_new_playlist.CreateNewPlaylistOutputBoundary;
+import services.create_new_playlist.CreateNewPlaylistPresenter;
 import services.login_complete.*;
 import services.login_new_signup.*;
 import services.remove_friend.RemoveFriendController;
@@ -19,6 +24,11 @@ import services.remove_friend.RemoveFriendInputBoundary;
 import services.remove_friend.RemoveFriendInteractor;
 import services.remove_friend.RemoveFriendOutputBoundary;
 import services.remove_friend.RemoveFriendPresenter;
+import services.remove_playlist.RemovePlaylistController;
+import services.remove_playlist.RemovePlaylistInputBoundary;
+import services.remove_playlist.RemovePlaylistInteractor;
+import services.remove_playlist.RemovePlaylistOutputBoundary;
+import services.remove_playlist.RemovePlaylistPresenter;
 import services.search.SearchController;
 import services.search.SearchInputBoundary;
 import services.search.SearchInteractor;
@@ -118,6 +128,14 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
+        CreateNewPlaylistOutputBoundary createNewPlaylistPresenter = new CreateNewPlaylistPresenter(myLibraryViewModel);
+        CreateNewPlaylistInputBoundary createNewPlaylistInteractor = new CreateNewPlaylistInteractor(userDataAccessObject, createNewPlaylistPresenter);
+        CreateNewPlaylistController createNewPlaylistController = new CreateNewPlaylistController(createNewPlaylistInteractor);
+
+        RemovePlaylistOutputBoundary removePlaylistPresenter = new RemovePlaylistPresenter(myLibraryViewModel);
+        RemovePlaylistInputBoundary removePlaylistInteractor = new RemovePlaylistInteractor(userDataAccessObject, removePlaylistPresenter);
+        RemovePlaylistController removePlaylistController = new RemovePlaylistController(removePlaylistInteractor);
+
         ViewPlaylistOutputBoundary viewPlaylistPresenter = new ViewPlaylistPresenter(playlistViewModel,
             viewManagerModel);
         ViewPlaylistInputBoundary viewPlaylistInteractor = new ViewPlaylistInteractor(userDataAccessObject, viewPlaylistPresenter, trackDataAccessObject);
@@ -145,9 +163,9 @@ public class Main extends JPanel {
                 followedArtistsViewModel,
                 followedFriendsViewModel,
                 searchViewModel,
-                null,
+                createNewPlaylistController,
                 viewPlaylistController,
-                null,
+                removePlaylistController,
                 null,
                 null,
                 addFriendController,
