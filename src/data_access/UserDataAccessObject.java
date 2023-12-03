@@ -101,26 +101,4 @@ public class UserDataAccessObject implements
       return matchingUsers;
     }
 
-    public Playlist getPlaylist(String playlistName, String username) {
-        // Return the Playlist with the given name belonging to the given user
-        User user = users.get(username);
-        for (Playlist playlist : user.getPlaylists()) {
-            if (playlist.getName().equals(playlistName)) {
-                return playlist;
-            }
-        }
-        return null; // This line should never be reached as the playlist name will be valid
-    }
-
-    public ArrayList<String> searchUser(String query) {
-
-        ArrayList<String> matchingUsers = new ArrayList<>();
-        for (String user : users.keySet()) {
-            if (query.contains(user) || user.contains(query)) {
-                matchingUsers.add(user);
-            }
-        }
-        return matchingUsers;
-    }
-
 }
