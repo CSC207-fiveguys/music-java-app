@@ -6,6 +6,7 @@ import entities.UserFactory;
 import services.add_friend.AddFriendUserDataAccessInterface;
 import java.util.ArrayList;
 import services.create_new_playlist.CreateNewPlaylistDataAccessInterface;
+import services.follow_artist.FollowArtistUserDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
 import services.remove_playlist.RemovePlaylistDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
@@ -20,7 +21,8 @@ import services.view_playlist.ViewPlaylistDataAccessInterface;
       CreateNewPlaylistDataAccessInterface,
       RemovePlaylistDataAccessInterface,
       ViewPlaylistDataAccessInterface,
-      AddFriendUserDataAccessInterface{
+      AddFriendUserDataAccessInterface,
+      FollowArtistUserDataAccessInterface {
 
     private final Map<String, User> users;
 

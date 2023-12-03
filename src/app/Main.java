@@ -11,19 +11,16 @@ import services.add_friend.AddFriendInteractor;
 import services.add_friend.AddFriendOutputBoundary;
 import services.add_friend.AddFriendPresenter;
 import services.back_to_tab_view.*;
-<<<<<<< HEAD
 import services.follow_artist.FollowArtistController;
 import services.follow_artist.FollowArtistInputBoundary;
 import services.follow_artist.FollowArtistInteractor;
 import services.follow_artist.FollowArtistOutputBoundary;
 import services.follow_artist.FollowArtistPresenter;
-=======
 import services.create_new_playlist.CreateNewPlaylistController;
 import services.create_new_playlist.CreateNewPlaylistInputBoundary;
 import services.create_new_playlist.CreateNewPlaylistInteractor;
 import services.create_new_playlist.CreateNewPlaylistOutputBoundary;
 import services.create_new_playlist.CreateNewPlaylistPresenter;
->>>>>>> 2eaf514f0c48415ee09c62f2f1de8319708abacd
 import services.login_complete.*;
 import services.login_new_signup.*;
 import services.remove_playlist.RemovePlaylistController;
@@ -125,12 +122,11 @@ public class Main extends JPanel {
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
 
-<<<<<<< HEAD
         FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(followedArtistsViewModel);
         FollowArtistInputBoundary followArtistInteractor = new FollowArtistInteractor(
             spotifyDataAccessObject, artistDataAccessObject, userDataAccessObject, followArtistPresenter);
         FollowArtistController followArtistController = new FollowArtistController(followArtistInteractor);
-=======
+
         CreateNewPlaylistOutputBoundary createNewPlaylistPresenter = new CreateNewPlaylistPresenter(myLibraryViewModel);
         CreateNewPlaylistInputBoundary createNewPlaylistInteractor = new CreateNewPlaylistInteractor(userDataAccessObject, createNewPlaylistPresenter);
         CreateNewPlaylistController createNewPlaylistController = new CreateNewPlaylistController(createNewPlaylistInteractor);
@@ -143,7 +139,6 @@ public class Main extends JPanel {
             viewManagerModel);
         ViewPlaylistInputBoundary viewPlaylistInteractor = new ViewPlaylistInteractor(userDataAccessObject, viewPlaylistPresenter, trackDataAccessObject);
         ViewPlaylistController viewPlaylistController = new ViewPlaylistController(viewPlaylistInteractor);
->>>>>>> 2eaf514f0c48415ee09c62f2f1de8319708abacd
 
         // CREATE VIEWS
 
@@ -170,16 +165,9 @@ public class Main extends JPanel {
                 createNewPlaylistController,
                 viewPlaylistController,
                 removePlaylistController,
-                null,
-                null,
-<<<<<<< HEAD
-                null,
                 followArtistController,
                 null,
-                null,
-=======
                 addFriendController,
->>>>>>> 2eaf514f0c48415ee09c62f2f1de8319708abacd
                 null,
                 searchController,
                 null,
