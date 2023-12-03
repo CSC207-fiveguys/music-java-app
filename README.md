@@ -6,17 +6,14 @@ Use cases include the following.
 * login
 * create playlist
 * delete playlist
-
 * search for track
   * like track
   * add track to playlist
 * unlike track
 * remove track from playlist
-
 * search for artist
   * follow artist (a playlist of their top tracks will be added to your library)
 * unfollow artist
-
 * search for friend
   * add friend (you will be able to view their playlists in your library)
 * remove friend
@@ -43,37 +40,37 @@ All code follows SOLID design principles and CLEAN architecture (use cases have 
 # UI/Views
 
 Signup View (no errors displayed)
-![ss](https://imgur.com/SUcQ53z)
+![ss](https://i.imgur.com/SUcQ53z.png)
 
 Signup View (username taken error)
-![ss](https://imgur.com/WTd0GLD)
+![ss](https://i.imgur.com/WTd0GLD.png)
 
 Signup View (password mismatch error)
-![ss](https://imgur.com/R4N0hsG)
+![ss](https://i.imgur.com/R4N0hsG.png)
 
 Login View (no errors displayed)
-![ss](https://imgur.com/DMISZBN)
+![ss](https://i.imgur.com/DMISZBN.png)
 
 Login View (account does not exist error)
-![ss](https://imgur.com/mlPPBzk)
+![ss](https://i.imgur.com/mlPPBzk.png)
 
 Login View (wrong password error)
-![ss](https://imgur.com/AP1TqTs)
+![ss](https://i.imgur.com/AP1TqTs.png)
 
 Library View
-![ss](https://imgur.com/x3ZsvCm)
+![ss](https://i.imgur.com/x3ZsvCm.png)
 
 Playlist View (viewing "Liked Tracks")
-![ss](https://imgur.com/BIrmtg9)
+![ss](https://i.imgur.com/BIrmtg9.png)
 
 Playlist View (viewing "Best of Drake")
-![ss](https://imgur.com/CUh2kRY)
+![ss](https://i.imgur.com/CUh2kRY.png)
 
 Followed Artist View
-![ss](https://imgur.com/q7WKIY3)
+![ss](https://i.imgur.com/q7WKIY3.png)
 
 Followed Friends View
-![ss](https://imgur.com/XN3YYeh)
+![ss](https://i.imgur.com/XN3YYeh.png)
 
 Search View
-![ss](https://imgur.com/f2IeO6j)
+![ss](https://i.imgur.com/f2IeO6j.png)
