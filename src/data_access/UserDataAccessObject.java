@@ -16,17 +16,15 @@ import java.util.HashMap;
 import java.util.Map;
 import services.view_playlist.ViewPlaylistDataAccessInterface;
 
-  public class UserDataAccessObject implements
-      LoginCompleteUserDataAccessInterface,
-      SignupCompleteUserDataAccessInterface,
-      CreateNewPlaylistDataAccessInterface,
-      RemovePlaylistDataAccessInterface,
-      ViewPlaylistDataAccessInterface,
-      AddFriendUserDataAccessInterface,
-      RemoveFriendDataAccessInterface,
-      FollowArtistUserDataAccessInterface {
-      {
-
+public class UserDataAccessObject implements
+    LoginCompleteUserDataAccessInterface,
+    SignupCompleteUserDataAccessInterface,
+    CreateNewPlaylistDataAccessInterface,
+    RemovePlaylistDataAccessInterface,
+    ViewPlaylistDataAccessInterface,
+    AddFriendUserDataAccessInterface,
+    RemoveFriendDataAccessInterface,
+    FollowArtistUserDataAccessInterface {
 
     private final Map<String, User> users;
 
