@@ -9,7 +9,6 @@ public class UnfollowArtistController {
   }
 
   public void execute(String id, String username) {
-    // todo 1. make user with "username" unfollow artist with "id"
     UnfollowArtistInputData unfollowArtistInputData =
         new UnfollowArtistInputData(id, username);
     this.unfollowArtistInteractor.execute(unfollowArtistInputData);

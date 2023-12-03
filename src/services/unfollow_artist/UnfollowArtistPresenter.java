@@ -5,17 +5,17 @@ import view.logged_in.tabs.FollowedArtistsViewState;
 
 public class UnfollowArtistPresenter implements UnfollowArtistOutputBoundary {
 
-  private final FollowedArtistsViewModel followedFriendsViewModel;
+  private final FollowedArtistsViewModel followedArtistsViewModel;
 
   public UnfollowArtistPresenter(FollowedArtistsViewModel followedFriendsViewModel) {
-    this.followedFriendsViewModel = followedFriendsViewModel;
+    this.followedArtistsViewModel = followedFriendsViewModel;
   }
 
   @Override
   public void prepareSuccessView(UnfollowArtistOutputData followArtistOutputData) {
-    FollowedArtistsViewState followedArtistsViewState = followedFriendsViewModel.state;
+    FollowedArtistsViewState followedArtistsViewState = followedArtistsViewModel.state;
     followedArtistsViewState.artists = followArtistOutputData.artists;
-    followedFriendsViewModel.firePropertyChanged();
+    followedArtistsViewModel.firePropertyChanged();
 
   }
 }
