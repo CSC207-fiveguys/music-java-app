@@ -23,7 +23,14 @@ public class ViewPlaylistInteractor implements ViewPlaylistInputBoundary{
   @Override
   public void execute(ViewPlaylistInputData viewPlaylistInputData) {
     // Get the playlists from the UserDAO
-    Playlist playlist = userDataAccessObject.getPlaylist(viewPlaylistInputData.playlistName, viewPlaylistInputData.username);
+    Playlist playlist;
+    if (viewPlaylistInputData.isShowingLikedTracks){
+      playlist = userDataAccessObject.getUser(viewPlaylistInputData.username).getLikedTracks();
+    }
+    else {
+      playlist = userDataAccessObject.getPlaylist(viewPlaylistInputData.playlistName,
+          viewPlaylistInputData.username);
+    }
     // Get a list of Tracks from the playlist
 
     ArrayList<Track> tracks = new ArrayList<>();
