@@ -5,18 +5,20 @@ import entities.User;
 import entities.UserFactory;
 import services.add_friend.AddFriendUserDataAccessInterface;
 import java.util.ArrayList;
+import services.create_new_playlist.CreateNewPlaylistDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
+import services.remove_playlist.RemovePlaylistDataAccessInterface;
 import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 import services.view_playlist.ViewPlaylistDataAccessInterface;
 
-
-
   public class UserDataAccessObject implements
       LoginCompleteUserDataAccessInterface,
       SignupCompleteUserDataAccessInterface,
+      CreateNewPlaylistDataAccessInterface,
+      RemovePlaylistDataAccessInterface,
       ViewPlaylistDataAccessInterface,
       AddFriendUserDataAccessInterface{
 
