@@ -36,6 +36,6 @@ public interface User {
 
     void addPlaylist(Playlist playlist);
 
-    void removePlaylist(String playlist);
+    void removePlaylistName(String playlist);
 
 }
