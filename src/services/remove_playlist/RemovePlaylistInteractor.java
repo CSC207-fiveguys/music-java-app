@@ -20,7 +20,7 @@ public class RemovePlaylistInteractor implements RemovePlaylistInputBoundary {
     public void execute(RemovePlaylistInputData removePlaylistInputData) {
         User user = userDataAccessObject.getUser(removePlaylistInputData.removeFromUsername);
         String playlistname = removePlaylistInputData.playlistName;
-        user.removePlaylist(playlistname);
+        user.removePlaylistName(playlistname);
         RemovePlaylistOutputData removePlaylistOutputData = new RemovePlaylistOutputData(
             playlistname,
             removePlaylistInputData.removeFromUsername);

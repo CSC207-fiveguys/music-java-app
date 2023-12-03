@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import services.add_track_to_playlist.AddTrackToPlaylistUserDataAccessInterface;
 import services.like_track.LikeTrackUserDataAccessInterface;
 import services.create_new_playlist.CreateNewPlaylistDataAccessInterface;
+import services.follow_artist.FollowArtistUserDataAccessInterface;
 import services.login_complete.LoginCompleteUserDataAccessInterface;
+import services.remove_friend.RemoveFriendDataAccessInterface;
 import services.remove_playlist.RemovePlaylistDataAccessInterface;
 import services.remove_track_from_liked.RemoveTrackFromLikedUserDataAccessInterface;
 import services.remove_track_from_playlist.RemoveTrackFromPlaylistUserDataAccessInterface;
@@ -25,9 +27,11 @@ import services.signup_complete.SignupCompleteUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
+import services.unfollow_artist.UnfollowArtistUserDataAccessInterface;
 import services.view_playlist.ViewPlaylistDataAccessInterface;
 
 public class UserDataAccessObject implements
+
       LoginCompleteUserDataAccessInterface,
       SignupCompleteUserDataAccessInterface,
       CreateNewPlaylistDataAccessInterface,

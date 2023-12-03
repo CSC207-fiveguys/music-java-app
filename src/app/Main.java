@@ -4,7 +4,6 @@ import data_access.ArtistDataAccessObject;
 import data_access.SpotifyDataAccessObject;
 import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
-import entities.Track;
 import entities.UserFactory;
 import services.add_track_to_playlist.*;
 import services.like_track.*;
@@ -14,6 +13,11 @@ import services.add_friend.AddFriendInteractor;
 import services.add_friend.AddFriendOutputBoundary;
 import services.add_friend.AddFriendPresenter;
 import services.back_to_tab_view.*;
+import services.follow_artist.FollowArtistController;
+import services.follow_artist.FollowArtistInputBoundary;
+import services.follow_artist.FollowArtistInteractor;
+import services.follow_artist.FollowArtistOutputBoundary;
+import services.follow_artist.FollowArtistPresenter;
 import services.create_new_playlist.CreateNewPlaylistController;
 import services.create_new_playlist.CreateNewPlaylistInputBoundary;
 import services.create_new_playlist.CreateNewPlaylistInteractor;
@@ -23,6 +27,11 @@ import services.login_complete.*;
 import services.login_new_signup.*;
 import services.remove_track_from_liked.*;
 import services.remove_track_from_playlist.*;
+import services.remove_friend.RemoveFriendController;
+import services.remove_friend.RemoveFriendInputBoundary;
+import services.remove_friend.RemoveFriendInteractor;
+import services.remove_friend.RemoveFriendOutputBoundary;
+import services.remove_friend.RemoveFriendPresenter;
 import services.remove_playlist.RemovePlaylistController;
 import services.remove_playlist.RemovePlaylistInputBoundary;
 import services.remove_playlist.RemovePlaylistInteractor;
@@ -35,6 +44,11 @@ import services.search.SearchOutputBoundary;
 import services.search.SearchPresenter;
 import services.signup_abort.*;
 import services.signup_complete.*;
+import services.unfollow_artist.UnfollowArtistController;
+import services.unfollow_artist.UnfollowArtistInputBoundary;
+import services.unfollow_artist.UnfollowArtistInteractor;
+import services.unfollow_artist.UnfollowArtistOutputBoundary;
+import services.unfollow_artist.UnfollowArtistPresenter;
 import services.view_playlist.ViewPlaylistController;
 import services.view_playlist.ViewPlaylistInputBoundary;
 import services.view_playlist.ViewPlaylistInteractor;
@@ -109,6 +123,11 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+        RemoveFriendOutputBoundary removeFriendPresenter = new RemoveFriendPresenter(
+            followedFriendsViewModel, myLibraryViewModel);
+        RemoveFriendInputBoundary removeFriendInteractor = new RemoveFriendInteractor(userDataAccessObject, removeFriendPresenter);
+        RemoveFriendController removeFriendController = new RemoveFriendController(removeFriendInteractor);
+
         AddFriendOutputBoundary addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel,
             myLibraryViewModel);
         AddFriendInputBoundary addFriendInteractor = new AddFriendInteractor(userDataAccessObject, addFriendPresenter);
@@ -121,6 +140,16 @@ public class Main extends JPanel {
         BackToTabViewOutputBoundary backToTabViewPresenter = new BackToTabViewPresenter(tabViewModel, viewManagerModel);
         BackToTabViewInputBoundary backToTabViewInteractor = new BackToTabViewInteractor(backToTabViewPresenter);
         BackToTabViewController backToTabViewController = new BackToTabViewController(backToTabViewInteractor);
+
+        UnfollowArtistOutputBoundary unfollowArtistPresenter = new UnfollowArtistPresenter(followedArtistsViewModel);
+        UnfollowArtistInputBoundary unfollowArtistInteractor = new UnfollowArtistInteractor(artistDataAccessObject, userDataAccessObject, unfollowArtistPresenter);
+        UnfollowArtistController unfollowArtistController = new UnfollowArtistController(unfollowArtistInteractor);
+
+        FollowArtistOutputBoundary followArtistPresenter = new FollowArtistPresenter(followedArtistsViewModel,
+            myLibraryViewModel);
+        FollowArtistInputBoundary followArtistInteractor = new FollowArtistInteractor(
+            spotifyDataAccessObject, artistDataAccessObject, userDataAccessObject, followArtistPresenter);
+        FollowArtistController followArtistController = new FollowArtistController(followArtistInteractor);
 
         CreateNewPlaylistOutputBoundary createNewPlaylistPresenter = new CreateNewPlaylistPresenter(myLibraryViewModel);
         CreateNewPlaylistInputBoundary createNewPlaylistInteractor = new CreateNewPlaylistInteractor(userDataAccessObject, createNewPlaylistPresenter);
@@ -177,14 +206,15 @@ public class Main extends JPanel {
                 createNewPlaylistController,
                 viewPlaylistController,
                 removePlaylistController,
-                null,
-                null,
+                followArtistController,
+                unfollowArtistController,
                 addFriendController,
-                null,
+                removeFriendController,
                 searchController,
                 likeTrackController,
                 addTrackToPlaylistController
         );
+
         views.add(tabView, tabViewModel.viewName);
 
         PlaylistView playlistView = new PlaylistView(
