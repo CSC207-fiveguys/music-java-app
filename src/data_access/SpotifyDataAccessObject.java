@@ -109,6 +109,7 @@ public class SpotifyDataAccessObject implements
     } else {
       // If the Artist object does not already exist in our DAO, create a new Artist Object
       // Get all the fields needed
+
       saveArtist(id);
       return artistDataAccessObject.getArtist(id);
     }
