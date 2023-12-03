@@ -109,18 +109,8 @@ public class SpotifyDataAccessObject implements
     } else {
       // If the Artist object does not already exist in our DAO, create a new Artist Object
       // Get all the fields needed
-      String name = (String) spotifyAPI.get_artist(id, accessToken).get("name");
-      int numFollowers = (int) ((JSONObject)
-          spotifyAPI.get_artist(id, accessToken).get("followers")).get("total");
-      String imageURL = null;
-
-      // Store the image url if any images are given
-      JSONArray images = (JSONArray) spotifyAPI.get_artist(id, accessToken).get("images");
-      if (!images.isEmpty()){
-        imageURL = (String) ((JSONObject) images.get(0)).get("url");
-      }
-
-      return artistDataAccessObject.artistFactory.create(id, imageURL, name, numFollowers);
+      saveArtist(id);
+      return artistDataAccessObject.getArtist(id);
     }
   }
 
@@ -174,7 +164,11 @@ public class SpotifyDataAccessObject implements
     for (Object track : tracksArray) {
       // Cast the track into a JSONObject (which is what it always will be)
       Track trackObject = getTrack((JSONObject) track);
-      tracks.add(trackObject.getID());
+      String trackID = trackObject.getID();
+      tracks.add(trackID);
+      if (!trackDataAccessObject.exists(trackID)) {
+        trackDataAccessObject.saveTrack(trackObject);
+      }
     }
 
     return tracks;
