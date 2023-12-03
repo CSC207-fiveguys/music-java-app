@@ -60,7 +60,7 @@ class SearchInteractorTest {
     }
 
     @Test
-    void execute_PerformSearch() {
+    void successTest() {
         SearchInputData inputData = new SearchInputData("query");
         interactor.execute(inputData);
     }

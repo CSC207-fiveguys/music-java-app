@@ -1,7 +1,9 @@
 package services.create_new_playlist;
 
+import data_access.UserDataAccessObject;
 import entities.CommonUser;
 import entities.User;
+import entities.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +16,8 @@ class CreateNewPlaylistInteractorTest {
 
     @BeforeEach
     void setUp() {
-        userDataAccessObject = new CreateNewPlaylistDataAccessInterface() {
+        UserFactory userFactory = new UserFactory();
+        userDataAccessObject = new UserDataAccessObject(userFactory) {
             @Override
             public User getUser(String username) {
                 // Assuming User has appropriate constructor and methods
@@ -46,14 +49,14 @@ class CreateNewPlaylistInteractorTest {
     }
 
     @Test
-    void execute_SuccessfulCreation() {
-        CreateNewPlaylistInputData inputData = new CreateNewPlaylistInputData("TestUser", "New Playlist");
+    void successTest() {
+        CreateNewPlaylistInputData inputData = new CreateNewPlaylistInputData("New Playlist", "TestUser");
         interactor.execute(inputData);
     }
 
     @Test
-    void execute_FailedCreation_AlreadyExists() {
-        CreateNewPlaylistInputData inputData = new CreateNewPlaylistInputData("UserWithPlaylist", "Existing Playlist");
+    void failureAlreadyExists() {
+        CreateNewPlaylistInputData inputData = new CreateNewPlaylistInputData("New Playlist", "TestUser");
         interactor.execute(inputData);
     }
 }

@@ -58,8 +58,8 @@ class ViewPlaylistInteractorTest {
     }
 
     @Test
-    void execute_ViewExistingPlaylist() {
-        ViewPlaylistInputData inputData = new ViewPlaylistInputData("testUser", "testPlaylist", false);
+    void successTest() {
+        ViewPlaylistInputData inputData = new ViewPlaylistInputData("testPlaylist", "testUser", false);
         interactor.execute(inputData);
     }
 }

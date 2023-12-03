@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BackToTabViewInteractorTest {
 
     @Test
-    void execute_CallsPrepareSuccessView() {
+    void successTest() {
         BackToTabViewOutputBoundary outputBoundary = new BackToTabViewOutputBoundary() {
             @Override
             public void prepareSuccessView() {

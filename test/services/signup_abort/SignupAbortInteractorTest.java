@@ -16,7 +16,7 @@ class SignupAbortInteractorTest {
     }
 
     @Test
-    void execute_CallsPrepareSuccessView() {
+    void successTest() {
         interactor.execute();
         assertTrue(outputBoundary.isPrepareSuccessViewCalled(), "prepareSuccessView should be called.");
     }

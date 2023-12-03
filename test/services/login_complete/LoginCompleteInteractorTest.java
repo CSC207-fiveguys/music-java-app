@@ -49,19 +49,19 @@ class LoginCompleteInteractorTest {
     }
 
     @Test
-    void execute_SuccessfulLogin() {
+    void successTest() {
         LoginCompleteInputData inputData = new LoginCompleteInputData("existingUser", "correctPassword");
         interactor.execute(inputData);
     }
 
     @Test
-    void execute_FailedLogin_UserDoesNotExist() {
+    void failureUserDoesNotExist() {
         LoginCompleteInputData inputData = new LoginCompleteInputData("nonExistingUser", "anyPassword");
         interactor.execute(inputData);
     }
 
     @Test
-    void execute_FailedLogin_IncorrectPassword() {
+    void failureIncorrectPassword() {
         LoginCompleteInputData inputData = new LoginCompleteInputData("existingUser", "wrongPassword");
         interactor.execute(inputData);
     }

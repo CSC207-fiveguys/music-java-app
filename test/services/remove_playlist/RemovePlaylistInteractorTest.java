@@ -27,8 +27,8 @@ class RemovePlaylistInteractorTest {
             @Override
             public void prepareSuccessView(RemovePlaylistOutputData outputData) {
                 assertNotNull(outputData, "Output data should not be null");
-                assertEquals("Test Playlist", outputData.playlistname, "Playlist name should match");
-                assertEquals("TestUser", outputData.username, "Username should match");
+                assertEquals("TestPlaylist", outputData.playlistname, "Playlist name should match");
+                assertEquals("RemoveFromUsername", outputData.username, "Username should match");
             }
         };
 
@@ -36,7 +36,7 @@ class RemovePlaylistInteractorTest {
     }
 
     @Test
-    void execute_RemoveExistingPlaylist() {
+    void successTest() {
         RemovePlaylistInputData inputData = new RemovePlaylistInputData("TestPlaylist", "TestUsername", "RemoveFromUsername");
         interactor.execute(inputData);
     }

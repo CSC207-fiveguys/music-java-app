@@ -45,19 +45,19 @@ class SignupCompleteInteractorTest {
     }
 
     @Test
-    void execute_SuccessfulSignup() {
+    void successTest() {
         SignupCompleteInputData inputData = new SignupCompleteInputData("newUser", "password", "password");
         interactor.execute(inputData);
     }
 
     @Test
-    void execute_FailedSignup_UsernameExists() {
+    void failureUsernameExists() {
         SignupCompleteInputData inputData = new SignupCompleteInputData("existingUser", "password", "password");
         interactor.execute(inputData);
     }
 
     @Test
-    void execute_FailedSignup_PasswordMismatch() {
+    void failurePasswordMismatch() {
         SignupCompleteInputData inputData = new SignupCompleteInputData("newUser", "password1", "password2");
         interactor.execute(inputData);
     }
