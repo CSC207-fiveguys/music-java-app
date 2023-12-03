@@ -121,7 +121,7 @@ public class CommonUser implements User {
     }
 
     @Override
-    public void removePlaylist(String playlistname) {
+    public void removePlaylistName(String playlistname) {
         this.personalPlaylists.removeIf(
             playlist -> Objects.equals(playlist.getName(), playlistname));
     }
