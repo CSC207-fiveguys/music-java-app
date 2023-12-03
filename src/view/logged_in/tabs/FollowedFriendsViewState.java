@@ -10,7 +10,6 @@ public class FollowedFriendsViewState {
     public FollowedFriendsViewState() {
         // defines default state for testing purposes
         username = null;
-
         friendUsernames = new ArrayList<>();
         friendUsernames.add("friend1");
         friendUsernames.add("friend2");
