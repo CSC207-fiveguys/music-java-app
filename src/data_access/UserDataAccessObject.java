@@ -40,7 +40,7 @@ public class UserDataAccessObject implements
       RemoveTrackFromPlaylistUserDataAccessInterface,
       RemoveTrackFromLikedUserDataAccessInterface {
 
-    private final Map<String, User> users;
+    public final Map<String, User> users;
 
     public final UserFactory userFactory;
 
@@ -96,15 +96,5 @@ public class UserDataAccessObject implements
       return null; // This line should never be reached as the playlist name will be valid
     }
 
-    public ArrayList<String> searchUser(String query) {
-
-      ArrayList<String> matchingUsers = new ArrayList<>();
-      for (String user : users.keySet()) {
-        if (query.contains(user) || user.contains(query)) {
-          matchingUsers.add(user);
-        }
-      }
-      return matchingUsers;
-    }
 
 }
