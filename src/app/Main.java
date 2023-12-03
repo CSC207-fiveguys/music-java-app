@@ -23,6 +23,11 @@ import services.create_new_playlist.CreateNewPlaylistOutputBoundary;
 import services.create_new_playlist.CreateNewPlaylistPresenter;
 import services.login_complete.*;
 import services.login_new_signup.*;
+import services.remove_friend.RemoveFriendController;
+import services.remove_friend.RemoveFriendInputBoundary;
+import services.remove_friend.RemoveFriendInteractor;
+import services.remove_friend.RemoveFriendOutputBoundary;
+import services.remove_friend.RemoveFriendPresenter;
 import services.remove_playlist.RemovePlaylistController;
 import services.remove_playlist.RemovePlaylistInputBoundary;
 import services.remove_playlist.RemovePlaylistInteractor;
@@ -109,6 +114,11 @@ public class Main extends JPanel {
         SignupCompleteInputBoundary signupCompleteInteractor = new SignupCompleteInteractor(userDataAccessObject, signupCompletePresenter);
         SignupCompleteController signupCompleteController = new SignupCompleteController(signupCompleteInteractor);
 
+        RemoveFriendOutputBoundary removeFriendPresenter = new RemoveFriendPresenter(
+            followedFriendsViewModel, myLibraryViewModel);
+        RemoveFriendInputBoundary removeFriendInteractor = new RemoveFriendInteractor(userDataAccessObject, removeFriendPresenter);
+        RemoveFriendController removeFriendController = new RemoveFriendController(removeFriendInteractor);
+
         AddFriendOutputBoundary addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel,
             myLibraryViewModel);
         AddFriendInputBoundary addFriendInteractor = new AddFriendInteractor(userDataAccessObject, addFriendPresenter);
@@ -169,11 +179,10 @@ public class Main extends JPanel {
                 followArtistController,
                 null,
                 addFriendController,
-                null,
+                removeFriendController,
                 searchController,
                 null,
-                null
-        );
+                null);
         views.add(tabView, tabViewModel.viewName);
 
         PlaylistView playlistView = new PlaylistView(
