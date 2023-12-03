@@ -5,8 +5,9 @@ import entities.Artist;
 import entities.ArtistFactory;
 import java.util.HashMap;
 import java.util.Map;
+import services.follow_artist.FollowArtistDataAccessInterface;
 
-public class ArtistDataAccessObject {
+public class ArtistDataAccessObject implements FollowArtistDataAccessInterface {
 
     private final Map<String, Artist> artists;
     public final ArtistFactory artistFactory;
