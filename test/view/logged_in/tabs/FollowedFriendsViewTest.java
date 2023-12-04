@@ -9,20 +9,13 @@ import data_access.UserDataAccessObject;
 import entities.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import services.back_to_tab_view.BackToTabViewController;
-import services.back_to_tab_view.BackToTabViewInteractor;
-import services.back_to_tab_view.BackToTabViewPresenter;
-import services.remove_track_from_liked.RemoveTrackFromLikedController;
-import services.remove_track_from_liked.RemoveTrackFromLikedInteractor;
-import services.remove_track_from_liked.RemoveTrackFromLikedPresenter;
-import services.remove_track_from_playlist.RemoveTrackFromPlaylistController;
-import services.remove_track_from_playlist.RemoveTrackFromPlaylistInteractor;
-import services.remove_track_from_playlist.RemoveTrackFromPlaylistPresenter;
+import services.remove_friend.RemoveFriendController;
+import services.remove_friend.RemoveFriendInteractor;
+import services.remove_friend.RemoveFriendPresenter;
 import services.unfollow_artist.UnfollowArtistController;
 import services.unfollow_artist.UnfollowArtistInteractor;
 import services.unfollow_artist.UnfollowArtistPresenter;
 import view.ViewManagerModel;
-import view.logged_in.PlaylistView;
 import view.logged_in.PlaylistViewModel;
 import view.logged_in.PlaylistViewState;
 import view.logged_in.TabViewModel;
@@ -31,7 +24,7 @@ import view.logged_out.LoginViewState;
 import view.logged_out.SignupViewModel;
 import view.logged_out.SignupViewState;
 
-class FollowedArtistsViewTest {
+class FollowedFriendsViewTest {
 
     private TrackDataAccessObject trackDataAccessObject;
     private ArtistDataAccessObject artistDataAccessObject;
@@ -47,8 +40,8 @@ class FollowedArtistsViewTest {
     private FollowedArtistsViewModel followedArtistsViewModel;
     private SearchViewModel searchViewModel;
     private PlaylistViewModel playlistViewModel;
-    private UnfollowArtistController unfollowArtistController;
-    private FollowedArtistsView followedArtistsView;
+    private RemoveFriendController removeFriendController;
+    private FollowedFriendsView followedFriendsView;
     @BeforeEach
     void setUp() {
         trackDataAccessObject = new TrackDataAccessObject();
@@ -65,15 +58,15 @@ class FollowedArtistsViewTest {
         followedArtistsViewModel = new FollowedArtistsViewModel("Followed Artists", new FollowedArtistsViewState());
         searchViewModel = new SearchViewModel("Search", new SearchViewState());
         playlistViewModel = new PlaylistViewModel("Playlist", new PlaylistViewState());
-        unfollowArtistController = new UnfollowArtistController(new UnfollowArtistInteractor(artistDataAccessObject, userDataAccessObject, new UnfollowArtistPresenter(followedArtistsViewModel)));
-        followedArtistsView = new FollowedArtistsView(followedArtistsViewModel, unfollowArtistController);
+        removeFriendController = new RemoveFriendController(new RemoveFriendInteractor(userDataAccessObject, new RemoveFriendPresenter(followedFriendsViewModel, myLibraryViewModel)));
+        followedFriendsView = new FollowedFriendsView(followedFriendsViewModel, removeFriendController);
     }
 
     @Test
     void propertyChange() {
-        followedArtistsViewModel.state.username = "user";
-        followedArtistsViewModel.firePropertyChanged();
+        followedFriendsViewModel.state.username = "user";
+        followedFriendsViewModel.firePropertyChanged();
 
-        assertEquals("user", followedArtistsViewModel.state.username);
+        assertEquals("user", followedFriendsViewModel.state.username);
     }
 }
