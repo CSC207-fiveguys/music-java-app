@@ -31,7 +31,7 @@ class SearchControllerTest {
             }
         }, spotifyDataAccessObject, userDataAccessInterface);
 
-        SearchController controller = new SearchController(inputBoundary);
+        SearchController controller = new SearchController(inputBoundary, new SearchAlgorithmContains());
         controller.execute("drake");
     }
 }

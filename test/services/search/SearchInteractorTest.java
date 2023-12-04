@@ -44,12 +44,7 @@ class SearchInteractorTest {
         };
 
         userDataAccessObject = new UserDataAccessObject(userFactory, spotifyDataAccessObject1) {
-            @Override
-            public ArrayList<String> searchUser(String query) {
-                ArrayList<String> users = new ArrayList<>();
-                users.add("User1");
-                return users;
-            }
+
         };
 
         outputBoundary = new SearchOutputBoundary() {
@@ -67,7 +62,7 @@ class SearchInteractorTest {
 
     @Test
     void successTest() {
-        SearchInputData inputData = new SearchInputData("query");
+        SearchInputData inputData = new SearchInputData("query", new SearchAlgorithmContains());
         interactor.execute(inputData);
     }
 }

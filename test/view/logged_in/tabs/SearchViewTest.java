@@ -24,6 +24,7 @@ import services.follow_artist.FollowArtistPresenter;
 import services.like_track.LikeTrackController;
 import services.like_track.LikeTrackInteractor;
 import services.like_track.LikeTrackPresenter;
+import services.search.SearchAlgorithmContains;
 import services.search.SearchController;
 import services.search.SearchInteractor;
 import services.search.SearchPresenter;
@@ -79,7 +80,7 @@ class SearchViewTest {
         followedArtistsViewModel = new FollowedArtistsViewModel("Followed Artists", new FollowedArtistsViewState());
         searchViewModel = new SearchViewModel("Search", new SearchViewState());
         playlistViewModel = new PlaylistViewModel("Playlist", new PlaylistViewState());
-        searchController = new SearchController(new SearchInteractor(new SearchPresenter(searchViewModel), spotifyDataAccessObject, userDataAccessObject));
+        searchController = new SearchController(new SearchInteractor(new SearchPresenter(searchViewModel), spotifyDataAccessObject, userDataAccessObject), new SearchAlgorithmContains());
         likeTrackController = new LikeTrackController(new LikeTrackInteractor(userDataAccessObject, spotifyDataAccessObject, new LikeTrackPresenter()));
         addFriendController = new AddFriendController(new AddFriendInteractor(userDataAccessObject, new AddFriendPresenter(followedFriendsViewModel, myLibraryViewModel)));
         addTrackToPlaylistController = new AddTrackToPlaylistController(new AddTrackToPlaylistInteractor(userDataAccessObject, spotifyDataAccessObject, new AddTrackToPlaylistPresenter()));
