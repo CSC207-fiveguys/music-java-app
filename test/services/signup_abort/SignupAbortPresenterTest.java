@@ -20,9 +20,12 @@ class SignupAbortPresenterTest {
 
     @Test
     void prepareSuccessView() {
-        SignupAbortPresenter signupAbortPresenter = new SignupAbortPresenter(new LoginViewModel("view", new LoginViewState()),
-            new ViewManagerModel());
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        LoginViewState loginViewState = new LoginViewState();
+        LoginViewModel loginViewModel = new LoginViewModel("login", loginViewState);
+        SignupAbortPresenter signupAbortPresenter = new SignupAbortPresenter(loginViewModel,
+            viewManagerModel);
         signupAbortPresenter.prepareSuccessView();
-        assertTrue(true, "success view presented");
+        assertEquals(viewManagerModel.activeView, loginViewModel.viewName);
     }
 }

@@ -26,9 +26,11 @@ class LoginNewSignupPresenterTest {
 
     @Test
     void successView() {
-        LoginNewSignupPresenter presenter = new LoginNewSignupPresenter(new ViewManagerModel(),
-            new SignupViewModel("view", new SignupViewState()));
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        SignupViewState signupViewState = new SignupViewState();
+        SignupViewModel signupViewModel = new SignupViewModel("signup", signupViewState);
+        LoginNewSignupPresenter presenter = new LoginNewSignupPresenter(viewManagerModel, signupViewModel);
         presenter.prepareSuccessView();
-        assertTrue(true, "success view presented");
+        assertEquals(viewManagerModel.activeView, signupViewModel.viewName);
     }
 }

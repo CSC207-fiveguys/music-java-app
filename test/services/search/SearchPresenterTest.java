@@ -21,7 +21,9 @@ class SearchPresenterTest {
 
     @Test
     void prepareSuccessView() {
-        SearchPresenter searchPresenter = new SearchPresenter(new SearchViewModel("view", new SearchViewState()));
+        SearchViewState searchViewState = new SearchViewState();
+        SearchViewModel searchViewModel = new SearchViewModel("search view", searchViewState);
+        SearchPresenter searchPresenter = new SearchPresenter(searchViewModel);
         ArrayList<Track> tracks = new ArrayList<Track>();
         tracks.add(new CommonTrack("id", "name", "artist", 100, false, "1234.com"));
         ArrayList<Artist> artists = new ArrayList<Artist>();
@@ -29,6 +31,6 @@ class SearchPresenterTest {
         ArrayList<String> users = new ArrayList<>();
         users.add("user");
         searchPresenter.prepareSuccessView(new SearchOutputData(artists, tracks, users));
-        assertTrue(true, "success view presented");
+        assertNotNull(searchViewState.tracks);
     }
 }

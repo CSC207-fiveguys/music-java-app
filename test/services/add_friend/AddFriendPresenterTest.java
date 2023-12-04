@@ -25,18 +25,24 @@ class AddFriendPresenterTest {
 
     @Test
     void successView() {
-        AddFriendPresenter addFriendPresenter = new AddFriendPresenter(new FollowedFriendsViewModel("view", new FollowedFriendsViewState()),
-            new MyLibraryViewModel("view", new MyLibraryViewState()));
+        MyLibraryViewState myLibraryViewState = new MyLibraryViewState();
+        MyLibraryViewModel myLibraryViewModel = new MyLibraryViewModel("my library", myLibraryViewState);
+        FollowedFriendsViewState followedFriendsViewState = new FollowedFriendsViewState();
+        FollowedFriendsViewModel followedFriendsViewModel = new FollowedFriendsViewModel("followed friends", followedFriendsViewState);
+        AddFriendPresenter addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel, myLibraryViewModel);
         addFriendPresenter.prepareSuccessView(new AddFriendOutputData("user", new ArrayList<>()));
-        assertTrue(true, "fail view presented");
+        assertFalse(followedFriendsViewState.friendUsernames.isEmpty());
 
     }
 
     @Test
     void failView() {
-        AddFriendPresenter addFriendPresenter = new AddFriendPresenter(new FollowedFriendsViewModel("view", new FollowedFriendsViewState()),
-            new MyLibraryViewModel("view", new MyLibraryViewState()));
+        MyLibraryViewState myLibraryViewState = new MyLibraryViewState();
+        MyLibraryViewModel myLibraryViewModel = new MyLibraryViewModel("my library", myLibraryViewState);
+        FollowedFriendsViewState followedFriendsViewState = new FollowedFriendsViewState();
+        FollowedFriendsViewModel followedFriendsViewModel = new FollowedFriendsViewModel("followed friends", followedFriendsViewState);
+        AddFriendPresenter addFriendPresenter = new AddFriendPresenter(followedFriendsViewModel, myLibraryViewModel);
         addFriendPresenter.prepareFailView();
-        assertTrue(true, "fail view presented");
+        assertTrue(followedFriendsViewModel.state.friendUsernames.isEmpty());
     }
 }

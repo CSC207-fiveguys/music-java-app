@@ -16,9 +16,11 @@ class UnfollowArtistPresenterTest {
 
     @Test
     void prepareSuccessView() {
-        UnfollowArtistPresenter presenter = new UnfollowArtistPresenter(new FollowedArtistsViewModel("followed artists",
-            new FollowedArtistsViewState()));
+        FollowedArtistsViewState followedArtistsViewState = new FollowedArtistsViewState();
+        followedArtistsViewState.username = "user";
+        FollowedArtistsViewModel followedArtistsViewModel = new FollowedArtistsViewModel("followed artists", followedArtistsViewState);
+        UnfollowArtistPresenter presenter = new UnfollowArtistPresenter(followedArtistsViewModel);
         presenter.prepareSuccessView(new UnfollowArtistOutputData(new ArrayList<>()));
-        assertTrue(true, "success view presented");
+        assertNotNull(followedArtistsViewState.username);
     }
 }

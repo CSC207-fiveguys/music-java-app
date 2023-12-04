@@ -15,17 +15,23 @@ class RemoveFriendPresenterTest {
 
     @Test
     void prepareSuccessView() {
-        RemoveFriendPresenter removeFriendPresenter = new RemoveFriendPresenter(new FollowedFriendsViewModel("view", new FollowedFriendsViewState()),
-            new MyLibraryViewModel("view", new MyLibraryViewState()));
+        FollowedFriendsViewState followedFriendsViewState = new FollowedFriendsViewState();
+        FollowedFriendsViewModel followedFriendsViewModel = new FollowedFriendsViewModel("followed friends", followedFriendsViewState);
+        MyLibraryViewState myLibraryViewState = new MyLibraryViewState();
+        MyLibraryViewModel myLibraryViewModel = new MyLibraryViewModel("my library", myLibraryViewState);
+        RemoveFriendPresenter removeFriendPresenter = new RemoveFriendPresenter(followedFriendsViewModel, myLibraryViewModel);
         removeFriendPresenter.prepareSuccessView(new RemoveFriendOutputData(new ArrayList<>(), new ArrayList<>()));
-        assertTrue(true, "success view presented");
+        assertTrue(followedFriendsViewState.friendUsernames.isEmpty());
     }
 
     @Test
     void prepareFailView() {
-        RemoveFriendPresenter removeFriendPresenter = new RemoveFriendPresenter(new FollowedFriendsViewModel("view", new FollowedFriendsViewState()),
-            new MyLibraryViewModel("view", new MyLibraryViewState()));
+        FollowedFriendsViewState followedFriendsViewState = new FollowedFriendsViewState();
+        FollowedFriendsViewModel followedFriendsViewModel = new FollowedFriendsViewModel("followed friends", followedFriendsViewState);
+        MyLibraryViewState myLibraryViewState = new MyLibraryViewState();
+        MyLibraryViewModel myLibraryViewModel = new MyLibraryViewModel("my library", myLibraryViewState);
+        RemoveFriendPresenter removeFriendPresenter = new RemoveFriendPresenter(followedFriendsViewModel, myLibraryViewModel);
         removeFriendPresenter.prepareFailView();
-        assertTrue(true, "fail view presented");
+        assertTrue(followedFriendsViewState.friendUsernames.isEmpty());
     }
 }

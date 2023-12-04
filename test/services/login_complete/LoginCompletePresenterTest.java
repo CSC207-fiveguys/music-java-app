@@ -22,24 +22,33 @@ class LoginCompletePresenterTest {
 
     @Test
     void successView() {
-        LoginCompletePresenter presenter = new LoginCompletePresenter(new ViewManagerModel(),
-            new LoginViewModel("view", new LoginViewState()), new TabViewModel("view"),
+        TabViewModel tabViewModel = new TabViewModel("tab");
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+
+
+
+        LoginCompletePresenter presenter = new LoginCompletePresenter(viewManagerModel,
+            new LoginViewModel("view", new LoginViewState()), tabViewModel,
             new MyLibraryViewModel("view", new MyLibraryViewState()), new FollowedArtistsViewModel("view", new FollowedArtistsViewState()),
             new FollowedFriendsViewModel("view", new FollowedFriendsViewState()), new SearchViewModel("view", new SearchViewState()),
             new PlaylistViewModel("viewname", new PlaylistViewState()));
         presenter.prepareSuccessView(new LoginCompleteOutputData("user", false));
-        assertTrue(true, "fail view presented");
+        assertEquals(viewManagerModel.activeView, tabViewModel.viewName);
 
     }
 
     @Test
     void failView() {
-        LoginCompletePresenter presenter = new LoginCompletePresenter(new ViewManagerModel(),
-            new LoginViewModel("view", new LoginViewState()), new TabViewModel("view"),
+        LoginViewState loginViewState = new LoginViewState();
+        LoginViewModel loginViewModel = new LoginViewModel("login", loginViewState);
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        LoginCompletePresenter presenter = new LoginCompletePresenter(viewManagerModel,
+            loginViewModel, new TabViewModel("view"),
             new MyLibraryViewModel("view", new MyLibraryViewState()), new FollowedArtistsViewModel("view", new FollowedArtistsViewState()),
             new FollowedFriendsViewModel("view", new FollowedFriendsViewState()), new SearchViewModel("view", new SearchViewState()),
             new PlaylistViewModel("viewname", new PlaylistViewState()));
         presenter.prepareFailView("not good");
-        assertTrue(true, "fail view presented");
+        assertNull(viewManagerModel.activeView);
+        assertEquals(loginViewModel.state.currentError, "not good");
     }
 }

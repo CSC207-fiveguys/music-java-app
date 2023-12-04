@@ -13,9 +13,12 @@ class RemoveTrackFromPlaylistPresenterTest {
 
     @Test
     void prepareSuccessView() {
-        RemoveTrackFromPlaylistPresenter presenter = new RemoveTrackFromPlaylistPresenter(new ViewManagerModel(),
-            new PlaylistViewModel("playlist", new PlaylistViewState()));
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        viewManagerModel.activeView = "playlist view";
+        PlaylistViewState playlistViewState = new PlaylistViewState();
+        PlaylistViewModel playlistViewModel = new PlaylistViewModel("playlist view", playlistViewState);
+        RemoveTrackFromPlaylistPresenter presenter = new RemoveTrackFromPlaylistPresenter(viewManagerModel, playlistViewModel);
         presenter.prepareSuccessView(new RemoveTrackFromPlaylistOutputData("1234"));
-        assertTrue(true, "success view presented");
+        assertEquals(viewManagerModel.activeView, playlistViewModel.viewName);
     }
 }

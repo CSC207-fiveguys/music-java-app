@@ -22,19 +22,25 @@ class SignupCompletePresenterTest {
 
     @Test
     void prepareSuccessView() {
-        SignupCompletePresenter signupCompletePresenter = new SignupCompletePresenter(new SignupViewModel("view", new SignupViewState()),
-            new LoginViewModel("view", new LoginViewState()),
-            new ViewManagerModel());
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        LoginViewState loginViewState = new LoginViewState();
+        LoginViewModel loginViewModel = new LoginViewModel("login", loginViewState);
+        SignupViewState signupViewState = new SignupViewState();
+        SignupViewModel signupViewModel = new SignupViewModel("signup", signupViewState);
+        SignupCompletePresenter signupCompletePresenter = new SignupCompletePresenter(signupViewModel, loginViewModel, viewManagerModel);
         signupCompletePresenter.prepareSuccessView(new SignupCompleteOutputData("user"));
-        assertTrue(true, "success view presented");
+        assertEquals(viewManagerModel.activeView, loginViewModel.viewName);
     }
 
     @Test
     void prepareFailView() {
-        SignupCompletePresenter signupCompletePresenter = new SignupCompletePresenter(new SignupViewModel("view", new SignupViewState()),
-            new LoginViewModel("view", new LoginViewState()),
-            new ViewManagerModel());
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        LoginViewState loginViewState = new LoginViewState();
+        LoginViewModel loginViewModel = new LoginViewModel("login", loginViewState);
+        SignupViewState signupViewState = new SignupViewState();
+        SignupViewModel signupViewModel = new SignupViewModel("signup", signupViewState);
+        SignupCompletePresenter signupCompletePresenter = new SignupCompletePresenter(signupViewModel, loginViewModel, viewManagerModel);
         signupCompletePresenter.prepareFailView("error");
-        assertTrue(true, "fail view presented");
+        assertNull(viewManagerModel.activeView);
     }
 }
