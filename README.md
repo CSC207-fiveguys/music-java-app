@@ -1,7 +1,7 @@
 # Problem Domain Description
 We have chosen **Music Organization Service** as our project domain.
 
-Use cases include the following.
+Use cases include the following:
 * sign-up
 * login
 * create playlist
@@ -9,27 +9,29 @@ Use cases include the following.
 * search for track
   * like track
   * add track to playlist
-* unlike track
-* remove track from playlist
+  * unlike track
+  * remove track from playlist
 * search for artist
   * follow artist (a playlist of their top tracks will be added to your library)
-* unfollow artist
+  * unfollow artist
 * search for friend
   * add friend (you will be able to view their playlists in your library)
-* remove friend
+  * remove friend (their playlists will then be removed)
 
 All code follows SOLID design principles and CLEAN architecture (use cases have individual controllers, boundaries, interactors, and presentors)
 
 # Spotify API
 
+We use the following Spotify API endpoints in our project
+
 [/token Credentials Documentation](https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow)
-* retrieve accesse token using environment variables SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET
+* retrieve access token using environment variables SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET
 
 [/search Endpoint Documentation](https://developer.spotify.com/documentation/web-api/reference/search)
 * display results from searching (tracks and artists)
 
 [/tracks Endpoint Documentation](https://developer.spotify.com/documentation/web-api/reference/get-track)
-* save track on like/add
+* save track on like/add to play list
 
 [/artists Endpoint Documentation](https://developer.spotify.com/documentation/web-api/reference/get-an-artist)
 * save artist on follow
