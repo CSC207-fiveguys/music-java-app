@@ -1,5 +1,8 @@
 package services.create_new_playlist;
 
+import data_access.ArtistDataAccessObject;
+import data_access.SpotifyDataAccessObject;
+import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.CommonUser;
 import entities.User;
@@ -16,8 +19,11 @@ class CreateNewPlaylistInteractorTest {
 
     @BeforeEach
     void setUp() {
+        TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+        ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
+        SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
         UserFactory userFactory = new UserFactory();
-        userDataAccessObject = new UserDataAccessObject(userFactory) {
+        userDataAccessObject = new UserDataAccessObject(userFactory, spotifyDataAccessObject) {
             @Override
             public User getUser(String username) {
                 // Assuming User has appropriate constructor and methods

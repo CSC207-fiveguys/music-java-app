@@ -2,10 +2,23 @@ package services.remove_friend;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import data_access.ArtistDataAccessObject;
+import data_access.SpotifyDataAccessObject;
+import data_access.TrackDataAccessObject;
+import data_access.UserDataAccessObject;
 import entities.CommonUser;
 import entities.User;
+import entities.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import services.add_friend.AddFriendInputBoundary;
+import services.add_friend.AddFriendInputData;
+import services.add_friend.AddFriendInteractor;
+import services.add_friend.AddFriendOutputBoundary;
+import services.add_friend.AddFriendOutputData;
+import services.create_new_playlist.CreateNewPlaylistInteractor;
+import services.create_new_playlist.CreateNewPlaylistOutputBoundary;
+import services.create_new_playlist.CreateNewPlaylistOutputData;
 
 
 class RemoveFriendInteractorTest {
@@ -14,48 +27,66 @@ class RemoveFriendInteractorTest {
   private RemoveFriendDataAccessInterface userDataAccessObject;
   private RemoveFriendOutputBoundary outputBoundary;
 
-  @BeforeEach
-  void setUp() {
-    userDataAccessObject = new RemoveFriendDataAccessInterface() {
+  @Test
+  void successTest() {
+    RemoveFriendInputData inputData = new RemoveFriendInputData("friendUsername", "username");
+    UserFactory userFactory = new UserFactory();
+    TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+    ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
+    SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(
+        trackDataAccessObject, artistDataAccessObject);
+    UserDataAccessObject userDataAccessInterface = new UserDataAccessObject(userFactory,
+        spotifyDataAccessObject);
+    User user = userFactory.create("friendUsername", "123");
+    User user1 = userFactory.create("username", "123");
+    userDataAccessInterface.saveUser(user);
+    userDataAccessInterface.saveUser(user1);
+    user1.addFriend(user);
+    user.createPlaylist("Playlistname");
+    RemoveFriendOutputBoundary removeFriendOutputBoundary = new RemoveFriendOutputBoundary() {
       @Override
-      public User getUser(String username) {
-        CommonUser user = new CommonUser(username, "dummyPassword");
-        if (username.equals("user")) {
-          user.addFriend(new CommonUser("alreadyFriend", "dummyPassword"));
-        }
-        return user;
-
-      }
-    };
-
-    outputBoundary = new RemoveFriendOutputBoundary() {
-      @Override
-      public void prepareSuccessView(RemoveFriendOutputData outputData) {
-        assertNotNull(outputData, "Output data should not be null");
-        assertTrue(outputData.userPlaylists.isEmpty(),
-            "User playlists should be empty in this test case");
+      public void prepareSuccessView(RemoveFriendOutputData userFriends) {
+        assertTrue(true, "should prepare success view");
+        assertTrue(userFriends.userFriends.isEmpty(), "should be empty");
+        assertTrue(userFriends.userPlaylists.isEmpty(), "should be empty");
       }
 
       @Override
       public void prepareFailView() {
-        assertTrue(true, "Failure view should be prepared");
+        fail("Should not prepare fail");
       }
     };
-
-    interactor = new RemoveFriendInteractor(userDataAccessObject, outputBoundary);
+    RemoveFriendInputBoundary removeFriendInputBoundary = new RemoveFriendInteractor(userDataAccessInterface, removeFriendOutputBoundary);
+    removeFriendInputBoundary.execute(inputData);
 
   }
 
   @Test
-  void successTest() {
-    RemoveFriendInputData inputData = new RemoveFriendInputData("user", "alreadyFriend");
-    interactor.execute(inputData);
-  }
+  void failureTest() {
+    RemoveFriendInputData inputData = new RemoveFriendInputData("friendUsername", "username");
+    UserFactory userFactory = new UserFactory();
+    TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+    ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
+    SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(
+        trackDataAccessObject, artistDataAccessObject);
+    UserDataAccessObject userDataAccessInterface = new UserDataAccessObject(userFactory,
+        spotifyDataAccessObject);
+    User user = userFactory.create("friendUsername", "123");
+    userDataAccessInterface.saveUser(user);
+    User user1 = userFactory.create("username", "123");
+    userDataAccessInterface.saveUser(user1);
+    RemoveFriendOutputBoundary removeFriendOutputBoundary = new RemoveFriendOutputBoundary() {
+      @Override
+      public void prepareSuccessView(RemoveFriendOutputData userFriends) {
+        fail("Should not prepare success");
+      }
 
-  @Test
-  void failureAlreadyFriends() {
-    RemoveFriendInputData inputData = new RemoveFriendInputData("existingFriend", "newFriend");
-    interactor.execute(inputData);
+      @Override
+      public void prepareFailView() {
+        assertTrue(true, "should prepare fail view");
+      }
+    };
+    RemoveFriendInputBoundary removeFriendInputBoundary = new RemoveFriendInteractor(userDataAccessInterface, removeFriendOutputBoundary);
+    removeFriendInputBoundary.execute(inputData);
   }
-
 }

@@ -1,5 +1,7 @@
 package services.view_playlist;
 
+import data_access.ArtistDataAccessObject;
+import data_access.SpotifyDataAccessObject;
 import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.CommonPlaylist;
@@ -23,8 +25,11 @@ class ViewPlaylistInteractorTest {
 
     @BeforeEach
     void setUp() {
+        TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+        ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
+        SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
         UserFactory userFactory = new UserFactory();
-        userDataAccessObject = new UserDataAccessObject(userFactory) {
+        userDataAccessObject = new UserDataAccessObject(userFactory, spotifyDataAccessObject) {
             @Override
             public Playlist getPlaylist(String playlistName, String username) {
                 if ("testPlaylist".equals(playlistName) && "testUser".equals(username)) {

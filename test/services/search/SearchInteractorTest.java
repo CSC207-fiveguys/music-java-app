@@ -1,5 +1,8 @@
 package services.search;
 
+import data_access.ArtistDataAccessObject;
+import data_access.SpotifyDataAccessObject;
+import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.Artist;
 import entities.CommonArtist;
@@ -20,6 +23,9 @@ class SearchInteractorTest {
 
     @BeforeEach
     void setUp() {
+        TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+        ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
+        SpotifyDataAccessObject spotifyDataAccessObject1 = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
         UserFactory userFactory = new UserFactory();
         spotifyDataAccessObject = new SearchUserDataAccessInterface() {
             @Override
@@ -37,7 +43,7 @@ class SearchInteractorTest {
             }
         };
 
-        userDataAccessObject = new UserDataAccessObject(userFactory) {
+        userDataAccessObject = new UserDataAccessObject(userFactory, spotifyDataAccessObject1) {
             @Override
             public ArrayList<String> searchUser(String query) {
                 ArrayList<String> users = new ArrayList<>();

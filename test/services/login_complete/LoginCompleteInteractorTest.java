@@ -1,5 +1,8 @@
 package services.login_complete;
 
+import data_access.ArtistDataAccessObject;
+import data_access.SpotifyDataAccessObject;
+import data_access.TrackDataAccessObject;
 import data_access.UserDataAccessObject;
 import entities.CommonUser;
 import entities.User;
@@ -16,8 +19,11 @@ class LoginCompleteInteractorTest {
 
     @BeforeEach
     void setUp() {
+        TrackDataAccessObject trackDataAccessObject = new TrackDataAccessObject();
+        ArtistDataAccessObject artistDataAccessObject = new ArtistDataAccessObject();
+        SpotifyDataAccessObject spotifyDataAccessObject = new SpotifyDataAccessObject(trackDataAccessObject, artistDataAccessObject);
         UserFactory userFactory = new UserFactory();
-        userDataAccessObject = new UserDataAccessObject(userFactory) {
+        userDataAccessObject = new UserDataAccessObject(userFactory, spotifyDataAccessObject) {
             @Override
             public boolean exists(String username) {
                 return "existingUser".equals(username);

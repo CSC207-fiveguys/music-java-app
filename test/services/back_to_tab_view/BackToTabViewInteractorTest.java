@@ -10,7 +10,6 @@ class BackToTabViewInteractorTest {
         BackToTabViewOutputBoundary outputBoundary = new BackToTabViewOutputBoundary() {
             @Override
             public void prepareSuccessView() {
-                // Assert that the success view is prepared
                 assertTrue(true, "Success view should be prepared.");
             }
         };
